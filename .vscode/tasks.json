@@ -4,16 +4,25 @@
         {
             "label": "Build",
             "type": "shell",
-            "command": "gcc main.cpp -o build/app",
             "group": {
                 "kind": "build",
                 "isDefault": true
+            },
+            "windows": {
+                "command": "g++ -g main.cpp -o build\\win\\app.o",
+            },
+            "osx": {
+                "command": "g++ -g main.cpp -o build/osx/app.o -framework OpenGL",
+            },
+            "linux": {
+                "command": "g++ -g main.cpp -o build/linux/app.o",
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared"
             }
-        },
-        {
-            "label": "Run",
-            "type": "shell",
-            "command": "./build/app",
         }
     ]
 }

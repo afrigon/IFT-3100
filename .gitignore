@@ -1,4 +1,3 @@
-Linguist::FileBlob.new("lint.py").vendored? # => true
 .DS_Store
 *.code-workspace
 *.dSYM

@@ -7,8 +7,9 @@
             "name": "C++ launch",
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "Build",
+            "program": "${workspaceRoot}/build/osx/app.o",
             "windows": {
-                "program": "${workspaceRoot}/build/win/app.o",
+                "program": "${workspaceRoot}\\build\\win\\app.o",
                 "MIMode": "gdb",
                 "setupCommands": [
                     {
@@ -43,6 +44,7 @@
             "type": "cppdbg",
             "request": "attach",
             "processId": "${command:pickProcess}",
+            "program": "${workspaceRoot}/build/osx/app.o",
             "windows": {
                 "program": "${workspaceRoot}/build/win/app",
                 "MIMode": "gdb",

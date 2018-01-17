@@ -8,7 +8,7 @@
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "Build",
             "windows": {
-                "program": "${workspaceRoot}/build/win/app",
+                "program": "${workspaceRoot}/build/win/app.o",
                 "MIMode": "gdb",
                 "setupCommands": [
                     {
@@ -19,11 +19,11 @@
                 ]
             },
             "osx": {
-                "program": "${workspaceRoot}/build/osx/app",
+                "program": "${workspaceRoot}/build/osx/app.o",
                 "MIMode": "lldb"
             },
             "linux": {
-                "program": "${workspaceRoot}/build/linux/app",
+                "program": "${workspaceRoot}/build/linux/app.o",
                 "MIMode": "gdb",
                 "setupCommands": [
                     {
@@ -35,7 +35,8 @@
             },
             "logging": {
                 "moduleLoad": false
-            }
+            },
+            "internalConsoleOptions": "openOnSessionStart"
         },
         {
             "name": "C++ Attach",

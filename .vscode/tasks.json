@@ -9,13 +9,13 @@
                 "isDefault": true
             },
             "windows": {
-                "command": "g++ -g main.cpp -o build\\win\\app.o",
+                "command": "./lint.py src\\* && g++ -g src\\main.cpp -o build\\win\\app.o",
             },
             "osx": {
-                "command": "g++ -g main.cpp -o build/osx/app.o -framework OpenGL",
+                "command": "./lint.py src/* && g++ -g src/main.cpp -o build/osx/app.o -framework OpenGL",
             },
             "linux": {
-                "command": "g++ -g main.cpp -o build/linux/app.o",
+                "command": "./lint.py src/* && g++ -g src/main.cpp -o build/linux/app.o",
             },
             "presentation": {
                 "echo": true,

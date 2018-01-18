@@ -12,7 +12,7 @@
                 "command": "./lint.py src\\* && g++ -g src\\main.cpp -o build\\win\\app.o",
             },
             "osx": {
-                "command": "./lint.py src/* && g++ -g src/main.cpp -o build/osx/app.o -framework OpenGL",
+                "command": "./lint.py src/* && g++ -g -lglfw src/main.cpp -o build/osx/app.o -framework OpenGL",
             },
             "linux": {
                 "command": "./lint.py src/* && g++ -g src/main.cpp -o build/linux/app.o",

@@ -6,8 +6,20 @@
  */
 
 #include <stdio.h>
+#include <GLFW/glfw3.h>
 
 int main() {
-    printf("yolo \n");
+    if (!glfwInit()) {
+        return 1;
+    }
+    GLFWwindow* window = glfwCreateWindow(640,
+                                          480,
+                                          "My Title",
+                                          NULL,
+                                          NULL);
+    while (!glfwWindowShouldClose(window)) {
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
     return 0;
 }

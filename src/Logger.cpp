@@ -5,13 +5,22 @@
  * found in the LICENSE file.
  */
 
-#include <Logger>
+#include "Logger.h"
+#include <iostream>
 #include <string>
 
-class Logger {
- public:
-    static void err(std::string message) {
-        std::cout << message << std::endl;
-        exit(1);
-    }
+void Logger::log(std::string message) {
+    std::cout << "\033[34mINFO: \033[0m" << message << std::endl;
+}
+
+void Logger::success(std::string message) {
+    std::cout << "\033[32mSUCCESS: \033[0m" << message << std::endl;
+}
+
+void Logger::warn(std::string message) {
+    std::cout << "\033[33mWARN: \033[0m" << message << std::endl;
+}
+
+void Logger::err(std::string message) {
+    std::cout << "\033[31mERR: \033[0m" << message << std::endl;
 }

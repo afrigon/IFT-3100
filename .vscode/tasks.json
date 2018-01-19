@@ -12,7 +12,7 @@
                 "command": "./lint.py src/* && g++ -std=c++11 -g -Wc++11-narrowing -Wall -Wextra -pedantic -o build/win/app.o src/main.cpp",
             },
             "osx": {
-                "command": "./lint.py src/* && g++ -std=c++11 -g -Wc++11-narrowing -Wall -Wextra -pedantic -lglfw -Iinclude/osx lib/osx/* src/main.cpp -o build/osx/app.o",
+                "command": "./lint.py src/* && g++ -std=c++11 -g -Wc++11-narrowing -Wall -Wextra -pedantic -lglfw -Iinclude/osx -Isrc/headers lib/osx/* src/main.cpp -o build/osx/app.o",
             },
             "linux": {
                 "command": "./lint.py src/* && g++ -std=c++11 -g -Wc++11-narrowing -Wall -Wextra -pedantic -o build/linux/app.o src/main.cpp",

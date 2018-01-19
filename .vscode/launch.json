@@ -7,9 +7,9 @@
             "name": "C++ launch",
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "Build",
-            "program": "${workspaceRoot}/build/osx/app.o",
+            "program": "${workspaceRoot}/build/osx/app.app",
             "windows": {
-                "program": "${workspaceRoot}/build/win/app.o",
+                "program": "${workspaceRoot}/build/win/app.exe",
                 "MIMode": "gdb",
                 "setupCommands": [
                     {
@@ -20,11 +20,11 @@
                 ]
             },
             "osx": {
-                "program": "${workspaceRoot}/build/osx/app.o",
+                "program": "${workspaceRoot}/build/osx/app.app",
                 "MIMode": "lldb"
             },
             "linux": {
-                "program": "${workspaceRoot}/build/linux/app.o",
+                "program": "${workspaceRoot}/build/linux/app.out",
                 "MIMode": "gdb",
                 "setupCommands": [
                     {

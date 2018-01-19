@@ -1,2 +1,2 @@
 lint.py linguist-vendored
-lib/osx/glad.o linguist-vendored
+lib linguist-vendored

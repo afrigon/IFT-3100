@@ -9,13 +9,13 @@
                 "isDefault": true
             },
             "windows": {
-                "command": "./lint.py src\\* && g++ -g src\\main.cpp -o build\\win\\app.o",
+                "command": "make win",
             },
             "osx": {
-                "command": "./lint.py src/* && g++ -g -lglfw src/main.cpp -o build/osx/app.o -framework OpenGL",
+                "command": "make osx",
             },
             "linux": {
-                "command": "./lint.py src/* && g++ -g src/main.cpp -o build/linux/app.o",
+                "command": "make linux",
             },
             "presentation": {
                 "echo": true,

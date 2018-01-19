@@ -1,2 +1,4 @@
-lint.py linguist-vendored
-lib/* linguist-vendored
+lint.py linguist-vendored=true
+lib linguist-vendored=true
+include linguist-vendored=true
+build linguist-generated=true

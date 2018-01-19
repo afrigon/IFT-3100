@@ -1,4 +1,2 @@
-lint.py linguist-vendored=true
-lib linguist-vendored=true
-include linguist-vendored=true
-build linguist-generated=true
+lint.py linguist-vendored
+lib/osx/glad.o linguist-vendored

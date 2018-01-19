@@ -60,7 +60,7 @@
             "browse": {
                 "path": [
                     "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*",
-                    "${workspaceRoot}/include/win"
+                    "${workspaceRoot}/include/win/*"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             }

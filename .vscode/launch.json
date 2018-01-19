@@ -9,7 +9,7 @@
             "preLaunchTask": "Build",
             "program": "${workspaceRoot}/build/osx/app.o",
             "windows": {
-                "program": "${workspaceRoot}\\build\\win\\app.o",
+                "program": "${workspaceRoot}/build/win/app.o",
                 "MIMode": "gdb",
                 "setupCommands": [
                     {

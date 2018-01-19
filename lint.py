@@ -4378,9 +4378,9 @@ def CheckStyle(filename, clean_lines, linenum, file_extension, nesting_state,
       not Match(r'^\s*//\s*[^\s]*$', line) and
       not Match(r'^// \$Id:.*#[0-9]+ \$$', line)):
     line_width = GetLineWidth(line)
-    if line_width > _line_length:
-      error(filename, linenum, 'whitespace/line_length', 2,
-            'Lines should be <= %i characters long' % _line_length)
+    #if line_width > _line_length:
+    #  error(filename, linenum, 'whitespace/line_length', 2,
+    #        'Lines should be <= %i characters long' % _line_length)
 
   if (cleansed_line.count(';') > 1 and
       # for loops are allowed two ;'s (and may run over two lines).

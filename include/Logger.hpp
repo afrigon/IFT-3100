@@ -5,11 +5,10 @@
  * found in the LICENSE file.
  */
 
-#include <string>
+#ifndef LOGGER_H
+#define LOGGER_H
 
-#ifndef SRC_LOGGER_H
-#define SRC_LOGGER_H
-#endif  // SRC_LOGGER_H
+#include <string>
 
 struct Logger {
     static void log(std::string message);
@@ -25,3 +24,5 @@ enum class TerminalCode {
     yellow=33,
     blue=34
 };
+
+#endif  // LOGGER_H

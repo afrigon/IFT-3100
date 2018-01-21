@@ -7,9 +7,9 @@
             "name": "C++ launch",
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "Build",
-            "program": "${workspaceRoot}/build/osx/app.app",
+            "program": "${workspaceRoot}/bin/main.app",
             "windows": {
-                "program": "${workspaceRoot}/build/win/app.exe",
+                "program": "${workspaceRoot}/bin/main.exe",
                 "MIMode": "gdb",
                 "setupCommands": [
                     {
@@ -20,11 +20,11 @@
                 ]
             },
             "osx": {
-                "program": "${workspaceRoot}/build/osx/app.app",
+                "program": "${workspaceRoot}/bin/main.app",
                 "MIMode": "lldb"
             },
             "linux": {
-                "program": "${workspaceRoot}/build/linux/app.out",
+                "program": "${workspaceRoot}/bin/main.out",
                 "MIMode": "gdb",
                 "setupCommands": [
                     {
@@ -38,41 +38,6 @@
                 "moduleLoad": false
             },
             "internalConsoleOptions": "openOnSessionStart"
-        },
-        {
-            "name": "C++ Attach",
-            "type": "cppdbg",
-            "request": "attach",
-            "processId": "${command:pickProcess}",
-            "program": "${workspaceRoot}/build/osx/app.o",
-            "windows": {
-                "program": "${workspaceRoot}/build/win/app",
-                "MIMode": "gdb",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    }
-                ]
-            },
-            "osx": {
-                "program": "${workspaceRoot}/build/osx/app",
-                "MIMode": "lldb"
-            },
-            "linux": {
-                "MIMode": "gdb",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    }
-                ]
-            },
-            "logging": {
-                "moduleLoad": false
-            }
         }
     ]
 }

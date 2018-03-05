@@ -1,35 +1,8 @@
 .DS_Store
-*.code-workspace
 *.dSYM
+*.xcconfig
+*.plist
+Makefile
+*.make
+*.xcodeproj
 
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app

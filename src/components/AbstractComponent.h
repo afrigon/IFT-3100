@@ -5,12 +5,11 @@
 //  found in the LICENSE file.
 //
 
-#include "ofMain.h"
-#include "ofApp.h"
+#ifndef ABSTRACTCOMPONENTS_COMPONENT_H_
+#define ABSTRACTCOMPONENTS_COMPONENT_H_
 
-int main() {
-    ofSetupOpenGL(1024, 768, OF_WINDOW);
+class AbstractComponent {
+    
+};
 
-    ofRunApp(new ofApp());
-    return 0;
-}
+#endif  // ABSTRACTCOMPONENTS_COMPONENT_H_

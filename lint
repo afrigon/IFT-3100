@@ -1,0 +1,1 @@
+./lint.py --root=src src/*; ./lint.py --root=src src/components/*

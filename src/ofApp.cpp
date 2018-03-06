@@ -9,6 +9,7 @@
 
 void ofApp::setup() {
     this->scene = DemoScene::generate();
+    this->scene.print();
 }
 
 void ofApp::update() {

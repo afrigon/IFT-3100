@@ -8,10 +8,10 @@
 #ifndef SCENE_DEMOSCENE_H_
 #define SCENE_DEMOSCENE_H_
 
-#include "scene/Scene.h"
+#include "Scene.h"
 #include "GameObject.h"
-#include "components/Transform.h"
-#include "math/Vector3.h"
+#include "Transform.h"
+#include "Vector3.h"
 
 class DemoScene {
  public:

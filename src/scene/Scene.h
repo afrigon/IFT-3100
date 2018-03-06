@@ -8,6 +8,7 @@
 #ifndef SCENE_SCENE_H_
 #define SCENE_SCENE_H_
 
+#include <iostream>
 #include <list>
 using std::list;
 
@@ -19,6 +20,9 @@ class Scene {
 public:
     Scene& addObject(GameObject& o);
     Scene& remove(GameObject& o);
+    void print() {
+        std::cout << gameObjects.size() << std::endl;
+    }
 };
 
 #endif  // SCENE_SCENE_H_

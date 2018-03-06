@@ -21,11 +21,22 @@ public:
     bool operator!=(const GameObject &) const;
     unsigned long getID() const;
     
-    template<class T>
-    T& addComponent(T component);
+    template <class T>
+    T& addComponent(T component) {
+        this->components.push_back(component);
+        return component;
+    }
     
-    template<class T>
-    vector<T&> getComponents();
+    template <class T>
+    vector<T&> getComponents() {
+        vector<T&> matchingComponents;
+        for (vector<AbstractComponent>::iterator it = this->components.begin(); it != this->components.end(); ++it) {
+            if (typeid(T) == typeid(decltype(*it))) {
+                matchingComponents.push_back(*it);
+            }
+        }
+        return matchingComponents;
+    }
 };
 
 #endif  // GAMEOBJECT_H_

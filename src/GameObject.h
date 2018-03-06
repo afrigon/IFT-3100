@@ -22,7 +22,7 @@ public:
     unsigned long getID() const;
     
     template <class T>
-    T& addComponent(T component) {
+    T& addComponent(T& component) {
         this->components.push_back(component);
         return component;
     }

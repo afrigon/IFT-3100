@@ -15,11 +15,11 @@ using std::list;
 #include "GameObject.h"
 
 class Scene {
-    list<GameObject> gameObjects;
+    list<GameObject*> gameObjects;
     
 public:
-    Scene& addObject(GameObject& o);
-    Scene& remove(GameObject& o);
+    Scene& addObject(GameObject* o);
+    Scene& remove(GameObject* o);
     void print() {
         std::cout << gameObjects.size() << std::endl;
     }

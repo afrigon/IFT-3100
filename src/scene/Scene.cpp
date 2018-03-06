@@ -7,12 +7,12 @@
 
 #include "Scene.h"
 
-Scene& Scene::addObject(GameObject& o) {
+Scene& Scene::addObject(GameObject* o) {
     this->gameObjects.push_back(o);
     return *this;
 }
 
-Scene& Scene::remove(GameObject& o) {
+Scene& Scene::remove(GameObject* o) {
     this->gameObjects.remove(o);
     return *this;
 }

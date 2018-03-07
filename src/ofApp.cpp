@@ -8,6 +8,11 @@
 #include "ofApp.h"
 
 void ofApp::setup() {
+    outputTime = false;
+    if(outputTime)
+        lastElapsed = ofGetElapsedTimeMicros();
+
+    ofSetBackgroundColor(0);
     this->scene = DemoScene::generate();
     this->scene.print();
 }
@@ -16,6 +21,13 @@ void ofApp::update() {
 }
 
 void ofApp::draw() {
+    scene.render();
+
+    if(outputTime)
+    {
+        std::cout << "Elapsed Micros : " << ofGetElapsedTimeMicros() - lastElapsed << std::endl;
+        lastElapsed = ofGetElapsedTimeMicros();
+    }
 }
 
 void ofApp::keyPressed(int key) {

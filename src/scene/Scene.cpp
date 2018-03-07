@@ -6,6 +6,8 @@
 //
 
 #include "Scene.h"
+#include "components/Renderable.h"
+#include "ofMain.h"
 
 Scene& Scene::addObject(GameObject* o) {
     this->gameObjects.push_back(o);
@@ -14,6 +16,17 @@ Scene& Scene::addObject(GameObject* o) {
 
 Scene& Scene::remove(GameObject* o) {
     this->gameObjects.remove(o);
+    return *this;
+}
+Scene& Scene::render()
+{
+    ofPushMatrix();
+    ofTranslate(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
+    for(auto it = gameObjects.begin(); it != gameObjects.end(); ++it)
+    {
+        (*it)->draw();
+    }
+    ofPopMatrix();
     return *this;
 }
 

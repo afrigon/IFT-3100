@@ -20,8 +20,13 @@ class Scene {
 public:
     Scene& addObject(GameObject* o);
     Scene& remove(GameObject* o);
+    Scene& render();
     void print() {
-        std::cout << gameObjects.size() << std::endl;
+        std::cout << "GameObject size : " << gameObjects.size() << std::endl;
+        for(auto it = gameObjects.begin(); it != gameObjects.end(); ++it)
+        {
+            std::cout << "Child size : " << ((*it)->getChilds().size()) << "\tComponent size : " << ((*it)->getComponents<AbstractComponent>().size()) << std::endl;
+        }
     }
 };
 

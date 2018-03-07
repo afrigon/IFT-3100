@@ -14,6 +14,8 @@
 
 class ofApp: public ofBaseApp {
     Scene scene;
+    bool outputTime;
+    uint64_t lastElapsed;
     
  public:
         void setup();

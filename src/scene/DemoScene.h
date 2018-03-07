@@ -12,10 +12,11 @@
 #include "GameObject.h"
 #include "Transform.h"
 #include "Vector3.h"
+#include "components/PrimitiveShape.h"
 
 class DemoScene {
  public:
-    static Scene& generate();
+    static Scene generate();
 };
 
 #endif  // SCENE_DEMOSCENE_H_

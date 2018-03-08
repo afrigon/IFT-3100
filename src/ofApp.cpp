@@ -8,13 +8,39 @@
 #include "ofApp.h"
 
 void ofApp::setup() {
-    this->scene = DemoScene::generate();
+    outputTime = false;
+    if(outputTime)
+        lastElapsed = ofGetElapsedTimeMicros();
+
+    ofSetBackgroundColor(0);
+    light = ofLight();
+    light.setPosition(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 100);
+
+    this->scene = DemoScene::generate8();
+    this->scene.print();
 }
 
 void ofApp::update() {
 }
 
 void ofApp::draw() {
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    ofEnableDepthTest();
+    light.enable();
+    ofEnableSeparateSpecularLight();
+
+    scene.render();
+
+    ofDisableDepthTest();
+    light.disable();
+    ofDisableLighting();
+    ofDisableSeparateSpecularLight();
+
+    if(outputTime)
+    {
+        std::cout << "Elapsed Micros : " << ofGetElapsedTimeMicros() - lastElapsed << std::endl;
+        lastElapsed = ofGetElapsedTimeMicros();
+    }
 }
 
 void ofApp::keyPressed(int key) {

@@ -5,4 +5,11 @@
 Makefile
 *.make
 *.xcodeproj
-
+bin
+build
+obj
+.vs
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user

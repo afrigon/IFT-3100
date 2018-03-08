@@ -14,6 +14,8 @@
 
 class ofApp: public ofBaseApp {
     Scene scene;
+    bool outputTime;
+    uint64_t lastElapsed;
     
  public:
         void setup();
@@ -32,6 +34,8 @@ class ofApp: public ofBaseApp {
         void windowResized(int w, int h);
         void dragEvent(ofDragInfo dragInfo);
         void gotMessage(ofMessage msg);
+
+        ofLight	light;
 };
 
 #endif  // OFAPP_H_

@@ -18,6 +18,7 @@
 #include "components/Ellipse.h"
 #include "components/Sphere.h"
 #include "components/Cube.h"
+#include "components/Model.h"
 
 class DemoScene {
  public:
@@ -28,6 +29,7 @@ class DemoScene {
      static Scene generate5();
      static Scene generate6();
      static Scene generate7();
+     static Scene generate8();
 };
 
 #endif  // SCENE_DEMOSCENE_H_

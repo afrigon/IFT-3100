@@ -218,10 +218,69 @@ Scene DemoScene::generate7()
     GameObject* o1 = new GameObject();
     Transform* t1 = o1->getTransform();
     t1->position = Vector3(0, 200, 0);
-    t1->rotation = Vector3(0, 45, 0);
 
-    PrimitiveShape* p1 = o1->addComponent<PrimitiveShape>(new PrimitiveShape());
+    Component::Model* p1 = o1->addComponent<Component::Model>(new Component::Model());
+    p1->loadModel("C:/Users/Alexandre/Documents/openframeworks/examples/addons/assimpExample/bin/data/astroBoy_walk.dae");
 
     return temp.addObject(o1);
+}
+
+Scene DemoScene::generate8()
+{
+    Scene temp = Scene();
+
+    GameObject* o1 = new GameObject();
+    GameObject* o2 = new GameObject();
+    GameObject* o3 = new GameObject();
+    GameObject* o4 = new GameObject();
+    GameObject* o5 = new GameObject();
+    GameObject* o6 = new GameObject();
+    GameObject* o7 = new GameObject();
+    Transform* t1 = o1->getTransform();
+    Transform* t2 = o2->getTransform();
+    Transform* t3 = o3->getTransform();
+    Transform* t4 = o4->getTransform();
+    Transform* t5 = o5->getTransform();
+    Transform* t6 = o6->getTransform();
+    Transform* t7 = o7->getTransform();
+    t1->position = Vector3(-100, -200, 0);
+    t2->position = Vector3(-100, 0, 0);
+    t3->position = Vector3(-100, 200, 0);
+    t4->position = Vector3(100, -200, 0);
+    t5->position = Vector3(100, 0, 0);
+    t6->position = Vector3(100, 200, 0);
+    t6->rotation = Vector3(0, 0, 45);
+    t7->position = Vector3(300, 200, 0);
+    t7->scale = Vector3(1, 1, 0.5);
+
+    Component::Rectangle* c1 = o1->addComponent<Component::Rectangle>(new Component::Rectangle());
+    c1->setFillColor(ofColor(200, 0, 0));
+
+    Component::PrimitiveShape* c2 = o2->addComponent<Component::PrimitiveShape>(new Component::PrimitiveShape());
+    c2->setPointSize(4);
+    c2->setPoint(0, Vector3(-50, -25, 0));
+    c2->setPoint(1, Vector3(50, -25, 0));
+    c2->setPoint(2, Vector3(25, 25, 0));
+    c2->setPoint(3, Vector3(-25, 25, 0));
+
+    Component::Ligne* c3 = o3->addComponent<Component::Ligne>(new Component::Ligne());
+
+    Component::Ellipse* c4 = o4->addComponent<Component::Ellipse>(new Component::Ellipse());
+    c4->setWidth(50);
+
+    Component::Sphere* c5 = o5->addComponent<Component::Sphere>(new Component::Sphere());
+
+    Component::Cube* c6 = o6->addComponent<Component::Cube>(new Component::Cube());
+
+    Component::Model* c7 = o7->addComponent<Component::Model>(new Component::Model());
+    c7->loadModel("C:/Users/Alexandre/Documents/openframeworks/examples/addons/assimpExample/bin/data/astroBoy_walk.dae");
+
+    temp.addObject(o1);
+    temp.addObject(o2);
+    temp.addObject(o3);
+    temp.addObject(o4);
+    temp.addObject(o5);
+    temp.addObject(o6);
+    return temp.addObject(o7);
 }
 

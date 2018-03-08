@@ -1,4 +1,4 @@
-#include "src\components\Cube.h"
+#include "components/Cube.h"
 
 Component::Cube::Cube()
 {

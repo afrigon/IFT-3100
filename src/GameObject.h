@@ -15,9 +15,10 @@ using namespace std;
 #include "components/AbstractComponent.h"
 #include "components/Transform.h"
 #include "components/Renderable.h"
+#include "ofMain.h"
 
 class GameObject {
-    Transform* transform;
+    Component::Transform* transform;
     vector<AbstractComponent*> components;
     list<GameObject*> childs;
     
@@ -34,7 +35,7 @@ public:
     unsigned long getID() const;
 
     //Returns a reference on the transform pointer
-    Transform*& getTransform()
+    Component::Transform*& getTransform()
     {
         return transform;
     };

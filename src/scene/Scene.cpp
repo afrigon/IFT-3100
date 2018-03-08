@@ -6,8 +6,6 @@
 //
 
 #include "Scene.h"
-#include "components/Renderable.h"
-#include "ofMain.h"
 
 Scene& Scene::addObject(GameObject* o) {
     this->gameObjects.push_back(o);

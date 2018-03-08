@@ -6,11 +6,10 @@
 //
 
 #include "GameObject.h"
-#include "ofMain.h"
 
 GameObject::GameObject()
 {
-    transform = new Transform();
+    transform = new Component::Transform();
 }
 
 GameObject::~GameObject()

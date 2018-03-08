@@ -1,21 +1,18 @@
 #include "PrimitiveShape.h"
 
-
-
-PrimitiveShape::PrimitiveShape()
+Component::PrimitiveShape::PrimitiveShape()
 {
     fillColor = ofColor();
     drawColor = ofColor();
-    lineWidth = 2;
+    borderWidth = 2;
     points.resize(0);
 }
 
-
-PrimitiveShape::~PrimitiveShape()
+Component::PrimitiveShape::~PrimitiveShape()
 {
 }
 
-void PrimitiveShape::drawShape()
+void Component::PrimitiveShape::drawShape()
 {
     ofBeginShape();
 
@@ -28,7 +25,7 @@ void PrimitiveShape::drawShape()
     ofEndShape();
 }
 
-void PrimitiveShape::render()
+void Component::PrimitiveShape::render()
 {
     if(points.size() > 0)
     {
@@ -40,22 +37,22 @@ void PrimitiveShape::render()
 
         ofNoFill();
         ofSetColor(drawColor);
-        ofSetLineWidth(lineWidth);
+        ofSetLineWidth(borderWidth);
         drawShape();
     }
 }
 
-unsigned int PrimitiveShape::getPointCount()
+unsigned int Component::PrimitiveShape::getPointCount()
 {
     return (unsigned int)points.size();
 }
 
-void PrimitiveShape::setPointSize(unsigned int newSize)
+void Component::PrimitiveShape::setPointSize(unsigned int newSize)
 {
     points.resize(newSize);
 }
 
-bool PrimitiveShape::setPoint(unsigned int point, Vector3 &position)
+bool Component::PrimitiveShape::setPoint(unsigned int point, Vector3 position)
 {
     if(point < points.size())
     {
@@ -65,17 +62,37 @@ bool PrimitiveShape::setPoint(unsigned int point, Vector3 &position)
     return false;
 }
 
-void PrimitiveShape::setFillColor(ofColor &color)
+ofColor Component::PrimitiveShape::getFillColor()
+{
+    return fillColor;
+}
+
+ofColor Component::PrimitiveShape::getDrawColor()
+{
+    return drawColor;
+}
+
+unsigned int Component::PrimitiveShape::getBorderWidth()
+{
+    return borderWidth;
+}
+
+vector<Vector3>& Component::PrimitiveShape::getPoints()
+{
+    return points;
+}
+
+void Component::PrimitiveShape::setFillColor(ofColor color)
 {
     fillColor = color;
 }
 
-void PrimitiveShape::setDrawColor(ofColor &color)
+void Component::PrimitiveShape::setDrawColor(ofColor color)
 {
     drawColor = color;
 }
 
-void PrimitiveShape::setLineWidth(unsigned int width)
+void Component::PrimitiveShape::setBorderWidth(unsigned int width)
 {
-    lineWidth = lineWidth;
+    borderWidth = width;
 }

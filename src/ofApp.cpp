@@ -13,7 +13,10 @@ void ofApp::setup() {
         lastElapsed = ofGetElapsedTimeMicros();
 
     ofSetBackgroundColor(0);
-    this->scene = DemoScene::generate();
+    light = ofLight();
+    light.setPosition(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 100);
+
+    this->scene = DemoScene::generate7();
     this->scene.print();
 }
 
@@ -21,7 +24,17 @@ void ofApp::update() {
 }
 
 void ofApp::draw() {
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    ofEnableDepthTest();
+    light.enable();
+    ofEnableSeparateSpecularLight();
+
     scene.render();
+
+    ofDisableDepthTest();
+    light.disable();
+    ofDisableLighting();
+    ofDisableSeparateSpecularLight();
 
     if(outputTime)
     {

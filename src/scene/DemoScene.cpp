@@ -11,7 +11,8 @@ Scene& DemoScene::generate() {
     Scene temp = Scene();
     
     GameObject* o = new GameObject();
-    Transform t = o->addComponent(Transform(Vector3(10, 15, 20)));
+    Transform t = Transform(Vector3(10, 15, 20));
+    o->addComponent(t);
     
     return temp.addObject(o);
 }

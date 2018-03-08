@@ -8,14 +8,22 @@
 #include "ofApp.h"
 
 void ofApp::setup() {
-    this->scene = DemoScene::generate();
-    this->scene.print();
+    // this->scene = DemoScene::generate();
+    // this->scene.print();
+    ofSetBackgroundAuto(true);
+    ofSetBackgroundColor(0, 0, 0);
+    ofSetFrameRate(60);
+    ofSetDepthTest(true);
+    ofSetWindowTitle("Super Epic Game Engine");
+    this->window.setRootViewController(new ViewController());
 }
 
 void ofApp::update() {
+    this->window.layoutSubviews();
 }
 
 void ofApp::draw() {
+    this->window.draw();
 }
 
 void ofApp::keyPressed(int key) {
@@ -40,9 +48,6 @@ void ofApp::mouseEntered(int x, int y) {
 }
 
 void ofApp::mouseExited(int x, int y) {
-}
-
-void ofApp::windowResized(int w, int h) {
 }
 
 void ofApp::gotMessage(ofMessage msg) {

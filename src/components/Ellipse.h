@@ -8,10 +8,10 @@
 #ifndef COMPONENTS_ELLIPSE_H_
 #define COMPONENTS_ELLIPSE_H_
 
-#include "components/Renderable.h"
+#include "components/RenderableComponent.h"
 
 namespace Components {
-class Ellipse: public Renderable {
+class Ellipse: public RenderableComponent {
     ofColor fillColor;
     ofColor drawColor;
     unsigned int borderWidth;

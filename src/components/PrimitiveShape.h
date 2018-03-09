@@ -10,11 +10,11 @@
 
 #include <vector>
 
-#include "components/Renderable.h"
+#include "components/RenderableComponent.h"
 #include "math/Vector3.h"
 
 namespace Components {
-class PrimitiveShape: public Renderable {
+class PrimitiveShape: public RenderableComponent {
     ofColor fillColor;
     ofColor drawColor;
     unsigned int borderWidth = 2;

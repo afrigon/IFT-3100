@@ -65,13 +65,13 @@ Scene DemoScene::generate2() {
     t3->position = Vector3(-200, -150, 0);
     t3->rotation = Vector3(60, 60, 45);
 
-    Ligne* l1 = o1->addComponent<Ligne>(new Ligne());
+    Line* l1 = o1->addComponent<Line>(new Line());
     l1->setLineWidth(5);
 
-    Ligne* l2 = o2->addComponent<Ligne>(new Ligne());
+    Line* l2 = o2->addComponent<Line>(new Line());
     l2->setLineColor(ofColor(200, 0, 0));
 
-    Ligne* l3 = o3->addComponent<Ligne>(new Ligne());
+    Line* l3 = o3->addComponent<Line>(new Line());
     l3->setLineLength(300);
 
     o1->addChild(o2);
@@ -255,7 +255,7 @@ Scene DemoScene::generate8() {
     c2->setPoint(2, Vector3(25, 25, 0));
     c2->setPoint(3, Vector3(-25, 25, 0));
 
-    Ligne* c3 = o3->addComponent<Ligne>(new Ligne());
+    Line* c3 = o3->addComponent<Line>(new Line());
 
     Ellipse* c4 = o4->addComponent<Ellipse>(new Ellipse());
     c4->setWidth(50);

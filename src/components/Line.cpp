@@ -11,7 +11,7 @@ void Components::Line::render() {
     ofFill();
     ofSetColor(this->lineColor);
     ofSetLineWidth(this->lineWidth);
-    float half = static_cast<float>this->lineLength / 2.0f;
+    float half = static_cast<float>(this->lineLength) / 2.0f;
     ofDrawLine(-half, 0, half, 0);
 }
 

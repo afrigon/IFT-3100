@@ -13,7 +13,7 @@
 using std::list;
 
 #include "GameObject.h"
-#include "components/Renderable.h"
+#include "components/RenderableComponent.h"
 
 class Scene {
     list<GameObject*> gameObjects;

@@ -9,6 +9,7 @@
 
 void ofApp::setup() {
     ofSetBackgroundAuto(true);
+    ofSetBackgroundColor(0);
     ofSetFrameRate(60);
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Game Engine");
@@ -17,7 +18,6 @@ void ofApp::setup() {
     outputTime = false;
     if (outputTime) lastElapsed = ofGetElapsedTimeMicros();
 
-    ofSetBackgroundColor(0);
     light = ofLight();
     light.setPosition(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 100);
 

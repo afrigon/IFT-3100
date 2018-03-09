@@ -44,7 +44,7 @@ void GameObject::draw() {
     ofScale(transform->scale.getX(), transform->scale.getY(), transform->scale.getZ());
 
     // Get all the renderable objects and render them
-    std::vector<Renderable*> renderers = getComponents<Renderable>();
+    std::vector<RenderableComponent*> renderers = getComponents<RenderableComponent>();
     for (auto it = renderers.begin(); it != renderers.end(); ++it) {
         (*it)->render();
     }

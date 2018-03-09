@@ -13,7 +13,7 @@
 
 // Component that can be rendered
 // TODO(xenal) : Change that inheritance to something better, it's a bad way to handle it, too lazy to change it now so deal with it for the time
-class Renderable: public AbstractComponent {
+class RenderableComponent: public AbstractComponent {
  public:
     virtual void render() {}
 };

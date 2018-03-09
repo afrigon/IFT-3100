@@ -8,10 +8,10 @@
 #ifndef COMPONENTS_LINE_H_
 #define COMPONENTS_LINE_H_
 
-#include "components/Renderable.h"
+#include "components/RenderableComponent.h"
 
 namespace Components {
-class Line: public Renderable {
+class Line: public RenderableComponent {
     ofColor lineColor;
     unsigned int lineWidth = 2;
     unsigned int lineLength = 100;

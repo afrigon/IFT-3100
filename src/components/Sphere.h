@@ -8,10 +8,10 @@
 #ifndef COMPONENTS_SPHERE_H_
 #define COMPONENTS_SPHERE_H_
 
-#include "components/Renderable.h"
+#include "components/RenderableComponent.h"
 
 namespace Components {
-class Sphere: public Renderable {
+class Sphere: public RenderableComponent {
     ofColor color;
     unsigned int radius = 50;
 

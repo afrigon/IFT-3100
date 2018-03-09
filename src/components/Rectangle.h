@@ -8,17 +8,17 @@
 #ifndef COMPONENTS_RECTANGLE_H_
 #define COMPONENTS_RECTANGLE_H_
 
-#include "components/Renderable.h"
+#include "components/RenderableComponent.h"
 
 namespace Components {
-class Rectangle: public Renderable {
+class Rectangle: public RenderableComponent {
     ofColor fillColor;
     ofColor drawColor;
     unsigned int borderWidth = 2;
     unsigned int width = 100;
     unsigned int height = 100;
 
- public:
+ public:
     void render();
     ofColor getFillColor();
     ofColor getDrawColor();

@@ -10,11 +10,11 @@
 
 #include <string>
 
-#include "components/Renderable.h"
+#include "components/RenderableComponent.h"
 #include "ofxAssimpModelLoader.h"
 
 namespace Components {
-class Model: public Renderable {
+class Model: public RenderableComponent {
     ofxAssimpModelLoader model;
 
  public:

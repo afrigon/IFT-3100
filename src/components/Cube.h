@@ -8,11 +8,11 @@
 #ifndef COMPONENTS_CUBE_H_
 #define COMPONENTS_CUBE_H_
 
-#include "components/Renderable.h"
+#include "components/RenderableComponent.h"
 #include "math/Vector3.h"
 
 namespace Components {
-class Cube: public Renderable {
+class Cube: public RenderableComponent {
     ofColor color;
     Vector3 size = Vector3(100, 100, 100);
 

@@ -15,7 +15,7 @@ using std::vector;
 
 #include "components/AbstractComponent.h"
 #include "components/Transform.h"
-#include "components/Renderable.h"
+#include "components/RenderableComponent.h"
 
 class GameObject {
     Components::Transform* transform;

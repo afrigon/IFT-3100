@@ -23,6 +23,7 @@ class GameObject {
     Components::Transform* transform;
     vector<AbstractComponent*> components;
     list<GameObject*> children;
+    GameObject* parent;
 
  public:
     string name = "Empty Object";
@@ -42,6 +43,10 @@ class GameObject {
     Components::Transform*& getTransform() { return transform; }
     // Returns a reference on the list
     list<GameObject*>& getChildren();
+    // Return the parent of this instance. Nullptr if no parents
+    GameObject* getParent();
+    // Set the parent
+    void setParent(GameObject* parent);
     // Add a child to the end of the list
     // Returns an iterator on his position
     list<GameObject*>::iterator addChild(GameObject* gameObject);
@@ -61,6 +66,8 @@ class GameObject {
     unsigned int getGameObjectCount();
     // Returns the gameobject the index value
     GameObject* getGameObjectAt(unsigned int index);
+    // Returns the depth of the current GameObject
+    unsigned int getDepth();
 
     template <class T>
     T* addComponent(T* component) {

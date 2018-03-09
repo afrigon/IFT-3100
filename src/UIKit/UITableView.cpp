@@ -24,7 +24,8 @@ void UIKit::UITableViewCell::draw(UIKit::CGRect rect) {
 void UIKit::UITableView::draw(UIKit::CGRect rect) {
     if (isHidden) return;
     if (this->dataSource == nullptr) {
-        return (std::cout << "UITableView MUST have a dataSource of type UITableViewDataSource" << std::endl);
+        std::cout << "UITableView MUST have a dataSource of type UITableViewDataSource" << std::endl;
+        return;
     }
 
     ofSetColor(this->backgroundColor);

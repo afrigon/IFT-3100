@@ -28,3 +28,30 @@ Scene& Scene::render() {
     return *this;
 }
 
+unsigned int Scene::getGameObjectCount() {
+    unsigned int compteur = 0;
+    for(auto it = gameObjects.cbegin(); it != gameObjects.cend(); ++it) {
+        compteur += (*it)->getGameObjectCount();
+    }
+    return compteur;
+}
+
+GameObject* Scene::getGameObjectAt(unsigned int index) {
+    if(!gameObjects.empty()) {
+        int i = 0;
+        auto it = gameObjects.cbegin();
+        for(; it != gameObjects.cend(); ++it) {
+            if(i == index) {
+                return *it;
+            } else {
+                unsigned int count = (*it)->getGameObjectCount();
+                i += count;
+                if(i > index) {
+                    return (*it)->getGameObjectAt(index + count - i - 1);
+                }
+            }
+        }
+    }
+    return nullptr;
+}
+

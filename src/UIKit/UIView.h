@@ -9,6 +9,8 @@
 #define UIKIT_UIVIEW_H_
 
 #include <list>
+
+#include "UIEvent.h"
 #include "ofMain.h"
 
 namespace UIKit {
@@ -17,6 +19,14 @@ struct CGPoint {
     double y;
     CGPoint(): x(0), y(0) {}
     CGPoint(double x, double y): x(x), y(y) {}
+    CGPoint operator+(const CGPoint & o) {
+        return UIKit::CGPoint(this->x + o.x, this->y + o.y);
+    }
+    CGPoint& operator+=(const CGPoint & o) {
+        this->x += o.x;
+        this->y += o.y;
+        return *this;
+    }
 };
 
 struct CGSize {
@@ -35,7 +45,7 @@ struct CGRect {
     CGRect operator+(const CGRect & o) {
         return UIKit::CGRect(this->origin.x + o.origin.x, this->origin.y + o.origin.y, this->size.width + o.size.width, this->size.height + o.size.width);
     }
-    CGRect& operator+=(const CGRect & o ) {
+    CGRect& operator+=(const CGRect & o) {
         this->origin.x += o.origin.x;
         this->origin.y += o.origin.y;
         this->size.width += o.size.width;
@@ -45,7 +55,7 @@ struct CGRect {
     CGRect operator+(const CGPoint & o) {
         return UIKit::CGRect(this->origin.x + o.x, this->origin.y + o.y, this->size.width, this->size.height);
     }
-    CGRect& operator+=(const CGPoint & o ) {
+    CGRect& operator+=(const CGPoint & o) {
         this->origin.x += o.x;
         this->origin.y += o.y;
         return *this;
@@ -53,10 +63,13 @@ struct CGRect {
     CGRect operator+(const CGSize & o) {
         return UIKit::CGRect(this->origin.x, this->origin.y, this->size.width + o.width, this->size.height + o.width);
     }
-    CGRect& operator+=(const CGSize & o ) {
+    CGRect& operator+=(const CGSize & o) {
         this->size.width += o.width;
         this->size.height += o.height;
         return *this;
+    }
+    bool contains(const UIKit::CGPoint & o) {
+        return (this->origin.x <= o.x && this->origin.x + this->size.width >= o.x) && (this->origin.y <= o.y && this->origin.y + this->size.height >= o.y);
     }
 };
 
@@ -70,12 +83,17 @@ class UIView {
     bool isHidden = false;
     ofColor backgroundColor;
     ofColor tintColor;
+    ofEvent<UIView* const> onclick;
+    ofEvent<UIView* const> onmousedown;
+    ofEvent<UIView* const> onmouseup;
 
-    UIView* hitTest();  // TODO(afrigon) or something like that, still
+    UIView() {}
+    ~UIView();
     void addSubview(UIView*);
     void removeFromSuperView();
     virtual void layoutSubviews();
     virtual void draw(CGRect);
+    bool hitTest(UIKit::CGPoint, UIKit::CGPoint, UIKit::UIEvent);
 };
 }  // namespace UIKit
 

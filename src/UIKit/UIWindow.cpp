@@ -13,6 +13,7 @@ UIKit::UIWindow::UIWindow() {
 
 UIKit::UIWindow::~UIWindow() {
     ofRemoveListener(ofEvents().windowResized, this, &UIWindow::resize);
+    delete this->rootViewController;
 }
 
 void UIKit::UIWindow::resize(ofResizeEventArgs & e) {

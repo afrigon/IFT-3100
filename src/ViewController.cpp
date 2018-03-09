@@ -25,8 +25,7 @@ UIKit::UITableViewCell ViewController::cellForRow(int index) {
     UIKit::UITableViewCell cell;
     cell.label->setFontSize(8);
     GameObject* go = this->scene->getGameObjectAt(index);
-    // cell.label->padding = go->getDepth() * 20;
-    cell.label->padding = 30;
+    cell.label->padding = (go->getDepth() + 1) * 20;
     cell.backgroundColor = ofColor(0, 0);
     cell.label->text = go->name;
     return cell;

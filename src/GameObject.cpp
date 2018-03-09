@@ -100,7 +100,6 @@ unsigned int GameObject::getGameObjectCount() {
     for(auto it = children.cbegin(); it != children.cend(); ++it) {
         compteur += (*it)->getGameObjectCount();
     }
-    std::cout << getID() << " : " << compteur + 1 << std::endl;
     return compteur + 1;
 }
 

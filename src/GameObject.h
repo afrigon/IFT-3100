@@ -25,7 +25,7 @@ class GameObject {
     list<GameObject*> children;
 
  public:
-    string name = "GameObject";
+    string name = "Empty Object";
     
     GameObject();
     ~GameObject();

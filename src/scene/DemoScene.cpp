@@ -213,7 +213,7 @@ Scene DemoScene::generate7() {
     t1->position = Vector3(0, 200, 0);
 
     Model* p1 = o1->addComponent<Model>(new Model());
-    p1->loadModel("C:/Users/Alexandre/Documents/openframeworks/examples/addons/assimpExample/bin/data/astroBoy_walk.dae");
+    p1->loadModel("~/Documents/University/IFT-3100/labo/labo/labo5/bin/data/charlie.obj");
 
     return temp.addObject(o1);
 }
@@ -265,7 +265,7 @@ Scene DemoScene::generate8() {
     Cube* c6 = o6->addComponent<Cube>(new Cube());
 
     Model* c7 = o7->addComponent<Model>(new Model());
-    c7->loadModel("C:/Users/Alexandre/Documents/openframeworks/examples/addons/assimpExample/bin/data/astroBoy_walk.dae");
+    c7->loadModel("/Users/frigon/Documents/University/IFT-3100/labo/labo/labo5/bin/data/charlie.obj");
 
     temp.addObject(o1);
     temp.addObject(o2);
@@ -323,7 +323,7 @@ Scene DemoScene::generate9() {
     Cube* c6 = o6->addComponent<Cube>(new Cube());
 
     Model* c7 = o7->addComponent<Model>(new Model());
-    c7->loadModel("C:/Users/Alexandre/Documents/openframeworks/examples/addons/assimpExample/bin/data/astroBoy_walk.dae");
+    c7->loadModel("/Users/frigon/Documents/University/IFT-3100/labo/labo/labo5/bin/data/charlie.obj");
 
     temp.addObject(o1);
     o1->addChild(o2);

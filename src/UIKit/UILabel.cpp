@@ -39,7 +39,7 @@ void UIKit::UILabel::draw(UIKit::CGRect rect) {
     this->font.drawString(this->text,
                           rect.origin.x + this->frame.origin.x + this->padding,
                           rect.origin.y + this->frame.origin.y + (this->frame.size.height - stringHeight) / 2 + stringHeight);
-    
+
     for (std::list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->draw(rect + this->frame);
     }

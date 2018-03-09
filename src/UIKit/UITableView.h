@@ -19,6 +19,8 @@ struct UITableViewCell: public UIView {
     ofColor selectedBackgroundColor = this->backgroundColor;
     UILabel* label = new UILabel("TableViewCellLabel");
     list<UIKit::UIView*> subviews = { label };
+
+    void layoutSubviews() override;
     void draw(UIKit::CGRect) override;
 };
 

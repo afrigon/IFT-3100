@@ -13,7 +13,6 @@ void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Game Engine");
-    this->window.setRootViewController(new ViewController());
 
     outputTime = false;
     if (outputTime) lastElapsed = ofGetElapsedTimeMicros();
@@ -23,6 +22,8 @@ void ofApp::setup() {
 
     this->scene = DemoScene::generate8();
     this->scene.print();
+    
+    this->window.setRootViewController(new ViewController(&scene));
 }
 
 void ofApp::update() {

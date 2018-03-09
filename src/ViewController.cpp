@@ -9,7 +9,7 @@
 
 void ViewController::viewDidLoad() {
     this->hierarchy->dataSource = this;
-    this->hierarchy->backgroundColor = ofColor(96, 96, 96);
+    this->hierarchy->backgroundColor = ofColor(180);
     this->view->addSubview(this->hierarchy);
 }
 
@@ -18,12 +18,17 @@ void ViewController::willLayoutSubviews() {
 }
 
 int ViewController::numberOfRows() {
-    return 10;
+    return 10;//this->scene->getGameObjectCount();
 }
 
 UIKit::UITableViewCell ViewController::cellForRow(int index) {
     UIKit::UITableViewCell cell;
-    cell.backgroundColor = ofColor(255, 0, 0);
+    cell.label->setFontSize(8);
+    //GameObject* go = this->scene->getGameObjectAt(index);
+    // cell.label->padding = this->scene->getGameObjectHeight(go) * 20;
+    cell.label->padding = 30;
+    cell.backgroundColor = ofColor(0, 0);
+    //cell.label->text = go->name;
     return cell;
 }
 

@@ -15,14 +15,18 @@
 
 namespace UIKit {
 class UILabel: public UIView {
+    ofTrueTypeFont font;
+    int fontSize = 12;
+
  public:
     std::string text = "Label";
     ofColor textColor = ofColor(0, 0, 0);
-    double paddingX = 10;
-    double paddingY = 10;
+    double padding = 10;
 
     UILabel();
-    explicit UILabel(std::string text): text(text) {}
+    explicit UILabel(std::string);
+    void setFontSize(int);
+    void loadFont();
     void draw(UIKit::CGRect) override;
 };
 }  // namespace UIKit

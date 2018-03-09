@@ -71,7 +71,7 @@ class UIView {
     ofColor backgroundColor;
     ofColor tintColor;
 
-    UIView* hitTest();  // or something like that, still TODO
+    UIView* hitTest();  // TODO(afrigon) or something like that, still
     void addSubview(UIView*);
     void removeFromSuperView();
     virtual void layoutSubviews();

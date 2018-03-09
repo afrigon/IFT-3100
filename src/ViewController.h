@@ -9,8 +9,10 @@
 #define VIEWCONTROLLER_H_
 
 #include "UIKit/UIKit.h"
+#include "scene/Scene.h"
 
 class ViewController: public UIKit::UIViewController, public UIKit::UITableViewDataSource {
+    Scene* scene;
     UIKit::UITableView* hierarchy = new UIKit::UITableView();
 
     void viewDidLoad() override;
@@ -19,6 +21,9 @@ class ViewController: public UIKit::UIViewController, public UIKit::UITableViewD
     int numberOfRows() override;
     UIKit::UITableViewCell cellForRow(int index) override;
     int heightForRow() override;
+    
+ public:
+    ViewController(Scene* scene): scene(scene) {}
 };
 
 #endif  // VIEWCONTROLLER_H_

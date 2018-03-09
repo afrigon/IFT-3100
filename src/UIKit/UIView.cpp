@@ -27,7 +27,7 @@ void UIKit::UIView::draw(CGRect rect) {
     ofSetColor(this->backgroundColor);
     ofDrawRectangle(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height);
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
-        (*it)->draw(rect + this->frame);
+        (*it)->draw(this->frame + rect.origin);
     }
 }
 

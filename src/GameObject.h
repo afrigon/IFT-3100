@@ -10,8 +10,10 @@
 
 #include <vector>
 #include <list>
-using std::list;
+#include <string>
 using std::vector;
+using std::list;
+using std::string;
 
 #include "components/AbstractComponent.h"
 #include "components/Transform.h"
@@ -23,6 +25,8 @@ class GameObject {
     list<GameObject*> children;
 
  public:
+    string name = "GameObject";
+    
     GameObject();
     ~GameObject();
 

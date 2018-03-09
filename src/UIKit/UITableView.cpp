@@ -7,12 +7,17 @@
 
 #include "UIKit/UITableView.h"
 
+void UIKit::UITableViewCell::layoutSubviews() {
+    this->label->frame = this->frame;
+    UIKit::UIView::layoutSubviews();
+}
+
 void UIKit::UITableViewCell::draw(UIKit::CGRect rect) {
     if (isHidden) return;
     ofSetColor(this->backgroundColor);
-    ofDrawRectangle(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+    ofDrawRectangle(rect.origin.x, rect.origin.y, this->frame.size.width, this->frame.size.height);
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
-        (*it)->draw(rect);
+        (*it)->draw(this->frame + rect.origin);
     }
 }
 
@@ -24,10 +29,13 @@ void UIKit::UITableView::draw(UIKit::CGRect rect) {
 
     ofSetColor(this->backgroundColor);
     ofDrawRectangle(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height);
-    UIKit::CGRect cellRect = rect + this->frame;
-    cellRect.size = CGSize(this->frame.size.width, this->dataSource->heightForRow());
+    UIKit::CGRect cellRect = this->frame;
+    cellRect += rect.origin;
     for (int i = 0; i < this->dataSource->numberOfRows(); ++i) {
-        cellRect.origin = UIKit::CGPoint(0, i * this->dataSource->heightForRow());
-        this->dataSource->cellForRow(i).draw(cellRect);
+        cellRect.origin.y = i * this->dataSource->heightForRow();
+        UITableViewCell cell = this->dataSource->cellForRow(i);
+        cell.frame.size = UIKit::CGSize(this->frame.size.width, this->dataSource->heightForRow());
+        cell.layoutSubviews();
+        cell.draw(cellRect);
     }
 }

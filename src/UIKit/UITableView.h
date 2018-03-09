@@ -14,9 +14,16 @@
 #include "UILabel.h"
 
 namespace UIKit {
-struct UITableViewCell: public UIView {
-    ofColor backgroundColor = ofColor(255, 255, 255);
-    ofColor selectedBackgroundColor = this->backgroundColor;
+class UITableViewCell: public UIView {
+    bool isSelected = false;
+    
+ public:
+    ofColor textColor = ofColor(20);
+    ofColor backgroundColor = ofColor(175);
+    
+    ofColor selectedTextColor = ofColor(255);
+    ofColor selectedBackgroundColor = ofColor(66, 134, 244);
+    
     UILabel* label = new UILabel("TableViewCellLabel");
     list<UIKit::UIView*> subviews = { label };
 

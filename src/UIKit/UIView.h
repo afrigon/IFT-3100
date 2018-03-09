@@ -9,7 +9,9 @@
 #define UIKIT_UIVIEW_H_
 
 #include <list>
+
 #include "ofMain.h"
+#include "UIEvents.h"
 
 namespace UIKit {
 struct CGPoint {
@@ -17,6 +19,8 @@ struct CGPoint {
     double y;
     CGPoint(): x(0), y(0) {}
     CGPoint(double x, double y): x(x), y(y) {}
+    UIKit::CGPoint operator+(const UIKit::CGPoint &);
+    UIKit::CGPoint& operator+=(const UIKit::CGPoint &);
 };
 
 struct CGSize {
@@ -32,32 +36,13 @@ struct CGRect {
     CGRect(): origin(CGPoint()), size(CGSize()) {}
     CGRect(CGPoint origin, CGSize size): origin(origin), size(size) {}
     CGRect(double x, double y, double width, double height): origin(CGPoint(x, y)), size(CGSize(width, height)) {}
-    CGRect operator+(const CGRect & o) {
-        return UIKit::CGRect(this->origin.x + o.origin.x, this->origin.y + o.origin.y, this->size.width + o.size.width, this->size.height + o.size.width);
-    }
-    CGRect& operator+=(const CGRect & o ) {
-        this->origin.x += o.origin.x;
-        this->origin.y += o.origin.y;
-        this->size.width += o.size.width;
-        this->size.height += o.size.height;
-        return *this;
-    }
-    CGRect operator+(const CGPoint & o) {
-        return UIKit::CGRect(this->origin.x + o.x, this->origin.y + o.y, this->size.width, this->size.height);
-    }
-    CGRect& operator+=(const CGPoint & o ) {
-        this->origin.x += o.x;
-        this->origin.y += o.y;
-        return *this;
-    }
-    CGRect operator+(const CGSize & o) {
-        return UIKit::CGRect(this->origin.x, this->origin.y, this->size.width + o.width, this->size.height + o.width);
-    }
-    CGRect& operator+=(const CGSize & o ) {
-        this->size.width += o.width;
-        this->size.height += o.height;
-        return *this;
-    }
+    CGRect operator+(const CGRect &);
+    CGRect& operator+=(const CGRect &);
+    CGRect operator+(const CGPoint &);
+    CGRect& operator+=(const CGPoint &);
+    CGRect operator+(const CGSize &);
+    CGRect& operator+=(const CGSize &);
+    bool contains(const CGPoint &);
 };
 
 class UIView {
@@ -71,11 +56,26 @@ class UIView {
     ofColor backgroundColor;
     ofColor tintColor;
 
-    UIView* hitTest();  // TODO(afrigon) or something like that, still
+    UIView();
+    ~UIView();
     void addSubview(UIView*);
     void removeFromSuperView();
     virtual void layoutSubviews();
     virtual void draw(CGRect);
+    
+    template <class T>
+    bool hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentOrigin, ofEvent<T> event) {
+        UIKit::CGRect absoluteFrame = UIKit::CGRect(parentOrigin + this->frame.origin, this->frame.size);
+        if (!absoluteFrame.contains(clickPosition)) return false;
+        bool bubbled = false;
+        for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
+            if ((*it)->hitTest(clickPosition, absoluteFrame.origin, event)) bubbled = true;
+        }
+        if (this->subviews.size() != 0 && !bubbled) return false;
+        UIKit::UIEvent e = UIKit::UIEvent(this);
+        ofNotifyEvent(event, &e);
+        return e.shouldBubble();
+    }
 };
 }  // namespace UIKit
 

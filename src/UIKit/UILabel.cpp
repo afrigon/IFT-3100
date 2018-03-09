@@ -28,7 +28,7 @@ void UIKit::UILabel::loadFont() {
 }
 
 void UIKit::UILabel::draw(UIKit::CGRect rect) {
-    if (isHidden) return;
+    if (this->isHidden) return;
     ofSetColor(this->backgroundColor);
     ofDrawRectangle(this->frame.origin.x + rect.origin.x,
                     this->frame.origin.y + rect.origin.y,

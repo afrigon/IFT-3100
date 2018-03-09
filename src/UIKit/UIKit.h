@@ -8,6 +8,7 @@
 #ifndef UIKIT_UIKIT_H_
 #define UIKIT_UIKIT_H_
 
+#include "UIEvents.h"
 #include "UIView.h"
 #include "UIViewController.h"
 #include "UIWindow.h"

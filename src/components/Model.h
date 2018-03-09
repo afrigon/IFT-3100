@@ -1,20 +1,26 @@
-#pragma once
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
 
-#include "components/Renderable.h"
-#include "ofMain.h"
+#ifndef COMPONENTS_MODEL_H_
+#define COMPONENTS_MODEL_H_
+
+#include <string>
+
+#include "components/RenderableComponent.h"
 #include "ofxAssimpModelLoader.h"
 
-namespace Component
-{
+namespace Components {
+class Model: public RenderableComponent {
+    ofxAssimpModelLoader model;
 
-    class Model : public Renderable
-    {
-        ofxAssimpModelLoader model;
-    public:
-        Model();
-        ~Model();
+ public:
+    void render();
+    void loadModel(std::string path);
+};
+}  // namespace Components
 
-        void render();
-        void loadModel(std::string path);
-    };
-}
+#endif  // COMPONENTS_MODEL_H_

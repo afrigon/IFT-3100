@@ -1,73 +1,59 @@
-#include "Ellipse.h"
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
 
-Component::Ellipse::Ellipse()
-{
-    fillColor = drawColor = ofColor();
-    width = height = 100;
-}
+#include "components/Ellipse.h"
 
-Component::Ellipse::~Ellipse()
-{
-}
-
-void Component::Ellipse::render()
-{
+void Components::Ellipse::render() {
     ofFill();
     ofSetColor(fillColor);
     ofDrawEllipse(0, 0, 0, width, height);
 
     ofNoFill();
     ofSetColor(drawColor);
-    ofSetLineWidth(borderWidth);
-    ofDrawEllipse(0, 0, 0, width, height);
+    ofSetLineWidth(this->borderWidth);
+    ofDrawEllipse(0, 0, 0, this->width, this->height);
 }
 
-ofColor Component::Ellipse::getFillColor()
-{
-    return fillColor;
+ofColor Components::Ellipse::getFillColor() {
+    return this->fillColor;
 }
 
-ofColor Component::Ellipse::getDrawColor()
-{
-    return drawColor;
+ofColor Components::Ellipse::getDrawColor() {
+    return this->drawColor;
 }
 
-unsigned int Component::Ellipse::getBorderWidth()
-{
-    return borderWidth;
+unsigned int Components::Ellipse::getBorderWidth() {
+    return this->borderWidth;
 }
 
-unsigned int Component::Ellipse::getWidth()
-{
-    return width;
+unsigned int Components::Ellipse::getWidth() {
+    return this->width;
 }
 
-unsigned int Component::Ellipse::getHeight()
-{
-    return height;
+unsigned int Components::Ellipse::getHeight() {
+    return this->height;
 }
 
-void Component::Ellipse::setFillColor(ofColor color)
-{
-    fillColor = color;
+void Components::Ellipse::setFillColor(ofColor color) {
+    this->fillColor = color;
 }
 
-void Component::Ellipse::setDrawColor(ofColor color)
-{
-    drawColor = color;
+void Components::Ellipse::setDrawColor(ofColor color) {
+    this->drawColor = color;
 }
 
-void Component::Ellipse::setBorderWidth(unsigned int width)
-{
-    borderWidth = width;
+void Components::Ellipse::setBorderWidth(unsigned int width) {
+    this->borderWidth = width;
 }
 
-void Component::Ellipse::setWidth(unsigned int width)
-{
+void Components::Ellipse::setWidth(unsigned int width) {
     this->width = width;
 }
 
-void Component::Ellipse::setHeight(unsigned int height)
-{
+void Components::Ellipse::setHeight(unsigned int height) {
     this->height = height;
 }

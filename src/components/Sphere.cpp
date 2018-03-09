@@ -1,38 +1,30 @@
-#include "Sphere.h"
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
 
-Component::Sphere::Sphere()
-{
-    color = ofColor();
-    radius = 50;
-}
+#include "components/Sphere.h"
 
-Component::Sphere::~Sphere()
-{
-}
-
-void Component::Sphere::render()
-{
+void Components::Sphere::render() {
     ofFill();
-    ofSetColor(color);
-    ofDrawSphere(radius);
+    ofSetColor(this->color);
+    ofDrawSphere(this->radius);
 }
 
-ofColor Component::Sphere::getColor()
-{
-    return color;
+ofColor Components::Sphere::getColor() {
+    return this->color;
 }
 
-unsigned int Component::Sphere::getRadius()
-{
-    return radius;
+unsigned int Components::Sphere::getRadius() {
+    return this->radius;
 }
 
-void Component::Sphere::setColor(ofColor color)
-{
+void Components::Sphere::setColor(ofColor color) {
     this->color = color;
 }
 
-void Component::Sphere::setRadius(unsigned int radius)
-{
+void Components::Sphere::setRadius(unsigned int radius) {
     this->radius = radius;
 }

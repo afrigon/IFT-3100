@@ -5,13 +5,11 @@
 //  found in the LICENSE file.
 //
 
-#ifndef ABSTRACTCOMPONENTS_COMPONENT_H_
-#define ABSTRACTCOMPONENTS_COMPONENT_H_
+#ifndef COMPONENTS_ABSTRACTCOMPONENT_H_
+#define COMPONENTS_ABSTRACTCOMPONENT_H_
 
 class AbstractComponent {
-    virtual void dummy()
-    {
-    };
+    virtual void dummy() {}
 };
 
-#endif  // ABSTRACTCOMPONENTS_COMPONENT_H_
+#endif  // COMPONENTS_ABSTRACTCOMPONENT_H_

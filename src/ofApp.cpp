@@ -8,11 +8,16 @@
 #include "ofApp.h"
 
 void ofApp::setup() {
-    outputTime = false;
-    if(outputTime)
-        lastElapsed = ofGetElapsedTimeMicros();
-
+    ofSetBackgroundAuto(true);
     ofSetBackgroundColor(0);
+    ofSetFrameRate(60);
+    ofSetDepthTest(true);
+    ofSetWindowTitle("Super Epic Game Engine");
+    this->window.setRootViewController(new ViewController());
+
+    outputTime = false;
+    if (outputTime) lastElapsed = ofGetElapsedTimeMicros();
+
     light = ofLight();
     light.setPosition(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 100);
 
@@ -21,6 +26,7 @@ void ofApp::setup() {
 }
 
 void ofApp::update() {
+    this->window.layoutSubviews();
 }
 
 void ofApp::draw() {
@@ -36,11 +42,12 @@ void ofApp::draw() {
     ofDisableLighting();
     ofDisableSeparateSpecularLight();
 
-    if(outputTime)
-    {
+    if (outputTime) {
         std::cout << "Elapsed Micros : " << ofGetElapsedTimeMicros() - lastElapsed << std::endl;
         lastElapsed = ofGetElapsedTimeMicros();
     }
+
+    this->window.draw();
 }
 
 void ofApp::keyPressed(int key) {
@@ -65,9 +72,6 @@ void ofApp::mouseEntered(int x, int y) {
 }
 
 void ofApp::mouseExited(int x, int y) {
-}
-
-void ofApp::windowResized(int w, int h) {
 }
 
 void ofApp::gotMessage(ofMessage msg) {

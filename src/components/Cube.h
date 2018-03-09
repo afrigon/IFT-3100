@@ -1,25 +1,28 @@
-#pragma once
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
 
-#include "components/Renderable.h"
+#ifndef COMPONENTS_CUBE_H_
+#define COMPONENTS_CUBE_H_
+
+#include "components/RenderableComponent.h"
 #include "math/Vector3.h"
-#include "ofMain.h"
 
-namespace Component
-{
+namespace Components {
+class Cube: public RenderableComponent {
+    ofColor color;
+    Vector3 size = Vector3(100, 100, 100);
 
-    class Cube : public Renderable
-    {
-        ofColor color;
-        Vector3 size;
-    public:
-        Cube();
-        ~Cube();
+ public:
+    void render();
+    ofColor getColor();
+    Vector3 getSize();
+    void setColor(ofColor color);
+    void setSize(Vector3 size);
+};
+}  // namespace Components
 
-        void render();
-
-        ofColor getColor();
-        Vector3 getSize();
-        void setColor(ofColor color);
-        void setSize(Vector3 size);
-    };
-}
+#endif  // COMPONENTS_CUBE_H_

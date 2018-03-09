@@ -11,19 +11,16 @@
 #include "components/Undeletable.h"
 #include "math/Vector3.h"
 
-namespace Component
-{
-    class Transform : public Undeletable
-    {
+namespace Components {
+class Transform: public Undeletable {
+ public:
+    Vector3 position;
+    Vector3 scale;
+    Vector3 rotation;
 
-    public:
-        Transform();
-        Transform(Vector3, Vector3 = Vector3(1), Vector3 = Vector3());
-        Vector3 position;
-        Vector3 scale;
-        Vector3 rotation;
-
-    };
-}
+    Transform();
+    Transform(Vector3, Vector3 = Vector3(1), Vector3 = Vector3());
+};
+}  // namespace Components
 
 #endif  // COMPONENTS_TRANSFORM_H_

@@ -1,2 +1,2 @@
 lint.py linguist-vendored
-
+bin/* linguist-generated

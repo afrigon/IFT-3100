@@ -1,23 +1,27 @@
-#pragma once
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
 
-#include "components/Renderable.h"
-#include "ofMain.h"
+#ifndef COMPONENTS_SPHERE_H_
+#define COMPONENTS_SPHERE_H_
 
-namespace Component
-{
+#include "components/RenderableComponent.h"
 
-    class Sphere : public Renderable
-    {
-        ofColor color;
-        unsigned int radius;
-    public:
-        Sphere();
-        ~Sphere();
+namespace Components {
+class Sphere: public RenderableComponent {
+    ofColor color;
+    unsigned int radius = 50;
 
-        void render();
-        ofColor getColor();
-        unsigned int getRadius();
-        void setColor(ofColor color);
-        void setRadius(unsigned int radius);
-    };
-}
+ public:
+    void render();
+    ofColor getColor();
+    unsigned int getRadius();
+    void setColor(ofColor color);
+    void setRadius(unsigned int radius);
+};
+}  // namespace Components
+
+#endif  // COMPONENTS_SPHERE_H_

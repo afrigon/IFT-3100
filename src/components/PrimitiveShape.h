@@ -1,36 +1,41 @@
-#pragma once
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
 
-#include "components/Renderable.h"
-#include "math/Vector3.h"
-#include "ofMain.h"
+#ifndef COMPONENTS_PRIMITIVESHAPE_H_
+#define COMPONENTS_PRIMITIVESHAPE_H_
 
 #include <vector>
 
-namespace Component
-{
+#include "components/RenderableComponent.h"
+#include "math/Vector3.h"
 
-    class PrimitiveShape : public Renderable
-    {
-        ofColor fillColor;
-        ofColor drawColor;
-        unsigned int borderWidth;
-        std::vector<Vector3> points;
+namespace Components {
+class PrimitiveShape: public RenderableComponent {
+    ofColor fillColor;
+    ofColor drawColor;
+    unsigned int borderWidth = 2;
+    std::vector<Vector3> points;
 
-        void drawShape();
-    public:
-        PrimitiveShape();
-        ~PrimitiveShape();
+    void drawShape();
 
-        void render();
-        unsigned int getPointCount();
-        void setPointSize(unsigned int newSize);
-        bool setPoint(unsigned int point, Vector3 position);
-        ofColor getFillColor();
-        ofColor getDrawColor();
-        unsigned int getBorderWidth();
-        vector<Vector3>& getPoints();
-        void setFillColor(ofColor color);
-        void setDrawColor(ofColor color);
-        void setBorderWidth(unsigned int width);
-    };
-}
+ public:
+    PrimitiveShape();
+    void render();
+    unsigned int getPointCount();
+    void setPointSize(unsigned int newSize);
+    bool setPoint(unsigned int point, Vector3 position);
+    ofColor getFillColor();
+    ofColor getDrawColor();
+    unsigned int getBorderWidth();
+    vector<Vector3>& getPoints();
+    void setFillColor(ofColor color);
+    void setDrawColor(ofColor color);
+    void setBorderWidth(unsigned int width);
+};
+}  // namespace Components
+
+#endif  // COMPONENTS_PRIMITIVESHAPE_H_

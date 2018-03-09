@@ -8,12 +8,12 @@
 #ifndef SCENE_DEMOSCENE_H_
 #define SCENE_DEMOSCENE_H_
 
-#include "Scene.h"
 #include "GameObject.h"
-#include "Transform.h"
-#include "Vector3.h"
+#include "math/Vector3.h"
+#include "scene/Scene.h"
+#include "components/Transform.h"
 #include "components/PrimitiveShape.h"
-#include "components/Ligne.h"
+#include "components/Line.h"
 #include "components/Rectangle.h"
 #include "components/Ellipse.h"
 #include "components/Sphere.h"

@@ -1,98 +1,82 @@
-#include "PrimitiveShape.h"
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
 
-Component::PrimitiveShape::PrimitiveShape()
-{
-    fillColor = ofColor();
-    drawColor = ofColor();
-    borderWidth = 2;
-    points.resize(0);
+#include "components/PrimitiveShape.h"
+
+Components::PrimitiveShape::PrimitiveShape() {
+    this->points.resize(0);
 }
 
-Component::PrimitiveShape::~PrimitiveShape()
-{
-}
-
-void Component::PrimitiveShape::drawShape()
-{
+void Components::PrimitiveShape::drawShape() {
     ofBeginShape();
 
-    for(unsigned int i = 0; i < points.size(); ++i)
-    {
-        ofVertex(points[i].getX(), points[i].getY(), points[i].getZ());
+    for (unsigned int i = 0; i < this->points.size(); ++i) {
+        ofVertex(this->points[i].getX(), this->points[i].getY(), this->points[i].getZ());
     }
-    ofVertex(points[0].getX(), points[0].getY(), points[0].getZ());
 
+    ofVertex(this->points[0].getX(), this->points[0].getY(), this->points[0].getZ());
     ofEndShape();
 }
 
-void Component::PrimitiveShape::render()
-{
-    if(points.size() > 0)
-    {
+void Components::PrimitiveShape::render() {
+    if (this->points.size() > 0) {
         ofSetPolyMode(ofPolyWindingMode::OF_POLY_WINDING_ODD);
 
         ofFill();
-        ofSetColor(fillColor);
+        ofSetColor(this->fillColor);
         drawShape();
 
         ofNoFill();
-        ofSetColor(drawColor);
-        ofSetLineWidth(borderWidth);
+        ofSetColor(this->drawColor);
+        ofSetLineWidth(this->borderWidth);
         drawShape();
     }
 }
 
-unsigned int Component::PrimitiveShape::getPointCount()
-{
-    return (unsigned int)points.size();
+unsigned int Components::PrimitiveShape::getPointCount() {
+    return (unsigned int)this->points.size();
 }
 
-void Component::PrimitiveShape::setPointSize(unsigned int newSize)
-{
-    points.resize(newSize);
+void Components::PrimitiveShape::setPointSize(unsigned int newSize) {
+    this->points.resize(newSize);
 }
 
-bool Component::PrimitiveShape::setPoint(unsigned int point, Vector3 position)
-{
-    if(point < points.size())
-    {
-        points[point] = position;
+bool Components::PrimitiveShape::setPoint(unsigned int point, Vector3 position) {
+    if (point < this->points.size()) {
+        this->points[point] = position;
         return true;
     }
     return false;
 }
 
-ofColor Component::PrimitiveShape::getFillColor()
-{
-    return fillColor;
+ofColor Components::PrimitiveShape::getFillColor() {
+    return this->fillColor;
 }
 
-ofColor Component::PrimitiveShape::getDrawColor()
-{
-    return drawColor;
+ofColor Components::PrimitiveShape::getDrawColor() {
+    return this->drawColor;
 }
 
-unsigned int Component::PrimitiveShape::getBorderWidth()
-{
-    return borderWidth;
+unsigned int Components::PrimitiveShape::getBorderWidth() {
+    return this->borderWidth;
 }
 
-vector<Vector3>& Component::PrimitiveShape::getPoints()
-{
-    return points;
+vector<Vector3>& Components::PrimitiveShape::getPoints() {
+    return this->points;
 }
 
-void Component::PrimitiveShape::setFillColor(ofColor color)
-{
-    fillColor = color;
+void Components::PrimitiveShape::setFillColor(ofColor color) {
+    this->fillColor = color;
 }
 
-void Component::PrimitiveShape::setDrawColor(ofColor color)
-{
-    drawColor = color;
+void Components::PrimitiveShape::setDrawColor(ofColor color) {
+    this->drawColor = color;
 }
 
-void Component::PrimitiveShape::setBorderWidth(unsigned int width)
-{
-    borderWidth = width;
+void Components::PrimitiveShape::setBorderWidth(unsigned int width) {
+    this->borderWidth = width;
 }

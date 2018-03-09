@@ -1,38 +1,30 @@
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
+
 #include "components/Cube.h"
 
-Component::Cube::Cube()
-{
-    color = ofColor();
-    size = Vector3(100, 100, 100);
-}
-
-Component::Cube::~Cube()
-{
-}
-
-void Component::Cube::render()
-{
+void Components::Cube::render() {
     ofFill();
-    ofSetColor(color);
-    ofDrawBox(size.getX(), size.getY(), size.getZ());
+    ofSetColor(this->color);
+    ofDrawBox(this->size.getX(), this->size.getY(), this->size.getZ());
 }
 
-ofColor Component::Cube::getColor()
-{
-    return color;
+ofColor Components::Cube::getColor() {
+    return this->color;
 }
 
-Vector3 Component::Cube::getSize()
-{
-    return size;
+Vector3 Components::Cube::getSize() {
+    return this->size;
 }
 
-void Component::Cube::setColor(ofColor color)
-{
+void Components::Cube::setColor(ofColor color) {
     this->color = color;
 }
 
-void Component::Cube::setSize(Vector3 size)
-{
+void Components::Cube::setSize(Vector3 size) {
     this->size = size;
 }

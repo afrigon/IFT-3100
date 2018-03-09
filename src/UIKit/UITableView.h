@@ -23,8 +23,8 @@ struct UITableViewCell: public UIView {
 };
 
 struct UITableViewDataSource {
-    virtual int numberOfRows() {}
-    virtual UITableViewCell cellForRow(int index) {}
+    virtual int numberOfRows() { return 0; }
+    virtual UITableViewCell cellForRow(int index) { return UITableViewCell(); }
     virtual int heightForRow() { return 10; }
 };
 

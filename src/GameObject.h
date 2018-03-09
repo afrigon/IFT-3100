@@ -53,6 +53,10 @@ class GameObject {
     // Move itChild to itPosition in the list
     // Returns the new positon of the child
     list<GameObject*>::iterator moveChild(list<GameObject*>::const_iterator itChild, list<GameObject*>::const_iterator itPosition);
+    // Returns the number of object below him and include himself
+    unsigned int getGameObjectCount();
+    // Returns the gameobject the index value
+    GameObject* getGameObjectAt(unsigned int index);
 
     template <class T>
     T* addComponent(T* component) {

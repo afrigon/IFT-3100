@@ -95,4 +95,32 @@ list<GameObject*>::iterator GameObject::moveChild(list<GameObject*>::const_itera
     return children.insert(itPosition, movingObject);
 }
 
+unsigned int GameObject::getGameObjectCount() {
+    unsigned int compteur = 0;
+    for(auto it = children.cbegin(); it != children.cend(); ++it) {
+        compteur += (*it)->getGameObjectCount();
+    }
+    std::cout << getID() << " : " << compteur + 1 << std::endl;
+    return compteur + 1;
+}
+
+GameObject * GameObject::getGameObjectAt(unsigned int index) {
+    if(!children.empty()) {
+        int i = 0;
+        auto it = children.cbegin();
+        for(; it != children.cend(); ++it) {
+            if(i == index) {
+                return *it;
+            } else {
+                unsigned int count = (*it)->getGameObjectCount();
+                i += count;
+                if(i > index) {
+                    return (*it)->getGameObjectAt(index + count - i - 1);
+                }
+            }
+        }
+    }
+    return nullptr;
+}
+
 #pragma endregion

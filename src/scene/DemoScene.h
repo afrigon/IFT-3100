@@ -22,14 +22,15 @@
 
 class DemoScene {
  public:
-     static Scene generate1();
-     static Scene generate2();
-     static Scene generate3();
-     static Scene generate4();
-     static Scene generate5();
-     static Scene generate6();
-     static Scene generate7();
-     static Scene generate8();
+     static Scene generate1(); //PrimitiveShape
+     static Scene generate2(); //Line
+     static Scene generate3(); //Rectangle
+     static Scene generate4(); //Ellipse
+     static Scene generate5(); //Cube
+     static Scene generate6(); //Sphere
+     static Scene generate7(); //Model
+     static Scene generate8(); //All previews
+     static Scene generate9(); //Childens
 };
 
 #endif  // SCENE_DEMOSCENE_H_

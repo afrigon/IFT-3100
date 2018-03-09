@@ -22,11 +22,11 @@ class Scene {
     Scene& addObject(GameObject* o);
     Scene& remove(GameObject* o);
     Scene& render();
+    unsigned int getGameObjectCount();
+    GameObject* getGameObjectAt(unsigned int index);
+
     void print() {
-        std::cout << "GameObject size : " << gameObjects.size() << std::endl;
-        for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
-            std::cout << "Child size : " << ((*it)->getChildren().size()) << "\tComponent size : " << ((*it)->getComponents<AbstractComponent>().size()) << std::endl;
-        }
+        std::cout << "Total : " << getGameObjectCount() << std::endl;
     }
 };
 

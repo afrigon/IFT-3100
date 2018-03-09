@@ -95,16 +95,16 @@ Scene DemoScene::generate3() {
     t3->position = Vector3(-200, -150, 0);
     t3->rotation = Vector3(60, 60, 45);
 
-    Rectangle* r1 = o1->addComponent<Rectangle>(new Rectangle());
+    Components::Rectangle* r1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
     r1->setHeight(150);
     r1->setBorderWidth(5);
     r1->setDrawColor(ofColor(200, 0, 0));
 
-    Rectangle* r2 = o2->addComponent<Rectangle>(new Rectangle());
+    Components::Rectangle* r2 = o2->addComponent<Components::Rectangle>(new Components::Rectangle());
     r2->setWidth(150);
     r2->setDrawColor(ofColor(200, 0, 0));
 
-    o3->addComponent<Rectangle>(new Rectangle());
+    o3->addComponent<Components::Rectangle>(new Components::Rectangle());
 
     o1->addChild(o2);
 
@@ -127,16 +127,16 @@ Scene DemoScene::generate4() {
     t3->position = Vector3(-200, -150, 0);
     t3->rotation = Vector3(60, 60, 45);
 
-    Ellipse* e1 = o1->addComponent<Ellipse>(new Ellipse());
+    Components::Ellipse* e1 = o1->addComponent<Components::Ellipse>(new Components::Ellipse());
     e1->setHeight(150);
     e1->setBorderWidth(5);
     e1->setDrawColor(ofColor(200, 0, 0));
 
-    Ellipse* e2 = o2->addComponent<Ellipse>(new Ellipse());
+    Components::Ellipse* e2 = o2->addComponent<Components::Ellipse>(new Components::Ellipse());
     e2->setWidth(150);
     e2->setDrawColor(ofColor(200, 0, 0));
 
-    Ellipse* e3 = o3->addComponent<Ellipse>(new Ellipse());
+    Components::Ellipse* e3 = o3->addComponent<Components::Ellipse>(new Components::Ellipse());
     e3->setHeight(300);
     e3->setWidth(300);
 
@@ -245,7 +245,7 @@ Scene DemoScene::generate8() {
     t7->position = Vector3(300, 200, 0);
     t7->scale = Vector3(1, 1, 0.5);
 
-    Rectangle* c1 = o1->addComponent<Rectangle>(new Rectangle());
+    Components::Rectangle* c1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
     c1->setFillColor(ofColor(200, 0, 0));
 
     PrimitiveShape* c2 = o2->addComponent<PrimitiveShape>(new PrimitiveShape());
@@ -257,7 +257,7 @@ Scene DemoScene::generate8() {
 
     Line* c3 = o3->addComponent<Line>(new Line());
 
-    Ellipse* c4 = o4->addComponent<Ellipse>(new Ellipse());
+    Components::Ellipse* c4 = o4->addComponent<Components::Ellipse>(new Components::Ellipse());
     c4->setWidth(50);
 
     Sphere* c5 = o5->addComponent<Sphere>(new Sphere());
@@ -274,5 +274,64 @@ Scene DemoScene::generate8() {
     temp.addObject(o5);
     temp.addObject(o6);
     return temp.addObject(o7);
+}
+
+Scene DemoScene::generate9() {
+    Scene temp = Scene();
+
+    GameObject* o1 = new GameObject();
+    GameObject* o2 = new GameObject();
+    GameObject* o3 = new GameObject();
+    GameObject* o4 = new GameObject();
+    GameObject* o5 = new GameObject();
+    GameObject* o6 = new GameObject();
+    GameObject* o7 = new GameObject();
+    Transform* t1 = o1->getTransform();
+    Transform* t2 = o2->getTransform();
+    Transform* t3 = o3->getTransform();
+    Transform* t4 = o4->getTransform();
+    Transform* t5 = o5->getTransform();
+    Transform* t6 = o6->getTransform();
+    Transform* t7 = o7->getTransform();
+    t1->position = Vector3(-100, -200, 0);
+    t2->position = Vector3(0, 200, 0);
+    t3->position = Vector3(0, 400, 0);
+    t4->position = Vector3(200, -200, 0);
+    t5->position = Vector3(0, 200, 0);
+    t6->position = Vector3(0, 400, 0);
+    t6->rotation = Vector3(0, 200, 45);
+    t7->position = Vector3(200, 200, 0);
+    t7->scale = Vector3(1, 1, 0.5);
+
+    Components::Rectangle* c1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
+    c1->setFillColor(ofColor(200, 0, 0));
+
+    PrimitiveShape* c2 = o2->addComponent<PrimitiveShape>(new PrimitiveShape());
+    c2->setPointSize(4);
+    c2->setPoint(0, Vector3(-50, -25, 0));
+    c2->setPoint(1, Vector3(50, -25, 0));
+    c2->setPoint(2, Vector3(25, 25, 0));
+    c2->setPoint(3, Vector3(-25, 25, 0));
+
+    Line* c3 = o3->addComponent<Line>(new Line());
+
+    Components::Ellipse* c4 = o4->addComponent<Components::Ellipse>(new Components::Ellipse());
+    c4->setWidth(50);
+
+    Sphere* c5 = o5->addComponent<Sphere>(new Sphere());
+
+    Cube* c6 = o6->addComponent<Cube>(new Cube());
+
+    Model* c7 = o7->addComponent<Model>(new Model());
+    c7->loadModel("C:/Users/Alexandre/Documents/openframeworks/examples/addons/assimpExample/bin/data/astroBoy_walk.dae");
+
+    temp.addObject(o1);
+    o1->addChild(o2);
+    o1->addChild(o3);
+    o2->addChild(o4);
+    o4->addChild(o5);
+    o4->addChild(o6);
+    o4->addChild(o7);
+    return temp;
 }
 

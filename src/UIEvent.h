@@ -1,8 +1,8 @@
 //
-//  UIEvent.h
-//  project
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
 //
-//  Created by Alexandre Frigon on 2018-03-09.
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
 //
 
 #ifndef UIKIT_UIEVENT_H_

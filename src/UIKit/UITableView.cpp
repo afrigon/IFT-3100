@@ -29,6 +29,7 @@ void UIKit::UITableView::draw(UIKit::CGRect rect) {
         return;
     }
 
+    ofSetColor(this->backgroundColor);
     ofDrawRectangle(this->frame.origin.x + rect.origin.x,
                     this->frame.origin.y + rect.origin.y,
                     this->frame.size.width,

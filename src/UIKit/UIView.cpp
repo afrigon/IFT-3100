@@ -5,7 +5,7 @@
 //  found in the LICENSE file.
 //
 
-#include "UIView.h"
+#include "UIKit/UIView.h"
 
 UIKit::CGPoint UIKit::CGPoint::operator+(const UIKit::CGPoint & o) {
     return UIKit::CGPoint(this->x + o.x, this->y + o.y);
@@ -57,7 +57,6 @@ UIKit::UIView::~UIView() {
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         delete (*it);
     }
-    delete superview;
 }
 
 void UIKit::UIView::addSubview(UIView* view) {
@@ -69,7 +68,7 @@ void UIKit::UIView::removeFromSuperView() {
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->removeFromSuperView();
     }
-    if (this->superview != nullptr) {  // probably handle uiwindow case
+    if (this->superview) {  // probably handle uiwindow case
         this->superview->subviews.remove(this);
     }
     delete this;
@@ -90,20 +89,20 @@ void UIKit::UIView::layoutSubviews() {
     }
 }
 
-//bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentOrigin, UIEvent event) {
-//    UIKit::CGRect absoluteFrame = UIKit::CGRect(parentOrigin + this->frame.origin, this->frame.size);
-//    if (!absoluteFrame.contains(clickPosition)) return false;
-//    bool bubble = false;
-//    for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
-//        if ((*it)->hitTest(clickPosition, absoluteFrame.origin, event)) bubble = true;
-//    }
-//    if (this->subviews.size() != 0 && !bubble) return false;
-////    switch (event) {
-////        case UIEvent::click: ofNotifyEvent(this->onclick, this); break;
-////        case UIEvent::mousedown: ofNotifyEvent(this->onmousedown, this); break;
-////        case UIEvent::mouseup: ofNotifyEvent(this->onmouseup, this); break;
-////        default: return false;
-////    }
-//    return true;
-//}
+bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentOrigin, UIKit::UIEvent event) {
+    UIKit::CGRect absoluteFrame = UIKit::CGRect(parentOrigin + this->frame.origin, this->frame.size);
+    if (!absoluteFrame.contains(clickPosition)) return false;
+    bool bubble = false;
+    for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
+        if ((*it)->hitTest(clickPosition, absoluteFrame.origin, event)) bubble = true;
+    }
+    if (this->subviews.size() != 0 && !bubble) return false;
+    switch (event) {
+        case UIEvent::click: ofNotifyEvent(this->onclick, this); break;
+        case UIEvent::mousedown: ofNotifyEvent(this->onmousedown, this); break;
+        case UIEvent::mouseup: ofNotifyEvent(this->onmouseup, this); break;
+        default: return false;
+    }
+    return true;
+}
 

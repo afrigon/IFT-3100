@@ -55,17 +55,17 @@ class UIView {
     bool isHidden = false;
     ofColor backgroundColor;
     ofColor tintColor;
-//    ofEvent<UIView* const> onclick;
-//    ofEvent<UIView* const> onmousedown;
-//    ofEvent<UIView* const> onmouseup;
+    ofEvent<UIView* const> onclick;
+    ofEvent<UIView* const> onmousedown;
+    ofEvent<UIView* const> onmouseup;
 
-    UIView();
+    UIView() {}
     ~UIView();
     void addSubview(UIView*);
     void removeFromSuperView();
     virtual void layoutSubviews();
     virtual void draw(CGRect);
-    //bool hitTest(UIKit::CGPoint, UIKit::CGPoint, UIEvent);
+    bool hitTest(UIKit::CGPoint, UIKit::CGPoint, UIKit::UIEvent);
 };
 }  // namespace UIKit
 

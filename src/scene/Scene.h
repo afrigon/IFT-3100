@@ -13,6 +13,8 @@
 using std::list;
 
 #include "GameObject.h"
+#include "components/Renderable.h"
+#include "ofMain.h"
 
 class Scene {
     list<GameObject*> gameObjects;
@@ -20,8 +22,13 @@ class Scene {
 public:
     Scene& addObject(GameObject* o);
     Scene& remove(GameObject* o);
+    Scene& render();
     void print() {
-        std::cout << gameObjects.size() << std::endl;
+        std::cout << "GameObject size : " << gameObjects.size() << std::endl;
+        for(auto it = gameObjects.begin(); it != gameObjects.end(); ++it)
+        {
+            std::cout << "Child size : " << ((*it)->getChilds().size()) << "\tComponent size : " << ((*it)->getComponents<AbstractComponent>().size()) << std::endl;
+        }
     }
 };
 

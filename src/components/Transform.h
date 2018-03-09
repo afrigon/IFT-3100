@@ -8,17 +8,22 @@
 #ifndef COMPONENTS_TRANSFORM_H_
 #define COMPONENTS_TRANSFORM_H_
 
-#include "components/AbstractComponent.h"
+#include "components/Undeletable.h"
 #include "math/Vector3.h"
 
-class Transform: public AbstractComponent {
-    Vector3 position;
-    Vector3 scale;
-    Vector3 rotation;
+namespace Component
+{
+    class Transform : public Undeletable
+    {
 
- public:
-    Transform();
-    Transform(Vector3, Vector3 = Vector3(1), Vector3 = Vector3());
-};
+    public:
+        Transform();
+        Transform(Vector3, Vector3 = Vector3(1), Vector3 = Vector3());
+        Vector3 position;
+        Vector3 scale;
+        Vector3 rotation;
+
+    };
+}
 
 #endif  // COMPONENTS_TRANSFORM_H_

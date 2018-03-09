@@ -46,6 +46,11 @@ Scene DemoScene::generate1() {
     p3->setPoint(3, Vector3(100, 0, 0));
     p3->setDrawColor(ofColor(120, 0, 60));
     
+<<<<<<< HEAD
+    GameObject* o = new GameObject();
+    Transform t = Transform(Vector3(10, 15, 20));
+    o->addComponent(t);
+=======
     o1->addChild(o2);
     temp.addObject(o1);
 
@@ -77,6 +82,7 @@ Scene DemoScene::generate2()
     l3->setLineLength(300);
 
     o1->addChild(o2);
+>>>>>>> a25fd18efcd85c6938a32c6556f26956e616fb0d
     
     temp.addObject(o1);
 

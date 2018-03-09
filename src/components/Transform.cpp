@@ -7,8 +7,8 @@
 
 #include "components/Transform.h"
 
-Transform::Transform(): position(Vector3()), scale(Vector3(1)), rotation(Vector3()) {}
-Transform::Transform(Vector3 position, Vector3 scale, Vector3 rotation):
+Component::Transform::Transform(): position(Vector3()), scale(Vector3(1)), rotation(Vector3()) {}
+Component::Transform::Transform(Vector3 position, Vector3 scale, Vector3 rotation):
     position(position),
     scale(scale),
     rotation(rotation) {

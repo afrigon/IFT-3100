@@ -15,14 +15,16 @@
 #include "ViewController.h"
 
 class ofApp: public ofBaseApp {
+<<<<<<< HEAD
+    // Scene scene;
+    UIKit::UIWindow window;
+=======
     Scene scene;
     bool outputTime;
     uint64_t lastElapsed;
-    UIKit::UIWindow window;
+>>>>>>> a25fd18efcd85c6938a32c6556f26956e616fb0d
     
  public:
-        ofLight	light;
-    
         void setup();
         void update();
         void draw();
@@ -38,6 +40,8 @@ class ofApp: public ofBaseApp {
         void mouseExited(int x, int y);
         void dragEvent(ofDragInfo dragInfo);
         void gotMessage(ofMessage msg);
+
+        ofLight	light;
 };
 
 #endif  // OFAPP_H_

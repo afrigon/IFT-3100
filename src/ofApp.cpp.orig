@@ -8,14 +8,19 @@
 #include "ofApp.h"
 
 void ofApp::setup() {
+<<<<<<< HEAD
+    // this->scene = DemoScene::generate();
+    // this->scene.print();
     ofSetBackgroundAuto(true);
+    ofSetBackgroundColor(0, 0, 0);
     ofSetFrameRate(60);
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Game Engine");
     this->window.setRootViewController(new ViewController());
-    
+=======
     outputTime = false;
-    if(outputTime) lastElapsed = ofGetElapsedTimeMicros();
+    if(outputTime)
+        lastElapsed = ofGetElapsedTimeMicros();
 
     ofSetBackgroundColor(0);
     light = ofLight();
@@ -23,6 +28,7 @@ void ofApp::setup() {
 
     this->scene = DemoScene::generate8();
     this->scene.print();
+>>>>>>> a25fd18efcd85c6938a32c6556f26956e616fb0d
 }
 
 void ofApp::update() {
@@ -30,6 +36,9 @@ void ofApp::update() {
 }
 
 void ofApp::draw() {
+<<<<<<< HEAD
+    this->window.draw();
+=======
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofEnableDepthTest();
     light.enable();
@@ -47,8 +56,7 @@ void ofApp::draw() {
         std::cout << "Elapsed Micros : " << ofGetElapsedTimeMicros() - lastElapsed << std::endl;
         lastElapsed = ofGetElapsedTimeMicros();
     }
-    
-    this->window.draw();
+>>>>>>> a25fd18efcd85c6938a32c6556f26956e616fb0d
 }
 
 void ofApp::keyPressed(int key) {

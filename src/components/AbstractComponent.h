@@ -9,7 +9,9 @@
 #define ABSTRACTCOMPONENTS_COMPONENT_H_
 
 class AbstractComponent {
-    
+    virtual void dummy()
+    {
+    };
 };
 
 #endif  // ABSTRACTCOMPONENTS_COMPONENT_H_

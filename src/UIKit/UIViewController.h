@@ -11,18 +11,18 @@
 #include "UIView.h"
 
 namespace UIKit {
-    class UIViewController {
-     public:
-        UIView* view;
-        
-        UIViewController(): view(new UIView()) {
-            this->view->backgroundColor = ofColor(0, 0, 0, 0);
-        }
-        void layoutSubviews();
-        virtual void viewDidLoad() {}
-        virtual void willLayoutSubviews() {}
-        virtual void didLayoutSubviews() {}
-    };
-}
+class UIViewController {
+ public:
+    UIView* view;
+
+    UIViewController(): view(new UIView()) {
+        this->view->backgroundColor = ofColor(0, 0, 0, 0);
+    }
+    void layoutSubviews();
+    virtual void viewDidLoad() {}
+    virtual void willLayoutSubviews() {}
+    virtual void didLayoutSubviews() {}
+};
+}  // namespace UIKit
 
 #endif  // UIKIT_UIVIEWCONTROLLER_H_

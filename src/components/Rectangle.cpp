@@ -1,76 +1,61 @@
-#include "Rectangle.h"
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
 
-Component::Rectangle::Rectangle()
-{
-    fillColor = drawColor = ofColor();
-    borderWidth = 2;
-    width = height = 100;
-}
+#include "components/Rectangle.h"
 
-Component::Rectangle::~Rectangle()
-{
-}
-
-void Component::Rectangle::render()
-{
+void Components::Rectangle::render() {
     ofFill();
-    ofSetColor(fillColor);
-    ofDrawRectRounded(0, 0, 0, width, height,1);
-    //ofDrawRectangle(0, 0, 0, width, height); //0 0 0 car il est déjà positionné par le transform
+    ofSetColor(this->fillColor);
+    ofDrawRectRounded(0, 0, 0, this->width, this->height, 1);
+    // ofDrawRectangle(0, 0, 0, this->width, this->height);  // 0 0 0 since it is already placed by the transform
 
     ofNoFill();
-    ofSetColor(drawColor);
-    ofSetLineWidth(borderWidth);
-    ofDrawRectRounded(0, 0, 0, width, height,1);
-    //ofDrawRectangle(0, 0, 0, width, height);
+    ofSetColor(this->drawColor);
+    ofSetLineWidth(this->borderWidth);
+    ofDrawRectRounded(0, 0, 0, this->width, this->height, 1);
+    // ofDrawRectangle(0, 0, 0, width, this->height);
 }
 
-ofColor Component::Rectangle::getFillColor()
-{
-    return fillColor;
+ofColor Components::Rectangle::getFillColor() {
+    return this->fillColor;
 }
 
-ofColor Component::Rectangle::getDrawColor()
-{
-    return drawColor;
+ofColor Components::Rectangle::getDrawColor() {
+    return this->drawColor;
 }
 
-unsigned int Component::Rectangle::getBorderWidth()
-{
-    return borderWidth;
+unsigned int Components::Rectangle::getBorderWidth() {
+    return this->borderWidth;
 }
 
-unsigned int Component::Rectangle::getWidth()
-{
-    return width;
+unsigned int Components::Rectangle::getWidth() {
+    return this->width;
 }
 
-unsigned int Component::Rectangle::getHeight()
-{
-    return height;
+unsigned int Components::Rectangle::getHeight() {
+    return this->height;
 }
 
-void Component::Rectangle::setFillColor(ofColor color)
-{
-    fillColor = color;
+void Components::Rectangle::setFillColor(ofColor color) {
+    this->fillColor = color;
 }
 
-void Component::Rectangle::setDrawColor(ofColor color)
-{
-    drawColor = color;
+void Components::Rectangle::setDrawColor(ofColor color) {
+    this->drawColor = color;
 }
 
-void Component::Rectangle::setBorderWidth(unsigned int width)
-{
-    borderWidth = width;
+void Components::Rectangle::setBorderWidth(unsigned int width) {
+    this->borderWidth = width;
 }
 
-void Component::Rectangle::setWidth(unsigned int width)
-{
+void Components::Rectangle::setWidth(unsigned int width) {
     this->width = width;
 }
 
-void Component::Rectangle::setHeight(unsigned int height)
-{
+void Components::Rectangle::setHeight(unsigned int height) {
     this->height = height;
 }

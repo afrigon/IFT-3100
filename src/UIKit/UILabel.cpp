@@ -5,7 +5,7 @@
 //  found in the LICENSE file.
 //
 
-#include "UILabel.h"
+#include "UIKit/UILabel.h"
 
 void UIKit::UILabel::draw(UIKit::CGRect rect) {
     if (isHidden) return;
@@ -13,7 +13,7 @@ void UIKit::UILabel::draw(UIKit::CGRect rect) {
     ofDrawRectangle(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height);
     ofSetColor(this->textColor);
     ofDrawBitmapString(this->text, rect.origin.x + this->frame.origin.x + this->paddingX, rect.origin.y + this->frame.origin.y + this->paddingY);
-    for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
+    for (std::list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->draw(rect + this->frame);
     }
 }

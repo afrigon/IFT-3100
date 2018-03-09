@@ -5,7 +5,7 @@
 //  found in the LICENSE file.
 //
 
-#include "UITableView.h"
+#include "UIKit/UITableView.h"
 
 void UIKit::UITableViewCell::draw(UIKit::CGRect rect) {
     if (isHidden) return;
@@ -21,7 +21,7 @@ void UIKit::UITableView::draw(UIKit::CGRect rect) {
     if (this->dataSource == nullptr) {
         return (std::cout << "UITableView MUST have a dataSource of type UITableViewDataSource" << std::endl);
     }
-    
+
     ofSetColor(this->backgroundColor);
     ofDrawRectangle(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height);
     UIKit::CGRect cellRect = rect + this->frame;

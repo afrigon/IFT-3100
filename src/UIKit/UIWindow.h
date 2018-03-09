@@ -13,18 +13,18 @@
 #include "UIViewController.h"
 
 namespace UIKit {
-    class UIWindow {
-        CGSize size = UIKit::CGSize(ofGetWidth(), ofGetHeight());
-        void resize(ofResizeEventArgs &);
-        UIViewController* rootViewController;
-        
-     public:
-        UIWindow();
-        ~UIWindow();
-        void draw();
-        void setRootViewController(UIViewController*);
-        void layoutSubviews();
-    };
-}
+class UIWindow {
+    CGSize size = UIKit::CGSize(ofGetWidth(), ofGetHeight());
+    void resize(ofResizeEventArgs &);
+    UIViewController* rootViewController;
+
+ public:
+    UIWindow();
+    ~UIWindow();
+    void draw();
+    void setRootViewController(UIViewController*);
+    void layoutSubviews();
+};
+}  // namespace UIKit
 
 #endif  // UIKIT_UIWINDOW_H_

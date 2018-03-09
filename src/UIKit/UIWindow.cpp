@@ -5,7 +5,7 @@
 //  found in the LICENSE file.
 //
 
-#include "UIWindow.h"
+#include "UIKit/UIWindow.h"
 
 UIKit::UIWindow::UIWindow() {
     ofAddListener(ofEvents().windowResized, this, &UIWindow::resize);

@@ -13,9 +13,9 @@ void ofApp::setup() {
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Game Engine");
     this->window.setRootViewController(new ViewController());
-    
+
     outputTime = false;
-    if(outputTime) lastElapsed = ofGetElapsedTimeMicros();
+    if (outputTime) lastElapsed = ofGetElapsedTimeMicros();
 
     ofSetBackgroundColor(0);
     light = ofLight();
@@ -42,12 +42,11 @@ void ofApp::draw() {
     ofDisableLighting();
     ofDisableSeparateSpecularLight();
 
-    if(outputTime)
-    {
+    if (outputTime) {
         std::cout << "Elapsed Micros : " << ofGetElapsedTimeMicros() - lastElapsed << std::endl;
         lastElapsed = ofGetElapsedTimeMicros();
     }
-    
+
     this->window.draw();
 }
 

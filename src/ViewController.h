@@ -12,10 +12,10 @@
 
 class ViewController: public UIKit::UIViewController, public UIKit::UITableViewDataSource {
     UIKit::UITableView* hierarchy = new UIKit::UITableView();
-    
+
     void viewDidLoad() override;
     void willLayoutSubviews() override;
-    
+
     int numberOfRows() override;
     UIKit::UITableViewCell cellForRow(int index) override;
     int heightForRow() override;

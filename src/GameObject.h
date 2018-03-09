@@ -10,19 +10,19 @@
 
 #include <vector>
 #include <list>
-using namespace std;
+using std::list;
+using std::vector;
 
 #include "components/AbstractComponent.h"
 #include "components/Transform.h"
 #include "components/Renderable.h"
-#include "ofMain.h"
 
 class GameObject {
-    Component::Transform* transform;
+    Components::Transform* transform;
     vector<AbstractComponent*> components;
-    list<GameObject*> childs;
-    
-public:
+    list<GameObject*> children;
+
+ public:
     GameObject();
     ~GameObject();
 
@@ -32,43 +32,39 @@ public:
     void update();
     void draw();
 
-    unsigned long getID() const;
+    uint64_t getID() const;
 
-    //Returns a reference on the transform pointer
-    Component::Transform*& getTransform()
-    {
-        return transform;
-    };
-    //Returns a reference on the list
-    list<GameObject*>& getChilds();
-    //Add a child to the end of the list
-    //Returns an iterator on his position
+    // Returns a reference on the transform pointer
+    Components::Transform*& getTransform() { return transform; }
+    // Returns a reference on the list
+    list<GameObject*>& getChildren();
+    // Add a child to the end of the list
+    // Returns an iterator on his position
     list<GameObject*>::iterator addChild(GameObject* gameObject);
-    //Add a child to the specified position
-    //Returns an iterator on his position (in a nutshell, returns itPosition...)
+    // Add a child to the specified position
+    // Returns an iterator on his position (in a nutshell, returns itPosition...)
     list<GameObject*>::iterator addChild(GameObject* gameObject, list<GameObject*>::const_iterator itPosition);
-    //Remove the child at the specified position
-    //Returns an iterator on the next child
+    // Remove the child at the specified position
+    // Returns an iterator on the next child
     list<GameObject*>::iterator removeChild(list<GameObject*>::const_iterator itPosition);
-    //Remove the child using the gameobject directly
-    //Returns an iterator on the next child or end() if not found
+    // Remove the child using the gameobject directly
+    // Returns an iterator on the next child or end() if not found
     list<GameObject*>::iterator removeChild(GameObject* objectToRemove);
-    //Move itChild to itPosition in the list
-    //Returns the new positon of the child
+    // Move itChild to itPosition in the list
+    // Returns the new positon of the child
     list<GameObject*>::iterator moveChild(list<GameObject*>::const_iterator itChild, list<GameObject*>::const_iterator itPosition);
-    
+
     template <class T>
     T* addComponent(T* component) {
         this->components.push_back(component);
         return component;
     }
-    
+
     template <class T>
     vector<T*> getComponents() {
         vector<T*> matchingComponents;
         for (vector<AbstractComponent*>::iterator it = this->components.begin(); it != this->components.end(); ++it) {
-            if(T* t = dynamic_cast<T*>(*it))
-            {
+            if (T* t = dynamic_cast<T*>(*it)) {
                 matchingComponents.push_back(t);
             }
         }

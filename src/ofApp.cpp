@@ -21,7 +21,7 @@ void ofApp::setup() {
     light = ofLight();
     light.setPosition(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 100);
 
-    this->scene = DemoScene::generate8();
+    this->scene = DemoScene::generate9();
     this->scene.print();
 }
 

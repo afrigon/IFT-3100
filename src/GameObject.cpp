@@ -9,6 +9,7 @@
 
 GameObject::GameObject() {
     transform = new Components::Transform();
+    parent = nullptr;
 }
 
 GameObject::~GameObject() {
@@ -21,6 +22,7 @@ GameObject::~GameObject() {
     for (auto it = components.begin(); it != components.end(); ++it) {
         delete *it;
     }
+    parent->removeChild(this);
 }
 
 bool GameObject::operator==(const GameObject &o) const {
@@ -66,11 +68,21 @@ list<GameObject*>& GameObject::getChildren() {
     return children;
 }
 
+GameObject * GameObject::getParent() {
+    return parent;
+}
+
+void GameObject::setParent(GameObject * parent) {
+    this->parent = parent;
+}
+
 list<GameObject*>::iterator GameObject::addChild(GameObject* gameObject) {
+    gameObject->setParent(this);
     return children.insert(children.cend(), gameObject);
 }
 
 list<GameObject*>::iterator GameObject::addChild(GameObject* gameObject, list<GameObject*>::const_iterator itPosition) {
+    gameObject->setParent(this);
     return children.insert(itPosition, gameObject);
 }
 
@@ -82,7 +94,7 @@ list<GameObject*>::iterator GameObject::removeChild(list<GameObject*>::const_ite
 list<GameObject*>::iterator GameObject::removeChild(GameObject* objectToRemove) {
     for (auto it = children.cbegin(); it != children.cend(); ++it) {
         if (*it == objectToRemove) {
-            delete *it;
+            (*it)->setParent(nullptr);
             return children.erase(it);
         }
     }
@@ -107,8 +119,7 @@ unsigned int GameObject::getGameObjectCount() {
 GameObject * GameObject::getGameObjectAt(unsigned int index) {
     if(!children.empty()) {
         int i = 0;
-        auto it = children.cbegin();
-        for(; it != children.cend(); ++it) {
+        for(auto it = children.cbegin(); it != children.cend(); ++it) {
             if(i == index) {
                 return *it;
             } else {
@@ -121,6 +132,16 @@ GameObject * GameObject::getGameObjectAt(unsigned int index) {
         }
     }
     return nullptr;
+}
+
+unsigned int GameObject::getDepth() {
+    unsigned int i = 0;
+    GameObject* p = parent;
+    while(p != nullptr) {
+        ++i;
+        p = p->getParent();
+    }
+    return i;
 }
 
 #pragma endregion

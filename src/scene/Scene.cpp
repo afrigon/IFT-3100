@@ -39,8 +39,7 @@ unsigned int Scene::getGameObjectCount() {
 GameObject* Scene::getGameObjectAt(unsigned int index) {
     if(!gameObjects.empty()) {
         int i = 0;
-        auto it = gameObjects.cbegin();
-        for(; it != gameObjects.cend(); ++it) {
+        for(auto it = gameObjects.cbegin(); it != gameObjects.cend(); ++it) {
             if(i == index) {
                 return *it;
             } else {

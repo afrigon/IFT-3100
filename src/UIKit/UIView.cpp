@@ -5,7 +5,7 @@
 //  found in the LICENSE file.
 //
 
-#include "UIKit/UIView.h"
+#include "UIView.h"
 
 UIKit::CGPoint UIKit::CGPoint::operator+(const UIKit::CGPoint & o) {
     return UIKit::CGPoint(this->x + o.x, this->y + o.y);
@@ -89,3 +89,21 @@ void UIKit::UIView::layoutSubviews() {
         (*it)->layoutSubviews();
     }
 }
+
+//bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentOrigin, UIEvent event) {
+//    UIKit::CGRect absoluteFrame = UIKit::CGRect(parentOrigin + this->frame.origin, this->frame.size);
+//    if (!absoluteFrame.contains(clickPosition)) return false;
+//    bool bubble = false;
+//    for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
+//        if ((*it)->hitTest(clickPosition, absoluteFrame.origin, event)) bubble = true;
+//    }
+//    if (this->subviews.size() != 0 && !bubble) return false;
+////    switch (event) {
+////        case UIEvent::click: ofNotifyEvent(this->onclick, this); break;
+////        case UIEvent::mousedown: ofNotifyEvent(this->onmousedown, this); break;
+////        case UIEvent::mouseup: ofNotifyEvent(this->onmouseup, this); break;
+////        default: return false;
+////    }
+//    return true;
+//}
+

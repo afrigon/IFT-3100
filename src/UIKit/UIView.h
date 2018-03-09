@@ -10,8 +10,8 @@
 
 #include <list>
 
+#include "UIEvent.h"
 #include "ofMain.h"
-#include "UIEvents.h"
 
 namespace UIKit {
 struct CGPoint {
@@ -55,6 +55,9 @@ class UIView {
     bool isHidden = false;
     ofColor backgroundColor;
     ofColor tintColor;
+//    ofEvent<UIView* const> onclick;
+//    ofEvent<UIView* const> onmousedown;
+//    ofEvent<UIView* const> onmouseup;
 
     UIView();
     ~UIView();
@@ -62,20 +65,7 @@ class UIView {
     void removeFromSuperView();
     virtual void layoutSubviews();
     virtual void draw(CGRect);
-    
-    template <class T>
-    bool hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentOrigin, ofEvent<T> event) {
-        UIKit::CGRect absoluteFrame = UIKit::CGRect(parentOrigin + this->frame.origin, this->frame.size);
-        if (!absoluteFrame.contains(clickPosition)) return false;
-        bool bubbled = false;
-        for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
-            if ((*it)->hitTest(clickPosition, absoluteFrame.origin, event)) bubbled = true;
-        }
-        if (this->subviews.size() != 0 && !bubbled) return false;
-        UIKit::UIEvent e = UIKit::UIEvent(this);
-        ofNotifyEvent(event, &e);
-        return e.shouldBubble();
-    }
+    //bool hitTest(UIKit::CGPoint, UIKit::CGPoint, UIEvent);
 };
 }  // namespace UIKit
 

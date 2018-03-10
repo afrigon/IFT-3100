@@ -49,11 +49,24 @@ void GameObject::draw() {
     ofRotateZ(transform->rotation.getZ());
     ofScale(transform->scale.getX(), transform->scale.getY(), transform->scale.getZ());
 
+    //Apply the textures
+    std::vector<Components::Texture*> textures = getComponents<Components::Texture>();
+    bool useTexture = !textures.empty();
+    for(int i = 0; i < textures.size(); ++i) {
+        textures[i]->bindTexture(i);
+    }
+
     // Get all the renderable objects and render them
     std::vector<RenderableComponent*> renderers = getComponents<RenderableComponent>();
     for (auto it = renderers.begin(); it != renderers.end(); ++it) {
-        (*it)->render();
+        (*it)->render(useTexture);
     }
+
+    //Remove the textures
+    for(int i = 0; i < textures.size(); ++i) {
+        textures[i]->unbindTexture(i);
+    }
+
     // Draw all the childs
     for (auto it = children.begin(); it != children.end(); ++it) {
         (*it)->draw();

@@ -20,6 +20,10 @@ Scene& Scene::remove(GameObject* o) {
 Scene& Scene::render() {
     ofPushMatrix();
     ofTranslate(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
+    ofTranslate(-75, 100);
+    ofRotateX(-25);
+    ofRotateY(-30);
+
     ofDrawGrid(100, 100, false, false, true, false);
     for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
         (*it)->draw();

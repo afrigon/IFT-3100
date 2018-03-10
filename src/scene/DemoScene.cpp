@@ -286,6 +286,7 @@ Scene DemoScene::generate9() {
     GameObject* o5 = new GameObject();
     GameObject* o6 = new GameObject();
     GameObject* o7 = new GameObject();
+    GameObject* o01 = new GameObject();
     Transform* t1 = o1->getTransform();
     Transform* t2 = o2->getTransform();
     Transform* t3 = o3->getTransform();
@@ -302,6 +303,10 @@ Scene DemoScene::generate9() {
     t6->rotation = Vector3(0, 200, 45);
     t7->position = Vector3(200, 200, 0);
     t7->scale = Vector3(1, 1, 0.5);
+
+    Components::Cubemap* c01 = o01->addComponent<Components::Cubemap>(new Components::Cubemap());
+    c01->loadMap("C:/Users/Alexandre/Pictures/cm.jpg");
+    c01->setDistance(2000);
 
     Components::Rectangle* c1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
     c1->setFillColor(ofColor(200, 0, 0));
@@ -329,6 +334,10 @@ Scene DemoScene::generate9() {
     o7->name = "Charlie";
     c7->loadModel("/Users/frigon/Documents/University/IFT-3100/labo/labo/labo5/bin/data/charlie.obj");
 
+    Components::Texture* t06 = o6->addComponent<Components::Texture>(new Components::Texture());
+    t06->loadTexture("C:/Users/Alexandre/Pictures/cute firefox2.jpg");
+
+    temp.addObject(o01);
     temp.addObject(o1);
     o1->addChild(o2);
     o1->addChild(o3);

@@ -8,17 +8,34 @@
 #include "components/Rectangle.h"
 #include "views/RectangleView.h"
 
-void Components::Rectangle::render() {
+void Components::Rectangle::render(bool useTexture) {
+
     ofFill();
     ofSetColor(this->fillColor);
-    ofDrawRectRounded(0, 0, 0, this->width, this->height, 1);
-    // ofDrawRectangle(0, 0, 0, this->width, this->height);  // 0 0 0 since it is already placed by the transform
+    if(useTexture) {
+        ofMesh m = ofMesh();
+        m.setMode(ofPrimitiveMode::OF_PRIMITIVE_TRIANGLE_FAN);
+        m.addVertex(ofVec3f(-width / 2, -height / 2, 0));
+        m.addVertex(ofVec3f(width / 2, -height / 2, 0));
+        m.addVertex(ofVec3f(width / 2, height / 2, 0));
+        m.addVertex(ofVec3f(-width / 2, height / 2, 0));
+
+        m.addTexCoord(ofVec2f(0, 0));
+        m.addTexCoord(ofVec2f(1, 0));
+        m.addTexCoord(ofVec2f(1, 1));
+        m.addTexCoord(ofVec2f(0, 1));
+
+        m.drawFaces();
+    } else {
+        //ofDrawRectRounded(0, 0, 0, this->width, this->height, 1);
+        ofDrawRectangle(-width / 2, -height / 2, 0, width, height);
+    }
 
     ofNoFill();
     ofSetColor(this->drawColor);
     ofSetLineWidth(this->borderWidth);
-    ofDrawRectRounded(0, 0, 0, this->width, this->height, 1);
-    // ofDrawRectangle(0, 0, 0, width, this->height);
+    //ofDrawRectRounded(-width / 2, -height / 2, 0, this->width, this->height, 1);
+    ofDrawRectangle(-width / 2, -height / 2, 0, width, height);
 }
 
 ofColor Components::Rectangle::getFillColor() {
@@ -29,15 +46,15 @@ ofColor Components::Rectangle::getDrawColor() {
     return this->drawColor;
 }
 
-unsigned int Components::Rectangle::getBorderWidth() {
+float Components::Rectangle::getBorderWidth() {
     return this->borderWidth;
 }
 
-unsigned int Components::Rectangle::getWidth() {
+float Components::Rectangle::getWidth() {
     return this->width;
 }
 
-unsigned int Components::Rectangle::getHeight() {
+float Components::Rectangle::getHeight() {
     return this->height;
 }
 
@@ -49,15 +66,15 @@ void Components::Rectangle::setDrawColor(ofColor color) {
     this->drawColor = color;
 }
 
-void Components::Rectangle::setBorderWidth(unsigned int width) {
+void Components::Rectangle::setBorderWidth(float width) {
     this->borderWidth = width;
 }
 
-void Components::Rectangle::setWidth(unsigned int width) {
+void Components::Rectangle::setWidth(float width) {
     this->width = width;
 }
 
-void Components::Rectangle::setHeight(unsigned int height) {
+void Components::Rectangle::setHeight(float height) {
     this->height = height;
 }
 

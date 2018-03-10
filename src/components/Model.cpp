@@ -8,9 +8,17 @@
 #include "components/Model.h"
 #include "views/ModelView.h"
 
-void Components::Model::render() {
-    if (model.hasAnimations()) this->model.update();
-    if (model.hasMeshes()) this->model.drawFaces();
+void Components::Model::render(bool useTexture) {
+    if (model.hasAnimations()) model.update();
+    if(model.hasMeshes()) {
+        if(useTexture) {
+            model.disableTextures();
+            model.drawFaces();
+            model.enableTextures();
+        } else {
+            model.drawFaces();
+        }
+    }
 }
 
 void Components::Model::loadModel(std::string path) {

@@ -207,16 +207,16 @@ void Components::Cubemap::generateMeshes() {
 
     //BACK
     m.addVertex(ofVec3f(1, 1, 1));
-    m.addTexCoord(ofVec2f(0, 0));
+    m.addTexCoord(ofVec2f(0, 1));
 
     m.addVertex(ofVec3f(-1, 1, 1));
-    m.addTexCoord(ofVec2f(1, 0));
-
-    m.addVertex(ofVec3f(-1, -1, 1));
     m.addTexCoord(ofVec2f(1, 1));
 
+    m.addVertex(ofVec3f(-1, -1, 1));
+    m.addTexCoord(ofVec2f(1, 0));
+
     m.addVertex(ofVec3f(1, -1, 1));
-    m.addTexCoord(ofVec2f(0, 1));
+    m.addTexCoord(ofVec2f(0, 0));
 
     meshes[5] = m;
     m.clear();

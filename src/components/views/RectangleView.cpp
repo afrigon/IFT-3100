@@ -14,6 +14,19 @@ Components::Views::Rectangle::Rectangle(Components::Rectangle* rectangle): Base(
     this->borderWidthView = Components::Views::Generator::numeric("Border: ", this->rectangle->getBorderWidth());
     this->widthView = Components::Views::Generator::numeric("Width: ", this->rectangle->getWidth());
     this->heightView = Components::Views::Generator::numeric("Height: ", this->rectangle->getHeight());
+
+    this->fillColorView->colorView->tag = 0;
+    this->strokeColorView->colorView->tag = 1;
+    this->borderWidthView->valueLabel->tag = 2;
+    ofAddListener(this->borderWidthView->valueLabel->onclick, this, &Components::Views::Rectangle::click);
+    ofAddListener(this->borderWidthView->valueLabel->onrightclick, this, &Components::Views::Rectangle::rightclick);
+    this->widthView->valueLabel->tag = 3;
+    ofAddListener(this->widthView->valueLabel->onclick, this, &Components::Views::Rectangle::click);
+    ofAddListener(this->widthView->valueLabel->onrightclick, this, &Components::Views::Rectangle::rightclick);
+    this->heightView->valueLabel->tag = 4;
+    ofAddListener(this->heightView->valueLabel->onclick, this, &Components::Views::Rectangle::click);
+    ofAddListener(this->heightView->valueLabel->onrightclick, this, &Components::Views::Rectangle::rightclick);
+
     this->contentView->addSubview(this->fillColorView);
     this->contentView->addSubview(this->strokeColorView);
     this->contentView->addSubview(this->borderWidthView);
@@ -37,5 +50,50 @@ void Components::Views::Rectangle::layoutSubviews() {
     
     this->contentView->frame = UIKit::CGRect(0, 0, this->frame.size.width, x);
     Components::Views::Base::layoutSubviews();
+}
+
+void Components::Views::Rectangle::setText(int tag) {
+    switch(tag) {
+        case 0: break;
+        case 1: break;
+        case 2: this->borderWidthView->setValue(this->rectangle->getBorderWidth()); break;
+        case 3: this->widthView->setValue(this->rectangle->getWidth()); break;
+        case 4: this->heightView->setValue(this->rectangle->getHeight()); break;
+        default: break;
+    }
+}
+
+void Components::Views::Rectangle::click(UIView & view) {
+    switch(view.tag) {
+        case 0: break;
+        case 1: break;
+        case 2:
+            {
+                float x = this->rectangle->getBorderWidth();
+                if(x < 9.5) { this->rectangle->setBorderWidth(x + 0.5); }
+            }
+            break;
+        case 3: this->rectangle->setWidth(this->rectangle->getWidth() + 5); break;
+        case 4: this->rectangle->setHeight(this->rectangle->getHeight() + 5); break;
+        default: break;
+    }
+    setText(view.tag);
+}
+
+void Components::Views::Rectangle::rightclick(UIView & view) {
+    switch(view.tag) {
+        case 0: break;
+        case 1: break;
+        case 2:
+            {
+                float x = this->rectangle->getBorderWidth();
+                if(x < 9.5) { this->rectangle->setBorderWidth(x - 0.5); }
+            }
+            break;
+        case 3: this->rectangle->setWidth(this->rectangle->getWidth() - 5); break;
+        case 4: this->rectangle->setHeight(this->rectangle->getHeight() - 5); break;
+        default: break;
+    }
+    setText(view.tag);
 }
 

@@ -11,8 +11,17 @@ Components::Views::Sphere::Sphere(Components::Sphere* sphere): Base("Sphere"), s
     if (!sphere) return;
     this->colorView = Components::Views::Generator::color("Color: ", this->sphere->getColor());
     this->radiusView = Components::Views::Generator::numeric("Radius: ", this->sphere->getRadius());
+    this->radiusView->tag = 1;
+    ofAddListener(this->radiusView->valueLabel->onclick, this, &Components::Views::Sphere::click);
+    ofAddListener(this->radiusView->valueLabel->onrightclick, this, &Components::Views::Sphere::rightclick);
+
     this->contentView->addSubview(this->colorView);
     this->contentView->addSubview(this->radiusView);
+}
+
+Components::Views::Sphere::~Sphere() {
+    ofRemoveListener(this->radiusView->valueLabel->onclick, this, &Components::Views::Sphere::click);
+    ofRemoveListener(this->radiusView->valueLabel->onrightclick, this, &Components::Views::Sphere::rightclick);
 }
 
 void Components::Views::Sphere::layoutSubviews() {
@@ -24,4 +33,16 @@ void Components::Views::Sphere::layoutSubviews() {
     
     this->contentView->frame = UIKit::CGRect(0, 0, this->frame.size.width, x);
     Components::Views::Base::layoutSubviews();
+}
+
+void Components::Views::Sphere::click(UIView & view) {
+    float v = this->sphere->getRadius() + 5;
+    this->sphere->setRadius(v);
+    this->radiusView->setValue(v);
+}
+
+void Components::Views::Sphere::rightclick(UIView & view) {
+    float v = this->sphere->getRadius() - 5;
+    this->sphere->setRadius(v);
+    this->radiusView->setValue(v);
 }

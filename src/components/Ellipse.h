@@ -13,21 +13,15 @@
 namespace Components {
 class Ellipse: public RenderableComponent {
     ofColor fillColor;
-    ofColor drawColor;
-    unsigned int borderWidth;
     unsigned int width = 100;
     unsigned int height = 100;
 
  public:
     void render(bool useTexture) override;
     ofColor getFillColor();
-    ofColor getDrawColor();
-    unsigned int getBorderWidth();
     unsigned int getWidth();
     unsigned int getHeight();
     void setFillColor(ofColor color);
-    void setDrawColor(ofColor color);
-    void setBorderWidth(unsigned int width);
     void setWidth(unsigned int width);
     void setHeight(unsigned int height);
     

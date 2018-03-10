@@ -18,3 +18,7 @@ void Components::Views::Model::layoutSubviews() {
     Components::Views::Base::layoutSubviews();
 }
 
+void Components::Views::Model::click(UIView & view) {
+    //Should_have_an_event_more_like_fileSelected();
+}
+

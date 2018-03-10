@@ -27,23 +27,10 @@ void Components::Ellipse::render(bool useTexture) {
     } else {
         ofDrawEllipse(0, 0, 0, width, height);
     }
-
-    ofNoFill();
-    ofSetColor(drawColor);
-    ofSetLineWidth(this->borderWidth);
-    ofDrawEllipse(0, 0, 0, this->width, this->height);
 }
 
 ofColor Components::Ellipse::getFillColor() {
     return this->fillColor;
-}
-
-ofColor Components::Ellipse::getDrawColor() {
-    return this->drawColor;
-}
-
-unsigned int Components::Ellipse::getBorderWidth() {
-    return this->borderWidth;
 }
 
 unsigned int Components::Ellipse::getWidth() {
@@ -56,14 +43,6 @@ unsigned int Components::Ellipse::getHeight() {
 
 void Components::Ellipse::setFillColor(ofColor color) {
     this->fillColor = color;
-}
-
-void Components::Ellipse::setDrawColor(ofColor color) {
-    this->drawColor = color;
-}
-
-void Components::Ellipse::setBorderWidth(unsigned int width) {
-    this->borderWidth = width;
 }
 
 void Components::Ellipse::setWidth(unsigned int width) {

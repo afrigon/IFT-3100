@@ -9,6 +9,7 @@
 #define UIKIT_UIVIEW_H_
 
 #include <list>
+#include <cmath>
 
 #include "UIEvent.h"
 #include "ofMain.h"
@@ -53,13 +54,16 @@ class UIView {
     std::list<UIView*> subviews;
 
  public:
+    int tag = -1;
     CGRect frame;
     bool isHidden = false;
-    ofColor backgroundColor;
+    ofColor backgroundColor = ofColor(0, 0);
     ofColor tintColor;
+    bool shouldBubble = true;
     ofEvent<UIView> onclick;
     ofEvent<UIView> onmousedown;
     ofEvent<UIView> onmouseup;
+    ofEvent<UIView> onrightclick;
     ofEvent<UIView> onfocus;
     ofEvent<UIView> onblur;
 
@@ -78,6 +82,7 @@ class UIView {
     virtual void draw(CGRect);
     bool hitTest(UIKit::CGPoint, UIKit::CGPoint, UIKit::UIEvent);
     bool isFocused();
+    double getHeight();
 };
 }  // namespace UIKit
 

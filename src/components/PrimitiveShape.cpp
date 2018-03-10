@@ -6,6 +6,7 @@
 //
 
 #include "components/PrimitiveShape.h"
+//#include "views/PrimitiveShapeView.h"
 
 Components::PrimitiveShape::PrimitiveShape() {
     this->points.resize(0);
@@ -80,3 +81,12 @@ void Components::PrimitiveShape::setDrawColor(ofColor color) {
 void Components::PrimitiveShape::setBorderWidth(unsigned int width) {
     this->borderWidth = width;
 }
+
+//UIKit::UIView* Components::PrimitiveShape::getUIView() {
+//    return new Components::Views::PrimitiveShape(this);
+//}
+//
+//int Components::PrimitiveShape::getUIViewHeight() {
+//    return 20 + 30 + 30 + 30;
+//}
+

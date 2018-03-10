@@ -24,7 +24,7 @@ class PrimitiveShape: public RenderableComponent {
 
  public:
     PrimitiveShape();
-    void render();
+    void render() override;
     unsigned int getPointCount();
     void setPointSize(unsigned int newSize);
     bool setPoint(unsigned int point, Vector3 position);
@@ -35,6 +35,9 @@ class PrimitiveShape: public RenderableComponent {
     void setFillColor(ofColor color);
     void setDrawColor(ofColor color);
     void setBorderWidth(unsigned int width);
+    
+//    UIKit::UIView* getUIView() override;
+//    int getUIViewHeight() override;
 };
 }  // namespace Components
 

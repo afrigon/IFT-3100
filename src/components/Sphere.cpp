@@ -6,6 +6,7 @@
 //
 
 #include "components/Sphere.h"
+#include "views/SphereView.h"
 
 void Components::Sphere::render() {
     ofFill();
@@ -27,4 +28,12 @@ void Components::Sphere::setColor(ofColor color) {
 
 void Components::Sphere::setRadius(unsigned int radius) {
     this->radius = radius;
+}
+
+UIKit::UIView* Components::Sphere::getUIView() {
+    return new Components::Views::Sphere(this);
+}
+
+int Components::Sphere::getUIViewHeight() {
+    return 20 + 30 + 30;
 }

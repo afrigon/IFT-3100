@@ -8,15 +8,15 @@
 #include "ComponentsDataSource.h"
 
 int ComponentsDataSource::numberOfRows() {
-    if (!go) return 0;
-    return go->getComponentsCount();
+    if (!this->go) return 0;
+    return this->go->getComponentsCount();
 }
 
 UIKit::UITableViewCell* ComponentsDataSource::cellForRow(int index) {
-    if (!go) return nullptr;
-    return nullptr;
+    if (!this->go) return nullptr;
+    return new ComponentTableViewCell(this->go->getComponentAt(index)->getUIView());
 }
 
 int ComponentsDataSource::heightForRow(int index) {
-    return 0;
+    return this->go->getComponentAt(index)->getUIViewHeight();
 }

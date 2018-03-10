@@ -7,6 +7,10 @@
 
 #include "UIKit/UITableView.h"
 
+UIKit::UITableViewCell::UITableViewCell() {
+    this->addSubview(this->label);
+}
+
 void UIKit::UITableViewCell::select() {
     this->isSelected = true;
 }
@@ -48,9 +52,9 @@ void UIKit::UITableView::didSelectCell(UIView & view) {
 }
 
 void UIKit::UITableView::onBlur(UIView & view) {
-    if (this->delegate) this->delegate->willLoseFocus();
-    this->unselectAll();
-    if (this->delegate) this->delegate->didLoseFocus();
+    //if (this->delegate) this->delegate->willLoseFocus();
+    //this->unselectAll();
+    //if (this->delegate) this->delegate->didLoseFocus();
 }
 
 void UIKit::UITableView::unselectAll() {
@@ -70,12 +74,14 @@ void UIKit::UITableView::reloadData() {
         std::cout << "UITableView MUST have a dataSource of type UITableViewDataSource" << std::endl;
         return;
     }
+    double x = 0;
     for (int i = 0; i < this->dataSource->numberOfRows(); ++i) {
         UITableViewCell* cell = this->dataSource->cellForRow(i);
         if (!cell) continue;
         ofAddListener(cell->onmousedown, this, &UIKit::UITableView::didSelectCell);
-        cell->frame = UIKit::CGRect(UIKit::CGPoint(0, i * this->dataSource->heightForRow(i)),
+        cell->frame = UIKit::CGRect(UIKit::CGPoint(0, x),
                                     UIKit::CGSize(this->frame.size.width, this->dataSource->heightForRow(i)));
+        x += this->dataSource->heightForRow(i);
         this->addSubview(cell);
     }
 }
@@ -96,7 +102,8 @@ void UIKit::UITableView::draw(UIKit::CGRect rect) {
                     this->frame.origin.y + rect.origin.y,
                     this->frame.size.width,
                     this->frame.size.height);
-    for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
-        (*it)->draw(this->frame + rect.origin);
+    int i = 0;
+    for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it, ++i) {
+        (*it)->draw(this->frame + rect.origin + UIKit::CGPoint(0, i * this->cellSpacing));
     }
 }

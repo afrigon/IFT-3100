@@ -3,3 +3,4 @@
 ./lint.py --root=src src/math/*;
 ./lint.py --root=src src/scene/*;
 ./lint.py --root=src src/UIKit/*;
+./lint.py --root=src src/components/views/*;

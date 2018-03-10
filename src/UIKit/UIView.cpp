@@ -106,6 +106,7 @@ void UIKit::UIView::layoutSubviews() {
 }
 
 bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentOrigin, UIKit::UIEvent event) {
+    if (this->isHidden) return false;
     UIKit::CGRect absoluteFrame = UIKit::CGRect(parentOrigin + this->frame.origin, this->frame.size);
     if (!absoluteFrame.contains(clickPosition)) {
         if (this->focus) {
@@ -129,12 +130,23 @@ bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentO
         case UIEvent::click: ofNotifyEvent(this->onclick, *this); break;
         case UIEvent::mousedown: ofNotifyEvent(this->onmousedown, *this); break;
         case UIEvent::mouseup: ofNotifyEvent(this->onmouseup, *this); break;
+        case UIEvent::rightclick: ofNotifyEvent(this->onrightclick, *this); break;
         default: return false;
     }
-    return true;
+    bubble = this->shouldBubble;
+    this->shouldBubble = true;
+    return bubble;
 }
 
 bool UIKit::UIView::isFocused() {
     return this->focus;
+}
+
+double UIKit::UIView::getHeight() {
+    double result = 0;
+    for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
+        result = max(result, (*it)->frame.origin.x + (*it)->frame.size.height);
+    }
+    return result;
 }
 

@@ -14,6 +14,12 @@
 #include "UIView.h"
 
 namespace UIKit {
+enum class TextAlignment {
+    left,
+    center,
+    right
+};
+    
 class UILabel: public UIView {
     ofTrueTypeFont font;
     int fontSize = 12;
@@ -21,6 +27,7 @@ class UILabel: public UIView {
  public:
     std::string text = "Label";
     ofColor textColor = ofColor(0, 0, 0);
+    TextAlignment textAlignment = TextAlignment::left;
     double padding = 10;
 
     UILabel();
@@ -28,6 +35,7 @@ class UILabel: public UIView {
     void setFontSize(int);
     void loadFont();
     void draw(UIKit::CGRect) override;
+    double widthFor(string text);
 };
 }  // namespace UIKit
 

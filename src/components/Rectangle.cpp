@@ -6,6 +6,7 @@
 //
 
 #include "components/Rectangle.h"
+#include "views/RectangleView.h"
 
 void Components::Rectangle::render() {
     ofFill();
@@ -58,4 +59,12 @@ void Components::Rectangle::setWidth(unsigned int width) {
 
 void Components::Rectangle::setHeight(unsigned int height) {
     this->height = height;
+}
+
+UIKit::UIView* Components::Rectangle::getUIView() {
+    return new Components::Views::Rectangle(this);
+}
+
+int Components::Rectangle::getUIViewHeight() {
+    return 20 + 30 + 30 + 30 + 30 + 30;
 }

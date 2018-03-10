@@ -6,6 +6,7 @@
 //
 
 #include "components/Line.h"
+#include "views/LineView.h"
 
 void Components::Line::render() {
     ofFill();
@@ -37,4 +38,12 @@ void Components::Line::setLineWidth(unsigned int width) {
 
 void Components::Line::setLineLength(unsigned int length) {
     this->lineLength = length;
+}
+
+UIKit::UIView* Components::Line::getUIView() {
+    return new Components::Views::Line(this);
+}
+
+int Components::Line::getUIViewHeight() {
+    return 20 + 30 + 30 + 30;
 }

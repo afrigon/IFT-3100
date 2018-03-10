@@ -36,7 +36,12 @@ void UIKit::UIWindow:: mouseup(ofMouseEventArgs & e) {
                this->clickStartPosition.y - this->clickThreshold,
                this->clickThreshold * 2,
                this->clickThreshold * 2).contains(CGPoint(e.x, e.y))) {
-        this->rootViewController->view->hitTest(UIKit::CGPoint(e.x, e.y), CGPoint(), UIEvent::click);
+        if (e.button == 0) {
+            this->rootViewController->view->hitTest(UIKit::CGPoint(e.x, e.y), CGPoint(), UIEvent::click);
+        } else if (e.button == 2) {
+            this->rootViewController->view->hitTest(UIKit::CGPoint(e.x, e.y), CGPoint(), UIEvent::rightclick);
+        }
+        
     }
     this->clickStartPosition = CGPoint(-100, -100);
 }

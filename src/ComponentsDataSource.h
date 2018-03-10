@@ -10,6 +10,7 @@
 
 #include "UIKit.h"
 #include "GameObject.h"
+#include "ComponentTableViewCell.h"
 
 class ComponentsDataSource: public UIKit::UITableViewDataSource {
     int numberOfRows() override;

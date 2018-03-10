@@ -8,8 +8,12 @@
 #ifndef COMPONENTS_ABSTRACTCOMPONENT_H_
 #define COMPONENTS_ABSTRACTCOMPONENT_H_
 
+#include "UIKit.h"
+
 class AbstractComponent {
-    virtual void dummy() {}
+ public:
+    virtual UIKit::UIView* getUIView() { return nullptr; }
+    virtual int getUIViewHeight() { return 0; }
 };
 
 #endif  // COMPONENTS_ABSTRACTCOMPONENT_H_

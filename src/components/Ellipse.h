@@ -19,7 +19,7 @@ class Ellipse: public RenderableComponent {
     unsigned int height = 100;
 
  public:
-    void render();
+    void render() override;
     ofColor getFillColor();
     ofColor getDrawColor();
     unsigned int getBorderWidth();
@@ -30,6 +30,9 @@ class Ellipse: public RenderableComponent {
     void setBorderWidth(unsigned int width);
     void setWidth(unsigned int width);
     void setHeight(unsigned int height);
+    
+    UIKit::UIView* getUIView() override;
+    int getUIViewHeight() override;
 };
 }  // namespace Components
 

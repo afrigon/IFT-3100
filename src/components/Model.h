@@ -16,10 +16,14 @@
 namespace Components {
 class Model: public RenderableComponent {
     ofxAssimpModelLoader model;
+    std::string path;
 
  public:
-    void render();
+    void render() override;
     void loadModel(std::string path);
+    
+    UIKit::UIView* getUIView() override;
+    int getUIViewHeight() override;
 };
 }  // namespace Components
 

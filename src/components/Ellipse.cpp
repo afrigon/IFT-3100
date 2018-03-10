@@ -6,6 +6,7 @@
 //
 
 #include "components/Ellipse.h"
+#include "views/EllipseView.h"
 
 void Components::Ellipse::render() {
     ofFill();
@@ -56,4 +57,12 @@ void Components::Ellipse::setWidth(unsigned int width) {
 
 void Components::Ellipse::setHeight(unsigned int height) {
     this->height = height;
+}
+
+UIKit::UIView* Components::Ellipse::getUIView() {
+    return new Components::Views::Ellipse(this);
+}
+
+int Components::Ellipse::getUIViewHeight() {
+    return 20 + 30 + 30 + 30 + 30 + 30;
 }

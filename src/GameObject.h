@@ -69,6 +69,7 @@ class GameObject {
     unsigned int getDepth();
     int getComponentsCount();
     vector<AbstractComponent*> getComponents();
+    AbstractComponent* getComponentAt(int index);
     
     template <class T>
     T* addComponent(T* component) {

@@ -7,12 +7,39 @@
 
 #include "UIKit/UILabel.h"
 
+
+UIKit::UILabel::UILabel() {
+    this->loadFont();
+}
+
+UIKit::UILabel::UILabel(std::string text): text(text) {
+    this->loadFont();
+    this->backgroundColor = ofColor(0, 0);
+}
+
+void UIKit::UILabel::setFontSize(int fontSize) {
+    this->fontSize = fontSize;
+    this->loadFont();
+    this->backgroundColor = ofColor(0, 0);
+}
+
+void UIKit::UILabel::loadFont() {
+    this->font.load("nunito.ttf", this->fontSize);
+}
+
 void UIKit::UILabel::draw(UIKit::CGRect rect) {
-    if (isHidden) return;
+    if (this->isHidden) return;
     ofSetColor(this->backgroundColor);
-    ofDrawRectangle(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height);
+    ofDrawRectangle(this->frame.origin.x + rect.origin.x,
+                    this->frame.origin.y + rect.origin.y,
+                    this->frame.size.width,
+                    this->frame.size.height);
     ofSetColor(this->textColor);
-    ofDrawBitmapString(this->text, rect.origin.x + this->frame.origin.x + this->paddingX, rect.origin.y + this->frame.origin.y + this->paddingY);
+    float stringHeight = this->font.stringHeight(this->text);
+    this->font.drawString(this->text,
+                          rect.origin.x + this->frame.origin.x + this->padding,
+                          rect.origin.y + this->frame.origin.y + (this->frame.size.height - stringHeight) / 2 + stringHeight);
+
     for (std::list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->draw(rect + this->frame);
     }

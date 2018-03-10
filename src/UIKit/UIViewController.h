@@ -18,6 +18,7 @@ class UIViewController {
     UIViewController(): view(new UIView()) {
         this->view->backgroundColor = ofColor(0, 0, 0, 0);
     }
+    ~UIViewController() { delete this->view; }
     void layoutSubviews();
     virtual void viewDidLoad() {}
     virtual void willLayoutSubviews() {}

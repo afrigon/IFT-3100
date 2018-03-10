@@ -20,10 +20,6 @@ Scene& Scene::remove(GameObject* o) {
 Scene& Scene::render() {
     ofPushMatrix();
     ofTranslate(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
-    ofTranslate(-75, 100);
-    ofRotateX(-25);
-    ofRotateY(-30);
-
     ofDrawGrid(100, 100, false, false, true, false);
     for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
         (*it)->draw();
@@ -34,7 +30,7 @@ Scene& Scene::render() {
 
 unsigned int Scene::getGameObjectCount() {
     unsigned int compteur = 0;
-    for (auto it = gameObjects.cbegin(); it != gameObjects.cend(); ++it) {
+    for(auto it = gameObjects.cbegin(); it != gameObjects.cend(); ++it) {
         compteur += (*it)->getGameObjectCount();
     }
     return compteur;
@@ -43,8 +39,14 @@ unsigned int Scene::getGameObjectCount() {
 GameObject* Scene::getGameObjectAt(unsigned int index) {
     if (!gameObjects.empty()) {
         int i = 0;
-        for (auto it = gameObjects.cbegin(); it != gameObjects.cend(); ++it) {
+<<<<<<< HEAD
+        auto it = gameObjects.cbegin();
+        for (; it != gameObjects.cend(); ++it) {
             if (i == index) {
+=======
+        for(auto it = gameObjects.cbegin(); it != gameObjects.cend(); ++it) {
+            if(i == index) {
+>>>>>>> b63cd524c892f5a91bab864c53db609387f5d944
                 return *it;
             } else {
                 unsigned int count = (*it)->getGameObjectCount();

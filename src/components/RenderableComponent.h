@@ -5,8 +5,8 @@
 //  found in the LICENSE file.
 //
 
-#ifndef COMPONENTS_RENDERABLE_H_
-#define COMPONENTS_RENDERABLE_H_
+#ifndef COMPONENTS_RENDERABLECOMPONENT_H_
+#define COMPONENTS_RENDERABLECOMPONENT_H_
 
 #include "components/AbstractComponent.h"
 #include "ofMain.h"
@@ -18,4 +18,4 @@ class RenderableComponent: public AbstractComponent {
     virtual void render() {}
 };
 
-#endif  // COMPONENTS_RENDERABLE_H_
+#endif  // COMPONENTS_RENDERABLECOMPONENT_H_

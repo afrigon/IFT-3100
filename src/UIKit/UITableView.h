@@ -14,25 +14,51 @@
 #include "UILabel.h"
 
 namespace UIKit {
-struct UITableViewCell: public UIView {
-    ofColor backgroundColor = ofColor(255, 255, 255);
-    ofColor selectedBackgroundColor = this->backgroundColor;
+class UITableViewCell: public UIView {
+    friend class UITableView;
+    bool isSelected = false;
+    
+ public:
+    ofColor textColor = ofColor(20);
+    ofColor backgroundColor = ofColor(175);
+    
+    ofColor selectedTextColor = ofColor(255);
+    ofColor selectedBackgroundColor = ofColor(66, 134, 244);
+    
     UILabel* label = new UILabel("TableViewCellLabel");
     list<UIKit::UIView*> subviews = { label };
+
+    void select();
+    void layoutSubviews() override;
     void draw(UIKit::CGRect) override;
 };
 
 struct UITableViewDataSource {
     virtual int numberOfRows() { return 0; }
-    virtual UITableViewCell cellForRow(int index) { return UITableViewCell(); }
-    virtual int heightForRow() { return 10; }
+    virtual UITableViewCell* cellForRow(int index) { return new UITableViewCell(); }
+    virtual int heightForRow(int index) { return 10; }
+};
+    
+struct UITableViewDelegate {
+    virtual void didSelectRow(int index) {}
+    virtual void willLoseFocus() {}
+    virtual void didLoseFocus() {}
 };
 
 class UITableView: public UIView {
- public:
     UITableViewDataSource* dataSource;
-    // UITableViewDelegate* delegate;
-
+    UITableViewDelegate* delegate;
+    
+    void didSelectCell(UIView &);
+    void onBlur(UIView &);
+    void unselectAll();
+    
+ public:
+    UITableView();
+    ~UITableView();
+    virtual void reloadData();
+    void setDataSource(UITableViewDataSource*);
+    void setDelegate(UITableViewDelegate*);
     void draw(UIKit::CGRect) override;
 };
 }  // namespace UIKit

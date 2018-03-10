@@ -13,7 +13,6 @@ void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Game Engine");
-    this->window.setRootViewController(new ViewController());
 
     outputTime = false;
     if (outputTime) lastElapsed = ofGetElapsedTimeMicros();
@@ -23,6 +22,8 @@ void ofApp::setup() {
 
     this->scene = DemoScene::generate9();
     this->scene.print();
+    
+    this->window.setRootViewController(new ViewController(&scene));
 }
 
 void ofApp::update() {
@@ -62,20 +63,10 @@ void ofApp::mouseMoved(int x, int y) {
 void ofApp::mouseDragged(int x, int y, int button) {
 }
 
-void ofApp::mousePressed(int x, int y, int button) {
-}
-
-void ofApp::mouseReleased(int x, int y, int button) {
-}
-
 void ofApp::mouseEntered(int x, int y) {
 }
 
 void ofApp::mouseExited(int x, int y) {
-}
-
-void ofApp::gotMessage(ofMessage msg) {
-    cout << msg.message << endl;
 }
 
 void ofApp::dragEvent(ofDragInfo dragInfo) {

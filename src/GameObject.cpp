@@ -33,6 +33,10 @@ bool GameObject::operator!=(const GameObject &o) const {
     return this->getID() != o.getID();
 }
 
+uint64_t GameObject::getID() const {
+    return (uint64_t)this;
+}
+
 void GameObject::update() {}
 
 void GameObject::draw() {
@@ -56,10 +60,6 @@ void GameObject::draw() {
     }
 
     ofPopMatrix();  // Remove matrix before leaving to next object
-}
-
-uint64_t GameObject::getID() const {
-    return (uint64_t)this;
 }
 
 #pragma region ChildsFunction
@@ -112,7 +112,6 @@ unsigned int GameObject::getGameObjectCount() {
     for(auto it = children.cbegin(); it != children.cend(); ++it) {
         compteur += (*it)->getGameObjectCount();
     }
-    std::cout << getID() << " : " << compteur + 1 << std::endl;
     return compteur + 1;
 }
 
@@ -142,6 +141,14 @@ unsigned int GameObject::getDepth() {
         p = p->getParent();
     }
     return i;
+}
+
+int GameObject::getComponentsCount() {
+    return this->components.size();
+}
+
+vector<AbstractComponent*> GameObject::getComponents() {
+    return this->components;
 }
 
 #pragma endregion

@@ -15,7 +15,7 @@
 // TODO(xenal) : Change that inheritance to something better, it's a bad way to handle it, too lazy to change it now so deal with it for the time
 class RenderableComponent: public AbstractComponent {
  public:
-    virtual void render() {}
+    virtual void render(bool useTexture) {}
 };
 
 #endif  // COMPONENTS_RENDERABLECOMPONENT_H_

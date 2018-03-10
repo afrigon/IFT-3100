@@ -19,6 +19,8 @@
 #include "components/Sphere.h"
 #include "components/Cube.h"
 #include "components/Model.h"
+#include "components/Texture.h"
+#include "components/Cubemap.h"
 
 class DemoScene {
  public:

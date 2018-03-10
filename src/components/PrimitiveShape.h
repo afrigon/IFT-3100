@@ -19,12 +19,14 @@ class PrimitiveShape: public RenderableComponent {
     ofColor drawColor;
     unsigned int borderWidth = 2;
     std::vector<Vector3> points;
+    Vector3 dimension;
+    float maxX, maxY, maxZ, minX, minY, minZ;
 
-    void drawShape();
+    void drawShape(bool useTexture);
 
  public:
     PrimitiveShape();
-    void render();
+    void render(bool useTexture);
     unsigned int getPointCount();
     void setPointSize(unsigned int newSize);
     bool setPoint(unsigned int point, Vector3 position);
@@ -35,6 +37,8 @@ class PrimitiveShape: public RenderableComponent {
     void setFillColor(ofColor color);
     void setDrawColor(ofColor color);
     void setBorderWidth(unsigned int width);
+    void computeDimensions();
+    Vector3 getDimensions();
 };
 }  // namespace Components
 

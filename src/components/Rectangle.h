@@ -14,22 +14,22 @@ namespace Components {
 class Rectangle: public RenderableComponent {
     ofColor fillColor;
     ofColor drawColor;
-    unsigned int borderWidth = 2;
-    unsigned int width = 100;
-    unsigned int height = 100;
+    float borderWidth = 2;
+    float width = 100;
+    float height = 100;
 
  public:
-    void render();
+    void render(bool useTexture);
     ofColor getFillColor();
     ofColor getDrawColor();
-    unsigned int getBorderWidth();
-    unsigned int getWidth();
-    unsigned int getHeight();
+    float getBorderWidth();
+    float getWidth();
+    float getHeight();
     void setFillColor(ofColor color);
     void setDrawColor(ofColor color);
-    void setBorderWidth(unsigned int width);
-    void setWidth(unsigned int width);
-    void setHeight(unsigned int height);
+    void setBorderWidth(float width);
+    void setWidth(float width);
+    void setHeight(float height);
 };
 }  // namespace Components
 

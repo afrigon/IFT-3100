@@ -7,7 +7,7 @@
 
 #include "components/Cube.h"
 
-void Components::Cube::render() {
+void Components::Cube::render(bool useTexture) {
     ofFill();
     ofSetColor(this->color);
     ofDrawBox(this->size.getX(), this->size.getY(), this->size.getZ());

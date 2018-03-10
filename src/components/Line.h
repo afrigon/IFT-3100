@@ -17,7 +17,7 @@ class Line: public RenderableComponent {
     unsigned int lineLength = 100;
 
  public:
-    void render();
+    void render(bool useTexture);
     ofColor getLineColor();
     unsigned int getLineWidth();
     unsigned int getLineLength();

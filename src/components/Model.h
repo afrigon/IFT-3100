@@ -18,7 +18,7 @@ class Model: public RenderableComponent {
     ofxAssimpModelLoader model;
 
  public:
-    void render();
+    void render(bool useTexture);
     void loadModel(std::string path);
 };
 }  // namespace Components

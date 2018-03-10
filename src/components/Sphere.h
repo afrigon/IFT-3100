@@ -16,7 +16,7 @@ class Sphere: public RenderableComponent {
     unsigned int radius = 50;
 
  public:
-    void render();
+    void render(bool useTexture);
     ofColor getColor();
     unsigned int getRadius();
     void setColor(ofColor color);

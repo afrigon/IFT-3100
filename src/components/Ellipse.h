@@ -19,7 +19,7 @@ class Ellipse: public RenderableComponent {
     unsigned int height = 100;
 
  public:
-    void render();
+    void render(bool useTexture);
     ofColor getFillColor();
     ofColor getDrawColor();
     unsigned int getBorderWidth();

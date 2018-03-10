@@ -8,6 +8,7 @@
 #include "ofApp.h"
 
 void ofApp::setup() {
+    ofDisableArbTex();
     ofSetBackgroundAuto(true);
     ofSetBackgroundColor(0);
     ofSetFrameRate(60);

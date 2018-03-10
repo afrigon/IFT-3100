@@ -7,7 +7,7 @@
 
 #include "components/Sphere.h"
 
-void Components::Sphere::render() {
+void Components::Sphere::render(bool useTexture) {
     ofFill();
     ofSetColor(this->color);
     ofDrawSphere(this->radius);

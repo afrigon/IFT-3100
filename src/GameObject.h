@@ -18,6 +18,7 @@ using std::string;
 #include "components/AbstractComponent.h"
 #include "components/Transform.h"
 #include "components/RenderableComponent.h"
+#include "components/Texture.h"
 
 class GameObject {
     Components::Transform* transform;

@@ -7,7 +7,7 @@
 
 #include "components/Line.h"
 
-void Components::Line::render() {
+void Components::Line::render(bool useTexture) {
     ofFill();
     ofSetColor(this->lineColor);
     ofSetLineWidth(this->lineWidth);

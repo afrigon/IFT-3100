@@ -19,7 +19,7 @@ class Model: public RenderableComponent {
     std::string path;
 
  public:
-    void render(bool useTexture);
+    void render(bool useTexture) override;
     void loadModel(std::string path);
     
     UIKit::UIView* getUIView() override;

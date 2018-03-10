@@ -17,7 +17,7 @@ class Cube: public RenderableComponent {
     Vector3 size = Vector3(100, 100, 100);
 
  public:
-    void render(bool useTexture);
+    void render(bool useTexture) override;
     ofColor getColor();
     Vector3 getSize();
     void setColor(ofColor color);

@@ -19,7 +19,7 @@ class Rectangle: public RenderableComponent {
     float height = 100;
 
  public:
-    void render(bool useTexture);
+    void render(bool useTexture) override;
     ofColor getFillColor();
     ofColor getDrawColor();
     float getBorderWidth();

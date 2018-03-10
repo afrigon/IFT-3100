@@ -17,7 +17,7 @@
 
 class ViewController: public UIKit::UIViewController, public UIKit::UITableViewDataSource, public UIKit::UITableViewDelegate {
     Scene* scene;
-    GameObject* selectedGameObject;
+    GameObject* selectedGameObject = nullptr;
     ComponentsDataSource* componentsDataSource = new ComponentsDataSource();
     
     // UI

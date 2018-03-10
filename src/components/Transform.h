@@ -20,6 +20,9 @@ class Transform: public Undeletable {
 
     Transform();
     Transform(Vector3, Vector3 = Vector3(1), Vector3 = Vector3());
+    
+    UIKit::UIView* getUIView() override;
+    int getUIViewHeight() override;
 };
 }  // namespace Components
 

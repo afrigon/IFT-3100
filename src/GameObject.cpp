@@ -157,11 +157,18 @@ unsigned int GameObject::getDepth() {
 }
 
 int GameObject::getComponentsCount() {
-    return this->components.size();
+    return this->components.size() + 1;
 }
 
 vector<AbstractComponent*> GameObject::getComponents() {
-    return this->components;
+    vector<AbstractComponent*> temp = this->components;
+    temp.insert(temp.begin(), this->transform);
+    return temp;
+}
+
+AbstractComponent* GameObject::getComponentAt(int index) {
+    if (index == 0) return this->transform;
+    return this->components.at(index - 1);
 }
 
 #pragma endregion

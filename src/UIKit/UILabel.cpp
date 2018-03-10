@@ -10,6 +10,7 @@
 
 UIKit::UILabel::UILabel() {
     this->loadFont();
+    this->backgroundColor = ofColor(0, 0);
 }
 
 UIKit::UILabel::UILabel(std::string text): text(text) {
@@ -20,7 +21,6 @@ UIKit::UILabel::UILabel(std::string text): text(text) {
 void UIKit::UILabel::setFontSize(int fontSize) {
     this->fontSize = fontSize;
     this->loadFont();
-    this->backgroundColor = ofColor(0, 0);
 }
 
 void UIKit::UILabel::loadFont() {
@@ -35,12 +35,24 @@ void UIKit::UILabel::draw(UIKit::CGRect rect) {
                     this->frame.size.width,
                     this->frame.size.height);
     ofSetColor(this->textColor);
+    float x = 0;
+    switch (this->textAlignment) {
+        case TextAlignment::left: (x = rect.origin.x + this->frame.origin.x + this->padding); break;
+        case TextAlignment::right:
+            x = rect.origin.x + this->frame.origin.x + this->frame.size.width + this->font.stringWidth(this->text) - this->padding;
+            break;
+        case TextAlignment::center:
+            x = rect.origin.x + this->frame.origin.x + this->frame.size.width / 2 - this->font.stringWidth(this->text) / 2;
+            break;
+    }
     float stringHeight = this->font.stringHeight(this->text);
-    this->font.drawString(this->text,
-                          rect.origin.x + this->frame.origin.x + this->padding,
-                          rect.origin.y + this->frame.origin.y + (this->frame.size.height - stringHeight) / 2 + stringHeight);
+    this->font.drawString(this->text, x, rect.origin.y + this->frame.origin.y + (this->frame.size.height - stringHeight) / 2 + stringHeight);
 
     for (std::list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->draw(rect + this->frame);
     }
+}
+
+double UIKit::UILabel::widthFor(string text) {
+    return this->font.stringWidth(text);
 }

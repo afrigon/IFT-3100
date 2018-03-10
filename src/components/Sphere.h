@@ -16,11 +16,14 @@ class Sphere: public RenderableComponent {
     unsigned int radius = 50;
 
  public:
-    void render(bool useTexture);
+    void render(bool useTexture) override;
     ofColor getColor();
     unsigned int getRadius();
     void setColor(ofColor color);
     void setRadius(unsigned int radius);
+    
+    UIKit::UIView* getUIView() override;
+    int getUIViewHeight() override;
 };
 }  // namespace Components
 

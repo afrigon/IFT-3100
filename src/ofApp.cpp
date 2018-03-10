@@ -10,7 +10,7 @@
 void ofApp::setup() {
     ofDisableArbTex();
     ofSetBackgroundAuto(true);
-    ofSetBackgroundColor(0);
+    ofSetBackgroundColor(75);
     ofSetFrameRate(60);
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Game Engine");

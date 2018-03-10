@@ -6,6 +6,7 @@
 //
 
 #include "components/Rectangle.h"
+#include "views/RectangleView.h"
 
 void Components::Rectangle::render(bool useTexture) {
 
@@ -75,4 +76,12 @@ void Components::Rectangle::setWidth(float width) {
 
 void Components::Rectangle::setHeight(float height) {
     this->height = height;
+}
+
+UIKit::UIView* Components::Rectangle::getUIView() {
+    return new Components::Views::Rectangle(this);
+}
+
+int Components::Rectangle::getUIViewHeight() {
+    return 20 + 30 + 30 + 30 + 30 + 30;
 }

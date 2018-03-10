@@ -6,6 +6,7 @@
 //
 
 #include "components/PrimitiveShape.h"
+//#include "views/PrimitiveShapeView.h"
 
 Components::PrimitiveShape::PrimitiveShape() {
     this->points.resize(0);
@@ -125,3 +126,11 @@ void Components::PrimitiveShape::computeDimensions() {
 Vector3 Components::PrimitiveShape::getDimensions() {
     return dimension;
 }
+
+//UIKit::UIView* Components::PrimitiveShape::getUIView() {
+//    return new Components::Views::PrimitiveShape(this);
+//}
+//
+//int Components::PrimitiveShape::getUIViewHeight() {
+//    return 20 + 30 + 30 + 30;
+//}

@@ -6,6 +6,7 @@
 //
 
 #include "components/Cube.h"
+#include "views/CubeView.h"
 
 void Components::Cube::render(bool useTexture) {
     ofFill();
@@ -27,4 +28,12 @@ void Components::Cube::setColor(ofColor color) {
 
 void Components::Cube::setSize(Vector3 size) {
     this->size = size;
+}
+
+UIKit::UIView* Components::Cube::getUIView() {
+    return new Components::Views::Cube(this);
+}
+
+int Components::Cube::getUIViewHeight() {
+    return 20 + 30 + 30;
 }

@@ -6,6 +6,7 @@
 //
 
 #include "components/Model.h"
+#include "views/ModelView.h"
 
 void Components::Model::render(bool useTexture) {
     if (model.hasAnimations()) model.update();
@@ -24,4 +25,12 @@ void Components::Model::loadModel(std::string path) {
     model.loadModel(path);
     model.playAllAnimations();
     model.setLoopStateForAllAnimations(ofLoopType::OF_LOOP_NORMAL);
+}
+
+UIKit::UIView* Components::Model::getUIView() {
+    return new Components::Views::Model(this);
+}
+
+int Components::Model::getUIViewHeight() {
+    return 20 + 30;
 }

@@ -26,7 +26,7 @@ class PrimitiveShape: public RenderableComponent {
 
  public:
     PrimitiveShape();
-    void render(bool useTexture);
+    void render(bool useTexture) override;
     unsigned int getPointCount();
     void setPointSize(unsigned int newSize);
     bool setPoint(unsigned int point, Vector3 position);
@@ -39,6 +39,8 @@ class PrimitiveShape: public RenderableComponent {
     void setBorderWidth(unsigned int width);
     void computeDimensions();
     Vector3 getDimensions();
+    //    UIKit::UIView* getUIView() override;
+    //    int getUIViewHeight() override;
 };
 }  // namespace Components
 

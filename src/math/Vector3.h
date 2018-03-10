@@ -8,13 +8,16 @@
 #ifndef MATH_VECTOR3_H_
 #define MATH_VECTOR3_H_
 
-#include<cmath>
+#include <cmath>
+#include <string>
 
 class Vector3 {
     float x;
     float y;
     float z;
 
+    int round(float) const;
+    
  public:
     Vector3();
     explicit Vector3(float);

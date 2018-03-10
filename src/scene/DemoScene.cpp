@@ -305,7 +305,7 @@ Scene DemoScene::generate9() {
     t7->scale = Vector3(1, 1, 0.5);
 
     Components::Cubemap* c01 = o01->addComponent<Components::Cubemap>(new Components::Cubemap());
-    c01->loadMap("C:/Users/Alexandre/Pictures/cm.jpg");
+    c01->loadMap("cm1.png");
     c01->setDistance(2000);
 
     Components::Rectangle* c1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
@@ -335,7 +335,7 @@ Scene DemoScene::generate9() {
     c7->loadModel("/Users/frigon/Documents/University/IFT-3100/labo/labo/labo5/bin/data/charlie.obj");
 
     Components::Texture* t06 = o6->addComponent<Components::Texture>(new Components::Texture());
-    t06->loadTexture("C:/Users/Alexandre/Pictures/cute firefox2.jpg");
+    t06->loadTexture("/Users/frigon/Documents/Photoshop/card.jpg");
 
     temp.addObject(o01);
     temp.addObject(o1);

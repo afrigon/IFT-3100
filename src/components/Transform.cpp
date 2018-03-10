@@ -6,10 +6,19 @@
 //
 
 #include "components/Transform.h"
+#include "views/TransformView.h"
 
 Components::Transform::Transform(): position(Vector3()), scale(Vector3(1)), rotation(Vector3()) {}
 Components::Transform::Transform(Vector3 position, Vector3 scale, Vector3 rotation):
     position(position),
     scale(scale),
     rotation(rotation) {
+}
+
+UIKit::UIView* Components::Transform::getUIView() {
+    return new Components::Views::Transform(this);
+}
+
+int Components::Transform::getUIViewHeight() {
+    return 20 + 90;
 }

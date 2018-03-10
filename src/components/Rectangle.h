@@ -19,7 +19,7 @@ class Rectangle: public RenderableComponent {
     float height = 100;
 
  public:
-    void render(bool useTexture);
+    void render(bool useTexture) override;
     ofColor getFillColor();
     ofColor getDrawColor();
     float getBorderWidth();
@@ -30,6 +30,9 @@ class Rectangle: public RenderableComponent {
     void setBorderWidth(float width);
     void setWidth(float width);
     void setHeight(float height);
+    
+    UIKit::UIView* getUIView() override;
+    int getUIViewHeight() override;
 };
 }  // namespace Components
 

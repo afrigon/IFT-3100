@@ -26,6 +26,7 @@ void ViewController::viewDidLoad() {
     this->componentHeader->backgroundColor = ofColor(220);
     
     this->componentPanel->setDataSource(this->componentsDataSource);
+    this->componentPanel->cellSpacing = 10;
     this->componentPanel->backgroundColor = ofColor(180);
     this->view->addSubview(this->componentPanel);
 }
@@ -36,10 +37,10 @@ void ViewController::willLayoutSubviews() {
     this->hierarchyHeaderButton->frame = UIKit::CGRect(160, 0, 30, 30);
     this->hierarchyPanel->frame = UIKit::CGRect(0, 30, 200, this->view->frame.size.height);
     
-    int componentPannelX = (this->selectedGameObject ? this->view->frame.size.width - 200 : this->view->frame.size.width);
-    this->componentHeader->frame = UIKit::CGRect(componentPannelX, 0, 200, 30);
+    int componentPannelX = (this->selectedGameObject ? this->view->frame.size.width - 300 : this->view->frame.size.width);
+    this->componentHeader->frame = UIKit::CGRect(componentPannelX, 0, 300, 30);
     this->componentHeaderLabel->frame = UIKit::CGRect(0, 0, 150, 30);
-    this->componentPanel->frame = UIKit::CGRect(componentPannelX, 30, 200, this->view->frame.size.height);
+    this->componentPanel->frame = UIKit::CGRect(componentPannelX, 30, 300, this->view->frame.size.height);
 }
 
 int ViewController::numberOfRows() {

@@ -19,6 +19,8 @@ class UITableViewCell: public UIView {
     bool isSelected = false;
     
  public:
+    UITableViewCell();
+    
     ofColor textColor = ofColor(20);
     ofColor backgroundColor = ofColor(175);
     
@@ -26,9 +28,8 @@ class UITableViewCell: public UIView {
     ofColor selectedBackgroundColor = ofColor(66, 134, 244);
     
     UILabel* label = new UILabel("TableViewCellLabel");
-    list<UIKit::UIView*> subviews = { label };
 
-    void select();
+    virtual void select();
     void layoutSubviews() override;
     void draw(UIKit::CGRect) override;
 };
@@ -46,14 +47,16 @@ struct UITableViewDelegate {
 };
 
 class UITableView: public UIView {
-    UITableViewDataSource* dataSource;
-    UITableViewDelegate* delegate;
-    
+    UITableViewDataSource* dataSource = nullptr;
+    UITableViewDelegate* delegate = nullptr;
+
     void didSelectCell(UIView &);
     void onBlur(UIView &);
     void unselectAll();
-    
+
  public:
+    double cellSpacing = 0;
+    
     UITableView();
     ~UITableView();
     virtual void reloadData();

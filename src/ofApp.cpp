@@ -16,6 +16,7 @@ void ofApp::setup() {
     ofSetWindowTitle("Super Epic Game Engine");
 
     outputTime = false;
+    takeScreenshotOnNext = false;
     if (outputTime) lastElapsed = ofGetElapsedTimeMicros();
 
     light = ofLight();
@@ -49,10 +50,17 @@ void ofApp::draw() {
         lastElapsed = ofGetElapsedTimeMicros();
     }
 
-    this->window.draw();
+    if(!takeScreenshotOnNext) {
+        this->window.draw();
+    } else {
+        takeScreenshot();
+    }
 }
 
 void ofApp::keyPressed(int key) {
+    if(key == 19) {
+        takeScreenshotOnNext = true;
+    }
 }
 
 void ofApp::keyReleased(int key) {
@@ -71,4 +79,14 @@ void ofApp::mouseExited(int x, int y) {
 }
 
 void ofApp::dragEvent(ofDragInfo dragInfo) {
+}
+
+void ofApp::takeScreenshot() {
+    takeScreenshotOnNext = false;
+    ofImage screenshot = ofImage();
+    screenshot.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
+    ofFileDialogResult result = ofSystemSaveDialog(ofGetTimestampString() + ".png", "Select a location to save the image.");
+    if(result.bSuccess) {
+        screenshot.save(result.filePath);
+    }
 }

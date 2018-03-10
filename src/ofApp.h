@@ -17,6 +17,7 @@
 class ofApp: public ofBaseApp {
     Scene scene;
     bool outputTime;
+    bool takeScreenshotOnNext;
     uint64_t lastElapsed;
     UIKit::UIWindow window;
 
@@ -35,6 +36,8 @@ class ofApp: public ofBaseApp {
     void mouseEntered(int x, int y);
     void mouseExited(int x, int y);
     void dragEvent(ofDragInfo dragInfo);
+
+    void takeScreenshot();
 };
 
 #endif  // OFAPP_H_

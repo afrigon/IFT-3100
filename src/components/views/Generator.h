@@ -17,38 +17,57 @@ using std::string;
 
 namespace Components {
 namespace Views {
-    struct LabeledView: public UIKit::UIView {
-        const double height = 30;
-        UIKit::UILabel* label = new UIKit::UILabel();
-        LabeledView();
-        void setName(string name);
-    };
+struct LabeledView: public UIKit::UIView {
+    const double height = 30;
+    UIKit::UILabel* label = new UIKit::UILabel();
     
-    struct Vector3View: public LabeledView {
-        const double spacing = 50;
-        UIKit::UILabel* valueLabels [3];
-        Vector3View();
-        void setValue(Vector3);
-    };
+    LabeledView();
+    void setName(string name);
+};
+
+struct Vector3View: public LabeledView {
+    const double spacing = 50;
+    UIKit::UILabel* valueLabels [3];
     
-    struct ColorView: public LabeledView {
-        UIKit::UIView* colorView = new UIKit::UIView();
-        ColorView();
-        void setValue(ofColor);
-    };
+    Vector3View();
+    void setValue(Vector3);
+};
+
+enum class ColorMode { RGB, HSL };
+
+class ColorView: public LabeledView {
+    bool showAlpha = true;
+    ofColor color = ofColor(255);
+    ColorMode mode = ColorMode::RGB;
     
-    struct NumericView: public LabeledView {
-        UIKit::UILabel* valueLabel = new UIKit::UILabel("0");
-        NumericView();
-        void setValue(double);
-    };
+ public:
+    const double spacing = 40;
     
-    struct Generator {
-        static Vector3View* vector3(string, Vector3);
-        static ColorView* color(string, ofColor);
-        static NumericView* numeric(string, double);
-        static string numericToString(double);
-    };
+    UIKit::UILabel* valueLabels [4];
+    UIKit::UILabel* modeLabel = new UIKit::UILabel("RGB");
+    UIKit::UIView* colorView = new UIKit::UIView();
+    
+    ColorView();
+    ~ColorView();
+    void setValue(ofColor);
+    void switchMode(UIView&);
+    void setShowAlpha(bool);
+};
+
+struct NumericView: public LabeledView {
+    UIKit::UILabel* valueLabel = new UIKit::UILabel("0");
+    
+    NumericView();
+    void setValue(double);
+};
+
+struct Generator {
+    static Vector3View* vector3(string, Vector3);
+    static ColorView* color(string, ofColor);
+    static NumericView* numeric(string, double);
+    static string numericToString(double);
+    static string numericToIntString(double);
+};
 }  // namespace Views
 }  // namespace Components
 

@@ -59,6 +59,7 @@ class UIView {
     bool isHidden = false;
     ofColor backgroundColor = ofColor(0, 0);
     ofColor tintColor;
+    int cornerRadius = 0;
     bool shouldBubble = true;
     ofEvent<UIView> onclick;
     ofEvent<UIView> onmousedown;

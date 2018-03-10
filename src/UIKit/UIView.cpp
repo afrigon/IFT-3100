@@ -93,7 +93,7 @@ void UIKit::UIView::removeFromSuperView() {
 void UIKit::UIView::draw(CGRect rect) {
     if (this->isHidden) return;
     ofSetColor(this->backgroundColor);
-    ofDrawRectangle(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height);
+    ofDrawRectRounded(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height, this->cornerRadius);
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->draw(this->frame + rect.origin);
     }

@@ -50,17 +50,13 @@ void ofApp::draw() {
         lastElapsed = ofGetElapsedTimeMicros();
     }
 
-    if(!takeScreenshotOnNext) {
-        this->window.draw();
-    } else {
-        takeScreenshot();
-    }
+    if (!takeScreenshotOnNext) this->window.draw();
+    else takeScreenshot();
 }
 
 void ofApp::keyPressed(int key) {
-    if(key == 19) {
-        takeScreenshotOnNext = true;
-    }
+    // ctrl + s || print screen
+    if (key == 19 || key == 63248) takeScreenshotOnNext = true;
 }
 
 void ofApp::keyReleased(int key) {
@@ -86,7 +82,5 @@ void ofApp::takeScreenshot() {
     ofImage screenshot = ofImage();
     screenshot.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
     ofFileDialogResult result = ofSystemSaveDialog(ofGetTimestampString() + ".png", "Select a location to save the image.");
-    if(result.bSuccess) {
-        screenshot.save(result.filePath);
-    }
+    if (result.bSuccess) screenshot.save(result.filePath);
 }

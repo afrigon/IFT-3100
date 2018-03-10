@@ -1,20 +1,23 @@
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
+
 #include "Texture.h"
-
-Components::Texture::Texture() {}
-
-Components::Texture::~Texture() {}
 
 ofTexture& Components::Texture::getTexture() {
     return tex;
 }
 
 bool Components::Texture::loadTexture(std::string path) {
-    if(ofLoadImage(tex, path)) {
+    if (ofLoadImage(tex, path)) {
         this->setWrappingMode(GL_REPEAT);
         try {
             //GenerateMipmap fails if the image in invalid (such as non-power of 2)
             tex.generateMipmap();
-        } catch(const std::exception&) {}
+        } catch (const std::exception&) {}
         tex.setTextureMinMagFilter(GL_LINEAR, GL_LINEAR);
         return true;
     }

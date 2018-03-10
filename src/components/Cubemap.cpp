@@ -1,29 +1,34 @@
+//
+//  Copyright (c) 2018 Alexandre Frigon / Alexandre Rouleau
+//
+//  Use of this source code is governed by a MIT license that can be
+//  found in the LICENSE file.
+//
+
 #include "Cubemap.h"
 
 Components::Cubemap::Cubemap() {
     distance = 1000;
     textures = vector<ofTexture>(6);
     meshes = vector<ofMesh>(6);
-    for(int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 6; ++i) {
         textures[i].setTextureMinMagFilter(GL_LINEAR, GL_LINEAR);
     }
     generateMeshes();
 }
 
-Components::Cubemap::~Cubemap() {}
-
 void Components::Cubemap::render(bool useTexture) {
     ofPushMatrix();
     bool light = ofGetLightingEnabled();
-    if(light) { ofDisableLighting(); }
+    if (light) { ofDisableLighting(); }
     ofScale(distance, distance, distance);
     ofSetColor(255);
-    for(int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 6; ++i) {
         textures[i].bind();
         meshes[i].drawFaces();
         textures[i].unbind();
     }
-    if(light) { ofEnableLighting(); }
+    if (light) { ofEnableLighting(); }
     ofPopMatrix();
 }
 
@@ -36,32 +41,20 @@ void Components::Cubemap::loadMap(std::string path) {
 }
 
 void Components::Cubemap::loadMap(std::string path[6]) {
-    for(int i = 0; i < 6; ++i) {
-        if(!ofLoadImage(textures[i], path[i])) {
+    for (int i = 0; i < 6; ++i) {
+        if (!ofLoadImage(textures[i], path[i])) {
             ofLogError("LoadCubemap", "Image failed to load : " + i);
         }
     }
 }
 
 void Components::Cubemap::loadMap(std::string image1, std::string image2, std::string image3, std::string image4, std::string image5, std::string image6) {
-    if(!ofLoadImage(textures[0], image1)) {
-        ofLogError("LoadCubemap", "Image failed to load : 1");
-    }
-    if(!ofLoadImage(textures[1], image2)) {
-        ofLogError("LoadCubemap", "Image failed to load : 2");
-    }
-    if(!ofLoadImage(textures[2], image3)) {
-        ofLogError("LoadCubemap", "Image failed to load : 3");
-    }
-    if(!ofLoadImage(textures[3], image4)) {
-        ofLogError("LoadCubemap", "Image failed to load : 4");
-    }
-    if(!ofLoadImage(textures[4], image5)) {
-        ofLogError("LoadCubemap", "Image failed to load : 5");
-    }
-    if(!ofLoadImage(textures[5], image6)) {
-        ofLogError("LoadCubemap", "Image failed to load : 6");
-    }
+    if (!ofLoadImage(textures[0], image1)) ofLogError("LoadCubemap", "Image failed to load : 1");
+    if (!ofLoadImage(textures[1], image2)) ofLogError("LoadCubemap", "Image failed to load : 2");
+    if (!ofLoadImage(textures[2], image3)) ofLogError("LoadCubemap", "Image failed to load : 3");
+    if (!ofLoadImage(textures[3], image4)) ofLogError("LoadCubemap", "Image failed to load : 4");
+    if (!ofLoadImage(textures[4], image5)) ofLogError("LoadCubemap", "Image failed to load : 5");
+    if (!ofLoadImage(textures[5], image6)) ofLogError("LoadCubemap", "Image failed to load : 6");
 }
 
 void Components::Cubemap::loadMap(ofImage image) {
@@ -103,10 +96,10 @@ void Components::Cubemap::loadMap(ofImage image) {
 
 void Components::Cubemap::loadMap(ofImage images[6]) {
     try {
-        for(int i = 0; i < 6; ++i) {
+        for (int i = 0; i < 6; ++i) {
             textures[i] = images[i].getTexture();
         }
-    } catch(const std::exception& e) {
+    } catch (const std::exception& e) {
         ofLogError("LoadCubemap", e.what());
     }
 }
@@ -119,7 +112,7 @@ void Components::Cubemap::loadMap(ofImage image1, ofImage image2, ofImage image3
         textures[3] = image4.getTexture();
         textures[4] = image5.getTexture();
         textures[5] = image6.getTexture();
-    } catch(const std::exception& e) {
+    } catch (const std::exception& e) {
         ofLogError("LoadCubemap", e.what());
     }
 }

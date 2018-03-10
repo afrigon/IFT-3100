@@ -63,20 +63,10 @@ void ofApp::mouseMoved(int x, int y) {
 void ofApp::mouseDragged(int x, int y, int button) {
 }
 
-void ofApp::mousePressed(int x, int y, int button) {
-}
-
-void ofApp::mouseReleased(int x, int y, int button) {
-}
-
 void ofApp::mouseEntered(int x, int y) {
 }
 
 void ofApp::mouseExited(int x, int y) {
-}
-
-void ofApp::gotMessage(ofMessage msg) {
-    cout << msg.message << endl;
 }
 
 void ofApp::dragEvent(ofDragInfo dragInfo) {

@@ -33,11 +33,10 @@ class GameObject {
 
     bool operator==(const GameObject &) const;
     bool operator!=(const GameObject &) const;
-
+    uint64_t getID() const;
+    
     void update();
     void draw();
-
-    uint64_t getID() const;
 
     // Returns a reference on the transform pointer
     Components::Transform*& getTransform() { return transform; }
@@ -68,7 +67,9 @@ class GameObject {
     GameObject* getGameObjectAt(unsigned int index);
     // Returns the depth of the current GameObject
     unsigned int getDepth();
-
+    int getComponentsCount();
+    vector<AbstractComponent*> getComponents();
+    
     template <class T>
     T* addComponent(T* component) {
         this->components.push_back(component);

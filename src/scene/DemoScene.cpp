@@ -316,13 +316,17 @@ Scene DemoScene::generate9() {
     Line* c3 = o3->addComponent<Line>(new Line());
 
     Components::Ellipse* c4 = o4->addComponent<Components::Ellipse>(new Components::Ellipse());
+    o4->name = "Ellipse";
     c4->setWidth(50);
 
     Sphere* c5 = o5->addComponent<Sphere>(new Sphere());
+    o5->name = "Sphere";
 
     Cube* c6 = o6->addComponent<Cube>(new Cube());
+    o6->name = "Cube";
 
     Model* c7 = o7->addComponent<Model>(new Model());
+    o7->name = "Charlie";
     c7->loadModel("/Users/frigon/Documents/University/IFT-3100/labo/labo/labo5/bin/data/charlie.obj");
 
     temp.addObject(o1);

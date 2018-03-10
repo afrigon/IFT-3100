@@ -15,8 +15,13 @@
 namespace UIKit {
 class UIWindow {
     CGSize size = UIKit::CGSize(ofGetWidth(), ofGetHeight());
-    void resize(ofResizeEventArgs &);
     UIViewController* rootViewController;
+    UIKit::CGPoint clickStartPosition;
+    int clickThreshold = 3;
+    
+    void resize(ofResizeEventArgs &);
+    void mousedown(ofMouseEventArgs &);
+    void mouseup(ofMouseEventArgs &);
 
  public:
     UIWindow();

@@ -46,6 +46,8 @@ struct CGRect {
 };
 
 class UIView {
+    bool focus = false;
+    
  protected:
     UIView* superview;
     std::list<UIView*> subviews;
@@ -55,17 +57,27 @@ class UIView {
     bool isHidden = false;
     ofColor backgroundColor;
     ofColor tintColor;
-    ofEvent<UIView* const> onclick;
-    ofEvent<UIView* const> onmousedown;
-    ofEvent<UIView* const> onmouseup;
+    ofEvent<UIView> onclick;
+    ofEvent<UIView> onmousedown;
+    ofEvent<UIView> onmouseup;
+    ofEvent<UIView> onfocus;
+    ofEvent<UIView> onblur;
 
     UIView() {}
     ~UIView();
+    bool operator==(const UIView &) const;
+    bool operator!=(const UIView &) const;
+    uint64_t getID() const;
+    
+    virtual void didAddSubview(UIView*) {}
+    virtual void willRemoveSubview(UIView*) {}
+    
     void addSubview(UIView*);
     void removeFromSuperView();
     virtual void layoutSubviews();
     virtual void draw(CGRect);
     bool hitTest(UIKit::CGPoint, UIKit::CGPoint, UIKit::UIEvent);
+    bool isFocused();
 };
 }  // namespace UIKit
 

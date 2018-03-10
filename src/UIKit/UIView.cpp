@@ -59,18 +59,34 @@ UIKit::UIView::~UIView() {
     }
 }
 
+bool UIKit::UIView::operator==(const UIKit::UIView &o) const {
+    return this->getID() == o.getID();
+}
+
+bool UIKit::UIView::operator!=(const UIKit::UIView &o) const {
+    return this->getID() != o.getID();
+}
+
+uint64_t UIKit::UIView::getID() const {
+    return (uint64_t)this;
+}
+
 void UIKit::UIView::addSubview(UIView* view) {
     view->superview = this;
     this->subviews.push_back(view);
+    this->didAddSubview(view);
 }
 
 void UIKit::UIView::removeFromSuperView() {
+    if (this->superview) {
+        this->superview->willRemoveSubview(this);
+        this->superview->subviews.remove(this);
+    }
+    
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->removeFromSuperView();
     }
-    if (this->superview) {  // probably handle uiwindow case
-        this->superview->subviews.remove(this);
-    }
+    
     delete this;
 }
 
@@ -91,18 +107,34 @@ void UIKit::UIView::layoutSubviews() {
 
 bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentOrigin, UIKit::UIEvent event) {
     UIKit::CGRect absoluteFrame = UIKit::CGRect(parentOrigin + this->frame.origin, this->frame.size);
-    if (!absoluteFrame.contains(clickPosition)) return false;
+    if (!absoluteFrame.contains(clickPosition)) {
+        if (this->focus) {
+            this->focus = false;
+            ofNotifyEvent(this->onblur, *this);
+        }
+        return false;
+    }
+    
+    if (!this->focus) {
+        this->focus = true;
+        ofNotifyEvent(this->onfocus, *this);
+    }
+    
     bool bubble = false;
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         if ((*it)->hitTest(clickPosition, absoluteFrame.origin, event)) bubble = true;
     }
     if (this->subviews.size() != 0 && !bubble) return false;
     switch (event) {
-        case UIEvent::click: ofNotifyEvent(this->onclick, this); break;
-        case UIEvent::mousedown: ofNotifyEvent(this->onmousedown, this); break;
-        case UIEvent::mouseup: ofNotifyEvent(this->onmouseup, this); break;
+        case UIEvent::click: ofNotifyEvent(this->onclick, *this); break;
+        case UIEvent::mousedown: ofNotifyEvent(this->onmousedown, *this); break;
+        case UIEvent::mouseup: ofNotifyEvent(this->onmouseup, *this); break;
         default: return false;
     }
     return true;
+}
+
+bool UIKit::UIView::isFocused() {
+    return this->focus;
 }
 

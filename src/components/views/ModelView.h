@@ -13,15 +13,17 @@
 #include "Model.h"
 
 namespace Components {
-namespace Views {
-class Model: public Components::Views::Base {
-    Components::Model* model = nullptr;
+    namespace Views {
+        class Model: public Components::Views::Base {
+            Components::Model* model = nullptr;
     
-public:
-    Model(Components::Model*);
-    void layoutSubviews() override;
-};
-}  // namespace Views
+        public:
+            Model(Components::Model*);
+            void layoutSubviews() override;
+
+            void click(UIView & view);
+        };
+    }  // namespace Views
 }  // namespace Components
 
 #endif  // COMPONENTS_VIEWS_MODELVIEW_H_

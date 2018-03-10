@@ -22,9 +22,15 @@ void Components::Model::render(bool useTexture) {
 }
 
 void Components::Model::loadModel(std::string path) {
-    model.loadModel(path);
-    model.playAllAnimations();
-    model.setLoopStateForAllAnimations(ofLoopType::OF_LOOP_NORMAL);
+    if(model.loadModel(path)) {
+        this->path = path;
+        model.playAllAnimations();
+        model.setLoopStateForAllAnimations(ofLoopType::OF_LOOP_NORMAL);
+    }
+}
+
+std::string Components::Model::getPath() {
+    return path;
 }
 
 UIKit::UIView* Components::Model::getUIView() {

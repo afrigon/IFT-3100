@@ -23,6 +23,10 @@ class Line: public Components::Views::Base {
 public:
     Line(Components::Line*);
     void layoutSubviews() override;
+    void setText(int tag);
+
+    void click(UIView & view);
+    void rightclick(UIView & view);
 };
 }  // namespace Views
 }  // namespace Components

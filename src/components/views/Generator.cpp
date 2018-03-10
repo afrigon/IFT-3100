@@ -53,7 +53,7 @@ Components::Views::NumericView::NumericView() {
 }
 
 void Components::Views::NumericView::setValue(double value) {
-    this->valueLabel->frame = UIKit::CGRect(125, 0, this->frame.size.width - 125, this->height);
+    this->valueLabel->frame = UIKit::CGRect(125, 0, 75/*this->frame.size.width - 125*/, this->height);
     this->valueLabel->text = Components::Views::Generator::numericToString(value);
 }
 

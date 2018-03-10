@@ -21,6 +21,7 @@ class Model: public RenderableComponent {
  public:
     void render(bool useTexture) override;
     void loadModel(std::string path);
+    std::string getPath();
     
     UIKit::UIView* getUIView() override;
     int getUIViewHeight() override;

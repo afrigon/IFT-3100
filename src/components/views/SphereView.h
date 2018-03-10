@@ -21,7 +21,11 @@ class Sphere: public Components::Views::Base {
     
 public:
     Sphere(Components::Sphere*);
+    ~Sphere();
     void layoutSubviews() override;
+
+    void click(UIView & view);
+    void rightclick(UIView & view);
 };
 }  // namespace Views
 }  // namespace Components

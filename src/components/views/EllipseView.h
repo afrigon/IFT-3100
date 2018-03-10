@@ -17,14 +17,16 @@ namespace Components {
         class Ellipse: public Components::Views::Base {
             Components::Ellipse* ellipse = nullptr;
             Components::Views::ColorView* fillColorView;
-            Components::Views::ColorView* strokeColorView;
-            Components::Views::NumericView* borderWidthView;
             Components::Views::NumericView* widthView;
             Components::Views::NumericView* heightView;
             
         public:
             Ellipse(Components::Ellipse*);
             void layoutSubviews() override;
+            void setText(int tag);
+
+            void click(UIView & view);
+            void rightclick(UIView & view);
         };
     }  // namespace Views
 }  // namespace Components

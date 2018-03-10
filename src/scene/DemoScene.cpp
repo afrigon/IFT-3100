@@ -129,12 +129,9 @@ Scene DemoScene::generate4() {
 
     Components::Ellipse* e1 = o1->addComponent<Components::Ellipse>(new Components::Ellipse());
     e1->setHeight(150);
-    e1->setBorderWidth(5);
-    e1->setDrawColor(ofColor(200, 0, 0));
 
     Components::Ellipse* e2 = o2->addComponent<Components::Ellipse>(new Components::Ellipse());
     e2->setWidth(150);
-    e2->setDrawColor(ofColor(200, 0, 0));
 
     Components::Ellipse* e3 = o3->addComponent<Components::Ellipse>(new Components::Ellipse());
     e3->setHeight(300);
@@ -305,13 +302,16 @@ Scene DemoScene::generate9() {
     t7->scale = Vector3(1, 1, 0.5);
 
     Components::Cubemap* c01 = o01->addComponent<Components::Cubemap>(new Components::Cubemap());
+    o01->name = "Skybox";
     c01->loadMap("cm1.png");
     c01->setDistance(2000);
 
     Components::Rectangle* c1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
+    o1->name = "Rectangle";
     c1->setFillColor(ofColor(200, 0, 0));
 
     PrimitiveShape* c2 = o2->addComponent<PrimitiveShape>(new PrimitiveShape());
+    o2->name = "Primitive";
     c2->setPointSize(4);
     c2->setPoint(0, Vector3(-50, -25, 0));
     c2->setPoint(1, Vector3(50, -25, 0));
@@ -319,6 +319,7 @@ Scene DemoScene::generate9() {
     c2->setPoint(3, Vector3(-25, 25, 0));
 
     Line* c3 = o3->addComponent<Line>(new Line());
+    o3->name = "Ligne";
 
     Components::Ellipse* c4 = o4->addComponent<Components::Ellipse>(new Components::Ellipse());
     o4->name = "Ellipse";
@@ -332,10 +333,10 @@ Scene DemoScene::generate9() {
 
     Model* c7 = o7->addComponent<Model>(new Model());
     o7->name = "Charlie";
-    c7->loadModel("/Users/frigon/Documents/University/IFT-3100/labo/labo/labo5/bin/data/charlie.obj");
+    c7->loadModel("charlie.dae");
 
     Components::Texture* t06 = o6->addComponent<Components::Texture>(new Components::Texture());
-    t06->loadTexture("/Users/frigon/Documents/Photoshop/card.jpg");
+    t06->loadTexture("card.jpg");
 
     temp.addObject(o01);
     temp.addObject(o1);

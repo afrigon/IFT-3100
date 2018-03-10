@@ -13,17 +13,17 @@
 namespace Components {
 class Line: public RenderableComponent {
     ofColor lineColor;
-    unsigned int lineWidth = 2;
-    unsigned int lineLength = 100;
+    float lineWidth = 2;
+    float lineLength = 100;
 
  public:
     void render(bool useTexture) override;
     ofColor getLineColor();
-    unsigned int getLineWidth();
-    unsigned int getLineLength();
+    float getLineWidth();
+    float getLineLength();
     void setLineColor(ofColor color);
-    void setLineWidth(unsigned int width);
-    void setLineLength(unsigned int length);
+    void setLineWidth(float width);
+    void setLineLength(float length);
     
     UIKit::UIView* getUIView() override;
     int getUIViewHeight() override;

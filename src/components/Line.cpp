@@ -20,11 +20,11 @@ ofColor Components::Line::getLineColor() {
     return this->lineColor;
 }
 
-unsigned int Components::Line::getLineWidth() {
+float Components::Line::getLineWidth() {
     return this->lineWidth;
 }
 
-unsigned int Components::Line::getLineLength() {
+float Components::Line::getLineLength() {
     return this->lineLength;
 }
 
@@ -32,11 +32,11 @@ void Components::Line::setLineColor(ofColor color) {
     this->lineColor = color;
 }
 
-void Components::Line::setLineWidth(unsigned int width) {
+void Components::Line::setLineWidth(float width) {
     this->lineWidth = width;
 }
 
-void Components::Line::setLineLength(unsigned int length) {
+void Components::Line::setLineLength(float length) {
     this->lineLength = length;
 }
 

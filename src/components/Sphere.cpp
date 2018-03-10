@@ -18,7 +18,7 @@ ofColor Components::Sphere::getColor() {
     return this->color;
 }
 
-unsigned int Components::Sphere::getRadius() {
+float Components::Sphere::getRadius() {
     return this->radius;
 }
 
@@ -26,7 +26,7 @@ void Components::Sphere::setColor(ofColor color) {
     this->color = color;
 }
 
-void Components::Sphere::setRadius(unsigned int radius) {
+void Components::Sphere::setRadius(float radius) {
     this->radius = radius;
 }
 

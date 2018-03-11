@@ -132,6 +132,8 @@ bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentO
         }
     }
     if (this->subviews.size() != 0 && !bubble) return false;
+    if (!this->isUserInteractionEnabled) return true;
+    // cancel cam
     switch (event) {
         case UIEvent::click: ofNotifyEvent(this->onclick, *this); break;
         case UIEvent::mousedown: ofNotifyEvent(this->onmousedown, *this); break;

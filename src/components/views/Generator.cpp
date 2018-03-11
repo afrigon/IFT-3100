@@ -125,7 +125,12 @@ void Components::Views::ColorView::rightclick(UIView & view) {
 
 void Components::Views::ColorView::editColor(int tag, int direction) {
     const int amount = 5 * max(-1, min(direction, 1));
-    if (tag == 3) { this->color->a += amount; return; }
+    if (tag == 3) {
+        this->color->a += amount;
+        this->setValue();
+        return;
+    }
+    
     switch (this->mode) {
         case ColorMode::RGB:
             switch (tag) {

@@ -8,6 +8,7 @@
 #include "UIKit/UITableView.h"
 
 UIKit::UITableViewCell::UITableViewCell() {
+    this->isUserInteractionEnabled = true;
     this->addSubview(this->label);
 }
 

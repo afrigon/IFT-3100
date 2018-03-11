@@ -11,6 +11,7 @@
 UIKit::UILabel::UILabel() {
     this->loadFont();
     this->backgroundColor = ofColor(0, 0);
+    this->isUserInteractionEnabled = true;
 }
 
 UIKit::UILabel::UILabel(std::string text): text(text) {

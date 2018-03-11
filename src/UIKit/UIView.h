@@ -48,6 +48,7 @@ struct CGRect {
 
 class UIView {
     bool focus = false;
+    bool isUserInteractionEnabled = false;
     
  protected:
     UIView* superview;

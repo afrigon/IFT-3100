@@ -9,6 +9,7 @@
 //#include "views/PrimitiveShapeView.h"
 
 Components::PrimitiveShape::PrimitiveShape() {
+    this->name = "Primitive Shape";
     this->points.resize(0);
 }
 

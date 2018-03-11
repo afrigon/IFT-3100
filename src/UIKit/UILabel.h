@@ -8,8 +8,9 @@
 #ifndef UIKIT_UILABEL_H_
 #define UIKIT_UILABEL_H_
 
-#include <string>
 #include <list>
+#include <string>
+using std::string;
 
 #include "UIView.h"
 
@@ -25,13 +26,12 @@ class UILabel: public UIView {
     int fontSize = 12;
 
  public:
-    std::string text = "Label";
+    string text;
     ofColor textColor = ofColor(0, 0, 0);
     TextAlignment textAlignment = TextAlignment::left;
-    double padding = 10;
+    double padding = 0;
 
-    UILabel();
-    explicit UILabel(std::string);
+    UILabel(string text = "Label");
     void setFontSize(int);
     void loadFont();
     void draw(UIKit::CGRect) override;

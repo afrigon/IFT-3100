@@ -6,27 +6,28 @@
 //
 
 
-#ifndef COMPONENTS_VIEWS_MODELVIEW_H_
-#define COMPONENTS_VIEWS_MODELVIEW_H_
+#ifndef COMPONENTS_VIEWS_TEXTUREVIEW_H_
+#define COMPONENTS_VIEWS_TEXTUREVIEW_H_
 
 #include "BaseView.h"
-#include "Model.h"
+#include "Texture.h"
 
 namespace Components {
 namespace Views {
-class Model: public Components::Views::Base, public Components::Views::FilePickerDelegate {
-    Components::Model* model = nullptr;
+class Texture: public Components::Views::Base, public Components::Views::FilePickerDelegate {
+    Components::Texture* texture = nullptr;
     Components::Views::FilePickerView* filePicker;
-    Components::Views::NumericView* vertexView;
+    //some other picker for the wrap mode
     
 public:
-    Model(Components::Model*);
+    Texture(Components::Texture*);
     void layoutSubviews() override;
     void didPickFile(string) override;
 };
 }  // namespace Views
 }  // namespace Components
 
-#endif  // COMPONENTS_VIEWS_MODELVIEW_H_
+#endif  // COMPONENTS_VIEWS_TEXTUREVIEW_H_
+
 
 

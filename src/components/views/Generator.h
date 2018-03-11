@@ -17,38 +17,78 @@ using std::string;
 
 namespace Components {
 namespace Views {
-    struct LabeledView: public UIKit::UIView {
-        const double height = 30;
-        UIKit::UILabel* label = new UIKit::UILabel();
-        LabeledView();
-        void setName(string name);
-    };
+struct LabeledView: public UIKit::UIView {
+    const double height = 30;
+    UIKit::UILabel* label = new UIKit::UILabel();
     
-    struct Vector3View: public LabeledView {
-        const double spacing = 50;
-        UIKit::UILabel* valueLabels [3];
-        Vector3View();
-        void setValue(Vector3);
-    };
+    LabeledView();
+    void setName(string name);
+};
+
+struct Vector3View: public LabeledView {
+    const double spacing = 50;
+    UIKit::UIButton* valueLabels [3];
     
-    struct ColorView: public LabeledView {
-        UIKit::UIView* colorView = new UIKit::UIView();
-        ColorView();
-        void setValue(ofColor);
-    };
+    Vector3View();
+    void setValue(Vector3);
+};
+
+enum class ColorMode { RGB, HSB };
+
+class ColorView: public LabeledView {
+    bool showAlpha = true;
+    ofColor* color;
+    ColorMode mode = ColorMode::RGB;
     
-    struct NumericView: public LabeledView {
-        UIKit::UILabel* valueLabel = new UIKit::UILabel("0");
-        NumericView();
-        void setValue(double);
-    };
+    void editColor(int, int);
+    void switchMode(UIView&);
+    void click(UIView&);
+    void rightclick(UIView&);
     
-    struct Generator {
-        static Vector3View* vector3(string, Vector3);
-        static ColorView* color(string, ofColor);
-        static NumericView* numeric(string, double);
-        static string numericToString(double);
-    };
+ public:
+    const double spacing = 40;
+    
+    UIKit::UIButton* valueLabels [4];
+    UIKit::UIButton* modeLabel = new UIKit::UIButton("RGB");
+    UIKit::UIView* colorView = new UIKit::UIView();
+    
+    ColorView(ofColor*);
+    ~ColorView();
+    void setValue();
+    void setShowAlpha(bool);
+};
+
+struct NumericView: public LabeledView {
+    int decimalCount = 2;
+    UIKit::UIButton* valueLabel = new UIKit::UIButton("0");
+    
+    NumericView();
+    void setValue(double);
+};
+
+struct FilePickerDelegate {
+    virtual void didPickFile(string path) {}
+};
+
+struct FilePickerView: public LabeledView {
+    FilePickerDelegate* delegate = nullptr;
+    UIKit::UILabel* pathLabel = new UIKit::UILabel("");
+    UIKit::UIButton* button = new UIKit::UIButton("open");
+    
+    FilePickerView();
+    ~FilePickerView();
+    void setValue(string);
+    void buttonclick(UIView &);
+};
+
+struct Generator {
+    static Vector3View* vector3(string, Vector3);
+    static ColorView* color(string, ofColor*);
+    static NumericView* numeric(string, double);
+    static FilePickerView* file(string, string);
+    static string numericToString(double, int = 2);
+    static string numericToIntString(double);
+};
 }  // namespace Views
 }  // namespace Components
 

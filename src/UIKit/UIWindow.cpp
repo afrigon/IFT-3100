@@ -18,6 +18,15 @@ UIKit::UIWindow::~UIWindow() {
     ofRemoveListener(ofEvents().mousePressed, this, &UIWindow::mousedown);
     ofRemoveListener(ofEvents().mouseReleased, this, &UIWindow::mouseup);
     delete this->rootViewController;
+    delete UIWindow::instance;
+}
+
+UIKit::UIWindow* UIKit::UIWindow::instance = nullptr;
+UIKit::UIWindow* UIKit::UIWindow::shared() {
+    if (!UIWindow::instance) {
+        UIWindow::instance = new UIKit::UIWindow();
+    }
+    return UIWindow::instance;
 }
 
 void UIKit::UIWindow::resize(ofResizeEventArgs & e) {
@@ -56,6 +65,17 @@ void UIKit::UIWindow::setRootViewController(UIViewController* vc) {
     this->rootViewController = vc;
     vc->view->frame = UIKit::CGRect(UIKit::CGPoint(), this->size);
     this->rootViewController->viewDidLoad();
+}
+
+void UIKit::UIWindow::layoutIfNeeded() {
+    if (this->needLayout) {
+        this->layoutSubviews();
+        this->needLayout = false;
+    }
+}
+
+void UIKit::UIWindow::setNeedsLayout() {
+    this->needLayout = true;
 }
 
 void UIKit::UIWindow::layoutSubviews() {

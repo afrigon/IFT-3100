@@ -12,6 +12,7 @@ Components::Views::Base::Base(string text) {
     
     this->label->text = text;
     this->label->setFontSize(10);
+    this->label->padding = 10;
     this->addSubview(this->label);
     
     this->addSubview(this->contentView);

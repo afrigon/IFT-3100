@@ -25,13 +25,13 @@ void ofApp::setup() {
     light.setPosition(0, 0, 500);
 
     this->scene = DemoScene::generate9();
-    this->scene.print();
     
-    this->window.setRootViewController(new ViewController(&scene));
+    UIKit::UIWindow::shared()->setRootViewController(new ViewController(&scene));
+    UIKit::UIWindow::shared()->mainCamera = &cam;
 }
 
 void ofApp::update() {
-    this->window.layoutSubviews();
+    UIKit::UIWindow::shared()->layoutIfNeeded();
 }
 
 void ofApp::draw() {
@@ -41,7 +41,7 @@ void ofApp::draw() {
     ofEnableDepthTest();
     light.enable();
     ofEnableSeparateSpecularLight();
-    
+
     scene.render();
 
     ofDisableDepthTest();
@@ -56,18 +56,15 @@ void ofApp::draw() {
         lastElapsed = ofGetElapsedTimeMicros();
     }
 
-    if(!takeScreenshotOnNext) {
-        this->window.draw();
-    } else {
-        takeScreenshot();
-    }
+    if (!takeScreenshotOnNext) UIKit::UIWindow::shared()->draw();
+    else takeScreenshot();
 }
 
 void ofApp::keyPressed(int key) {
-    if(key == 19) {
-        takeScreenshotOnNext = true;
-    } else if(key == 'c') {
-        cam.enableMouseInput();
+    switch (key) {
+        // ctrl + s || print screen
+        case 19:
+        case 63248: takeScreenshotOnNext = true; break;
     }
 }
 
@@ -94,7 +91,5 @@ void ofApp::takeScreenshot() {
     ofImage screenshot = ofImage();
     screenshot.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
     ofFileDialogResult result = ofSystemSaveDialog(ofGetTimestampString() + ".png", "Select a location to save the image.");
-    if(result.bSuccess) {
-        screenshot.save(result.filePath);
-    }
+    if (result.bSuccess) screenshot.save(result.filePath);
 }

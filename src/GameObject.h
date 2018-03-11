@@ -28,6 +28,7 @@ class GameObject {
 
  public:
     string name = "Empty Object";
+    ofEvent<GameObject> onaddcomponent;
     
     GameObject();
     ~GameObject();

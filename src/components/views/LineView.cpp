@@ -7,23 +7,29 @@
 
 #include "LineView.h"
 
-Components::Views::Line::Line(Components::Line* line): Base("Line"), line(line) {
+Components::Views::Line::Line(Components::Line* line): Base(line->name), line(line) {
     if (!line) return;
-    this->colorView = Components::Views::Generator::color("Color: ", this->line->getLineColor());
-    this->widthView = Components::Views::Generator::numeric("Width: ", this->line->getLineWidth());
+    this->colorView = Components::Views::Generator::color("Color: ", &this->line->strokeColor);
+    this->widthView = Components::Views::Generator::numeric("Width: ", this->line->getStrokeWidth());
     this->lengthView = Components::Views::Generator::numeric("Length: ", this->line->getLineLength());
 
-    this->colorView->colorView->tag = 0;
-    this->widthView->valueLabel->tag = 1;
+    this->widthView->valueLabel->tag = 0;
     ofAddListener(this->widthView->valueLabel->onclick, this, &Components::Views::Line::click);
     ofAddListener(this->widthView->valueLabel->onrightclick, this, &Components::Views::Line::rightclick);
-    this->lengthView->valueLabel->tag = 2;
+    this->lengthView->valueLabel->tag = 1;
     ofAddListener(this->lengthView->valueLabel->onclick, this, &Components::Views::Line::click);
     ofAddListener(this->lengthView->valueLabel->onrightclick, this, &Components::Views::Line::rightclick);
 
     this->contentView->addSubview(this->colorView);
     this->contentView->addSubview(this->widthView);
     this->contentView->addSubview(this->lengthView);
+}
+
+Components::Views::Line::~Line() {
+    ofRemoveListener(this->widthView->valueLabel->onclick, this, &Components::Views::Line::click);
+    ofRemoveListener(this->widthView->valueLabel->onrightclick, this, &Components::Views::Line::rightclick);
+    ofRemoveListener(this->lengthView->valueLabel->onclick, this, &Components::Views::Line::click);
+    ofRemoveListener(this->lengthView->valueLabel->onrightclick, this, &Components::Views::Line::rightclick);
 }
 
 void Components::Views::Line::layoutSubviews() {
@@ -41,39 +47,23 @@ void Components::Views::Line::layoutSubviews() {
 
 void Components::Views::Line::setText(int tag) {
     switch(tag) {
-        case 0: break;
-        case 1: this->widthView->setValue(this->line->getLineWidth()); break;
-        case 2: this->lengthView->setValue(this->line->getLineLength()); break;
-        default: break;
+        case 0: this->widthView->setValue(this->line->getStrokeWidth()); break;
+        case 1: this->lengthView->setValue(this->line->getLineLength()); break;
     }
 }
 
 void Components::Views::Line::click(UIView & view) {
     switch(view.tag) {
-        case 0: break;
-        case 1:
-            {
-                float x = this->line->getLineWidth();
-                if(x < 9.5) { this->line->setLineWidth(x + 0.5); }
-            }
-            break;
-        case 2: this->line->setLineLength(this->line->getLineLength() + 5); break;
-        default: break;
+        case 0: this->line->setStrokeWidth(min(this->line->getStrokeWidth() + 0.5, 9.5)); break;
+        case 1: this->line->setLineLength(this->line->getLineLength() + 5); break;
     }
     this->setText(view.tag);
 }
 
 void Components::Views::Line::rightclick(UIView & view) {
     switch(view.tag) {
-        case 0: break;
-        case 1:
-            {
-                float x = this->line->getLineWidth();
-                if(x > 0.5) { this->line->setLineWidth(x - 0.5); }
-            }
-            break;
-        case 2: this->line->setLineLength(this->line->getLineLength() - 5); break;
-        default: break;
+        case 0: this->line->setStrokeWidth(max(this->line->getStrokeWidth() - 0.5, 0.5)); break;
+        case 1: this->line->setLineLength(this->line->getLineLength() - 5); break;
     }
     this->setText(view.tag);
 }

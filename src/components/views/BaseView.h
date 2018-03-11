@@ -9,6 +9,7 @@
 #ifndef COMPONENTS_VIEWS_BASEVIEW_H_
 #define COMPONENTS_VIEWS_BASEVIEW_H_
 
+#include <cmath>
 #include <string>
 using std::string;
 

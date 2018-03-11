@@ -7,7 +7,7 @@
 
 #include "TransformView.h"
 
-Components::Views::Transform::Transform(Components::Transform* transform): Base("Transform"), transform(transform) {
+Components::Views::Transform::Transform(Components::Transform* transform): Base(transform->name), transform(transform) {
     if (!transform) return;
     this->views[0] = Components::Views::Generator::vector3("Position: ", this->transform->position);
     this->views[1] = Components::Views::Generator::vector3("Rotation: ", this->transform->rotation);

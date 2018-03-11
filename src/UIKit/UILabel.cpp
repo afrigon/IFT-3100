@@ -7,13 +7,7 @@
 
 #include "UIKit/UILabel.h"
 
-
-UIKit::UILabel::UILabel() {
-    this->loadFont();
-    this->backgroundColor = ofColor(0, 0);
-}
-
-UIKit::UILabel::UILabel(std::string text): text(text) {
+UIKit::UILabel::UILabel(string text): text(text) {
     this->loadFont();
     this->backgroundColor = ofColor(0, 0);
 }
@@ -29,11 +23,7 @@ void UIKit::UILabel::loadFont() {
 
 void UIKit::UILabel::draw(UIKit::CGRect rect) {
     if (this->isHidden) return;
-    ofSetColor(this->backgroundColor);
-    ofDrawRectangle(this->frame.origin.x + rect.origin.x,
-                    this->frame.origin.y + rect.origin.y,
-                    this->frame.size.width,
-                    this->frame.size.height);
+    UIKit::UIView::draw(rect);
     ofSetColor(this->textColor);
     float x = 0;
     switch (this->textAlignment) {
@@ -54,5 +44,5 @@ void UIKit::UILabel::draw(UIKit::CGRect rect) {
 }
 
 double UIKit::UILabel::widthFor(string text) {
-    return this->font.stringWidth(text);
+    return this->font.stringWidth(text) + (this->textAlignment == TextAlignment::center ? 0 : this->padding * 2);
 }

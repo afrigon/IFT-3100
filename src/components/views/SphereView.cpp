@@ -7,11 +7,10 @@
 
 #include "SphereView.h"
 
-Components::Views::Sphere::Sphere(Components::Sphere* sphere): Base("Sphere"), sphere(sphere) {
+Components::Views::Sphere::Sphere(Components::Sphere* sphere): Base(sphere->name), sphere(sphere) {
     if (!sphere) return;
-    this->colorView = Components::Views::Generator::color("Color: ", this->sphere->getColor());
-    this->radiusView = Components::Views::Generator::numeric("Radius: ", this->sphere->getRadius());
-    this->radiusView->tag = 1;
+    this->colorView = Components::Views::Generator::color("Color: ", &this->sphere->color);
+    this->radiusView = Components::Views::Generator::numeric("Radius: ", this->sphere->radius);
     ofAddListener(this->radiusView->valueLabel->onclick, this, &Components::Views::Sphere::click);
     ofAddListener(this->radiusView->valueLabel->onrightclick, this, &Components::Views::Sphere::rightclick);
 
@@ -36,13 +35,11 @@ void Components::Views::Sphere::layoutSubviews() {
 }
 
 void Components::Views::Sphere::click(UIView & view) {
-    float v = this->sphere->getRadius() + 5;
-    this->sphere->setRadius(v);
-    this->radiusView->setValue(v);
+    this->sphere->radius += 5;
+    this->radiusView->setValue(this->sphere->radius);
 }
 
 void Components::Views::Sphere::rightclick(UIView & view) {
-    float v = this->sphere->getRadius() - 5;
-    this->sphere->setRadius(v);
-    this->radiusView->setValue(v);
+    this->sphere->radius -= 5;
+    this->radiusView->setValue(this->sphere->radius);
 }

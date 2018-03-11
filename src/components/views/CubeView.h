@@ -21,7 +21,10 @@ class Cube: public Components::Views::Base {
     
 public:
     Cube(Components::Cube*);
+    ~Cube();
     void layoutSubviews() override;
+    void click(UIView &);
+    void rightclick(UIView &);
 };
 }  // namespace Views
 }  // namespace Components

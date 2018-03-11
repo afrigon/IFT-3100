@@ -8,6 +8,10 @@
 #include "components/Ellipse.h"
 #include "views/EllipseView.h"
 
+Components::Ellipse::Ellipse() {
+    this->name = "Circle / Ellipse";
+}
+
 void Components::Ellipse::render(bool useTexture) {
     ofFill();
     ofSetColor(fillColor);
@@ -29,20 +33,12 @@ void Components::Ellipse::render(bool useTexture) {
     }
 }
 
-ofColor Components::Ellipse::getFillColor() {
-    return this->fillColor;
-}
-
 unsigned int Components::Ellipse::getWidth() {
     return this->width;
 }
 
 unsigned int Components::Ellipse::getHeight() {
     return this->height;
-}
-
-void Components::Ellipse::setFillColor(ofColor color) {
-    this->fillColor = color;
 }
 
 void Components::Ellipse::setWidth(unsigned int width) {
@@ -58,5 +54,5 @@ UIKit::UIView* Components::Ellipse::getUIView() {
 }
 
 int Components::Ellipse::getUIViewHeight() {
-    return 20 + 30 + 30 + 30 + 30 + 30;
+    return 20 + 30 + 30 + 30;
 }

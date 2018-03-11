@@ -22,6 +22,7 @@ class Line: public Components::Views::Base {
     
 public:
     Line(Components::Line*);
+    ~Line();
     void layoutSubviews() override;
     void setText(int tag);
 

@@ -19,7 +19,6 @@ class ofApp: public ofBaseApp {
     bool outputTime;
     bool takeScreenshotOnNext;
     uint64_t lastElapsed;
-    UIKit::UIWindow window;
 
     ofEasyCam cam;
 

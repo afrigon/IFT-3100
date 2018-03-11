@@ -6,6 +6,7 @@
 //
 
 #include "UIKit/UIView.h"
+#include "UIKit/UIWindow.h"
 
 UIKit::CGPoint UIKit::CGPoint::operator+(const UIKit::CGPoint & o) {
     return UIKit::CGPoint(this->x + o.x, this->y + o.y);
@@ -50,7 +51,7 @@ UIKit::CGRect& UIKit::CGRect::operator+=(const UIKit::CGSize & o) {
 }
 
 bool UIKit::CGRect::contains(const UIKit::CGPoint & o) {
-    return (this->origin.x <= o.x && this->origin.x + this->size.width >= o.x) && (this->origin.y <= o.y && this->origin.y + this->size.height >= o.y);
+    return (this->origin.x < o.x && this->origin.x + this->size.width >= o.x) && (this->origin.y < o.y && this->origin.y + this->size.height >= o.y);
 }
 
 UIKit::UIView::~UIView() {
@@ -75,6 +76,7 @@ void UIKit::UIView::addSubview(UIView* view) {
     view->superview = this;
     this->subviews.push_back(view);
     this->didAddSubview(view);
+    UIKit::UIWindow::shared()->setNeedsLayout();
 }
 
 void UIKit::UIView::removeFromSuperView() {
@@ -92,8 +94,13 @@ void UIKit::UIView::removeFromSuperView() {
 
 void UIKit::UIView::draw(CGRect rect) {
     if (this->isHidden) return;
+    ofFill();
     ofSetColor(this->backgroundColor);
-    ofDrawRectangle(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height);
+    if (this->cornerRadius == 0) {
+        ofDrawRectangle(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height);
+    } else {
+        ofDrawRectRounded(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height, this->cornerRadius);
+    }
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->draw(this->frame + rect.origin);
     }
@@ -106,6 +113,7 @@ void UIKit::UIView::layoutSubviews() {
 }
 
 bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentOrigin, UIKit::UIEvent event) {
+    if (event == UIEvent::mouseup) UIKit::UIWindow::shared()->mainCamera->enableMouseInput();
     if (this->isHidden) return false;
     UIKit::CGRect absoluteFrame = UIKit::CGRect(parentOrigin + this->frame.origin, this->frame.size);
     if (!absoluteFrame.contains(clickPosition)) {
@@ -115,7 +123,7 @@ bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentO
         }
         return false;
     }
-    
+
     if (!this->focus) {
         this->focus = true;
         ofNotifyEvent(this->onfocus, *this);
@@ -125,7 +133,10 @@ bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentO
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         if ((*it)->hitTest(clickPosition, absoluteFrame.origin, event)) bubble = true;
     }
-    if (this->subviews.size() != 0 && !bubble) return false;
+    if (event == UIEvent::mousedown && this->isUserInteractionEnabled) UIKit::UIWindow::shared()->mainCamera->disableMouseInput();
+    if (this->subviews.size() != 0 && !bubble) return false; // will block events if it has multiple subviews that don't contains click
+    if (!this->isUserInteractionEnabled) return true;
+    
     switch (event) {
         case UIEvent::click: ofNotifyEvent(this->onclick, *this); break;
         case UIEvent::mousedown: ofNotifyEvent(this->onmousedown, *this); break;
@@ -133,9 +144,7 @@ bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentO
         case UIEvent::rightclick: ofNotifyEvent(this->onrightclick, *this); break;
         default: return false;
     }
-    bubble = this->shouldBubble;
-    this->shouldBubble = true;
-    return bubble;
+    return true;
 }
 
 bool UIKit::UIView::isFocused() {

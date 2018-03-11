@@ -12,6 +12,9 @@
 
 class AbstractComponent {
  public:
+    string name;
+
+    virtual AbstractComponent* createInstance() { return new AbstractComponent(); }
     virtual UIKit::UIView* getUIView() { return nullptr; }
     virtual int getUIViewHeight() { return 0; }
 };

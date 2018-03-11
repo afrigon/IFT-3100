@@ -66,10 +66,10 @@ Scene DemoScene::generate2() {
     t3->rotation = Vector3(60, 60, 45);
 
     Line* l1 = o1->addComponent<Line>(new Line());
-    l1->setLineWidth(5);
+    l1->setStrokeWidth(5);
 
     Line* l2 = o2->addComponent<Line>(new Line());
-    l2->setLineColor(ofColor(200, 0, 0));
+    l2->strokeColor = ofColor(200, 0, 0);
 
     Line* l3 = o3->addComponent<Line>(new Line());
     l3->setLineLength(300);
@@ -98,11 +98,11 @@ Scene DemoScene::generate3() {
     Components::Rectangle* r1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
     r1->setHeight(150);
     r1->setBorderWidth(5);
-    r1->setDrawColor(ofColor(200, 0, 0));
+    r1->strokeColor = ofColor(200, 0, 0);
 
     Components::Rectangle* r2 = o2->addComponent<Components::Rectangle>(new Components::Rectangle());
     r2->setWidth(150);
-    r2->setDrawColor(ofColor(200, 0, 0));
+    r2->strokeColor = ofColor(200, 0, 0);
 
     o3->addComponent<Components::Rectangle>(new Components::Rectangle());
 
@@ -159,12 +159,12 @@ Scene DemoScene::generate5() {
     t3->rotation = Vector3(60, 60, 45);
 
     Cube* c1 = o1->addComponent<Cube>(new Cube());
-    c1->setColor(ofColor(200, 0, 0));
+    c1->color = ofColor(200, 0, 0);
 
     Cube* c2 = o2->addComponent<Cube>(new Cube());
 
     Cube* c3 = o3->addComponent<Cube>(new Cube());
-    c3->setSize(Vector3(200, 300, 100));
+    c3->size = Vector3(200, 300, 100);
 
     o1->addChild(o2);
 
@@ -188,12 +188,12 @@ Scene DemoScene::generate6() {
     t3->rotation = Vector3(60, 60, 45);
 
     Sphere* s1 = o1->addComponent<Sphere>(new Sphere());
-    s1->setColor(ofColor(200, 0, 0));
+    s1->color = ofColor(200, 0, 0);
 
     Sphere* s2 = o2->addComponent<Sphere>(new Sphere());
 
     Sphere* s3 = o3->addComponent<Sphere>(new Sphere());
-    s3->setRadius(150);
+    s3->radius = 150;
 
     o1->addChild(o2);
 
@@ -243,7 +243,7 @@ Scene DemoScene::generate8() {
     t7->scale = Vector3(1, 1, 0.5);
 
     Components::Rectangle* c1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
-    c1->setFillColor(ofColor(200, 0, 0));
+    c1->fillColor = ofColor(200, 0, 0);
 
     PrimitiveShape* c2 = o2->addComponent<PrimitiveShape>(new PrimitiveShape());
     c2->setPointSize(4);
@@ -303,12 +303,12 @@ Scene DemoScene::generate9() {
 
     Components::Cubemap* c01 = o01->addComponent<Components::Cubemap>(new Components::Cubemap());
     o01->name = "Skybox";
-    c01->loadMap("cm1.png");
-    c01->setDistance(2000);
+    c01->loadMap("cm.png");
+    c01->distance = 2000;
 
     Components::Rectangle* c1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
     o1->name = "Rectangle";
-    c1->setFillColor(ofColor(200, 0, 0));
+    c1->fillColor = ofColor(200, 0, 0);
 
     PrimitiveShape* c2 = o2->addComponent<PrimitiveShape>(new PrimitiveShape());
     o2->name = "Primitive";
@@ -319,7 +319,7 @@ Scene DemoScene::generate9() {
     c2->setPoint(3, Vector3(-25, 25, 0));
 
     Line* c3 = o3->addComponent<Line>(new Line());
-    o3->name = "Ligne";
+    o3->name = "Line";
 
     Components::Ellipse* c4 = o4->addComponent<Components::Ellipse>(new Components::Ellipse());
     o4->name = "Ellipse";
@@ -333,10 +333,10 @@ Scene DemoScene::generate9() {
 
     Model* c7 = o7->addComponent<Model>(new Model());
     o7->name = "Charlie";
-    c7->loadModel("charlie.dae");
+    c7->loadModel("charlie.obj");
 
-    Components::Texture* t06 = o6->addComponent<Components::Texture>(new Components::Texture());
-    t06->loadTexture("card.jpg");
+    //Components::Texture* t06 = o6->addComponent<Components::Texture>(new Components::Texture());
+    //t06->loadTexture("card.jpg");
 
     temp.addObject(o01);
     temp.addObject(o1);

@@ -14,20 +14,27 @@
 
 namespace UIKit {
 class UIWindow {
+    static UIWindow* instance;
     CGSize size = UIKit::CGSize(ofGetWidth(), ofGetHeight());
     UIViewController* rootViewController;
     UIKit::CGPoint clickStartPosition;
     int clickThreshold = 3;
+    bool needLayout = true;
     
     void resize(ofResizeEventArgs &);
     void mousedown(ofMouseEventArgs &);
     void mouseup(ofMouseEventArgs &);
 
  public:
+    ofEasyCam* mainCamera;
+    
     UIWindow();
     ~UIWindow();
+    static UIWindow* shared();
     void draw();
     void setRootViewController(UIViewController*);
+    void layoutIfNeeded();
+    void setNeedsLayout();
     void layoutSubviews();
 };
 }  // namespace UIKit

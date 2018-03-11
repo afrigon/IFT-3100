@@ -8,6 +8,10 @@
 #include "components/Model.h"
 #include "views/ModelView.h"
 
+Components::Model::Model() {
+    this->name = "Mesh 3D";
+}
+
 void Components::Model::render(bool useTexture) {
     if (model.hasAnimations()) model.update();
     if(model.hasMeshes()) {
@@ -21,34 +25,31 @@ void Components::Model::render(bool useTexture) {
     }
 }
 
-void Components::Model::loadModel(std::string path) {
-    if(model.loadModel(path)) {
-        this->path = path;
+bool Components::Model::loadModel(std::string path) {
+    if (!model.loadModel(path)) { this->path = ""; return false; }
+    this->path = path;
 
-        if(model.hasAnimations()) {
-            model.playAllAnimations();
-            model.setLoopStateForAllAnimations(ofLoopType::OF_LOOP_NORMAL);
-        }
-        
-        verticesCount = 0;
-        unsigned int modelMeshCount = model.getMeshCount();
-        for(unsigned int i = 0; i < modelMeshCount; ++i) {
-            ofMesh m = model.getMesh(i);
-            verticesCount += m.getNumVertices();
-        }
+    if (model.hasAnimations()) {
+        model.playAllAnimations();
+        model.setLoopStateForAllAnimations(ofLoopType::OF_LOOP_NORMAL);
     }
+    
+    verticesCount = 0;
+    unsigned int modelMeshCount = model.getMeshCount();
+    for (int i = 0; i < modelMeshCount; ++i) {
+        ofMesh m = model.getMesh(i);
+        verticesCount += m.getNumVertices();
+    }
+    return true;
 }
 
-std::string Components::Model::getPath() {
-    return path;
+string Components::Model::getPath() {
+    return this->path;
 }
 
-size_t Components::Model::getVertexCount() {
-    return verticesCount;
-}
-
-unsigned int Components::Model::getAnimationCount() {
-    return model.getAnimationCount();
+int Components::Model::getVertexCount() {
+    if (this->path == "") return 0;
+    return static_cast<int>(verticesCount);
 }
 
 UIKit::UIView* Components::Model::getUIView() {
@@ -56,5 +57,5 @@ UIKit::UIView* Components::Model::getUIView() {
 }
 
 int Components::Model::getUIViewHeight() {
-    return 20 + 30;
+    return 20 + 30 + 30;
 }

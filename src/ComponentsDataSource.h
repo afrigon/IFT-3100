@@ -14,8 +14,8 @@
 
 class ComponentsDataSource: public UIKit::UITableViewDataSource {
     int numberOfRows() override;
-    UIKit::UITableViewCell* cellForRow(int index) override;
-    int heightForRow(int index) override;
+    UIKit::UITableViewCell* cellForRow(int) override;
+    int heightForRow(int) override;
     
  public:
     GameObject* go;

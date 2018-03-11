@@ -8,26 +8,14 @@
 #include "components/Sphere.h"
 #include "views/SphereView.h"
 
+Components::Sphere::Sphere() {
+    this->name = "Ball";
+}
+
 void Components::Sphere::render(bool useTexture) {
     ofFill();
     ofSetColor(this->color);
     ofDrawSphere(this->radius);
-}
-
-ofColor Components::Sphere::getColor() {
-    return this->color;
-}
-
-float Components::Sphere::getRadius() {
-    return this->radius;
-}
-
-void Components::Sphere::setColor(ofColor color) {
-    this->color = color;
-}
-
-void Components::Sphere::setRadius(float radius) {
-    this->radius = radius;
 }
 
 UIKit::UIView* Components::Sphere::getUIView() {

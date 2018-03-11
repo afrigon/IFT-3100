@@ -17,11 +17,14 @@ namespace Components {
 class Model: public RenderableComponent {
     ofxAssimpModelLoader model;
     std::string path;
+    size_t verticesCount;
 
  public:
     void render(bool useTexture) override;
     void loadModel(std::string path);
     std::string getPath();
+    size_t getVertexCount();
+    unsigned int getAnimationCount();
     
     UIKit::UIView* getUIView() override;
     int getUIViewHeight() override;

@@ -6,6 +6,7 @@ namespace Components
 {
     class Texture : public AbstractComponent {
         ofTexture tex;
+        bool isLoaded = false;
 
         public:
         Texture();

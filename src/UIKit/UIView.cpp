@@ -50,7 +50,7 @@ UIKit::CGRect& UIKit::CGRect::operator+=(const UIKit::CGSize & o) {
 }
 
 bool UIKit::CGRect::contains(const UIKit::CGPoint & o) {
-    return (this->origin.x <= o.x && this->origin.x + this->size.width >= o.x) && (this->origin.y <= o.y && this->origin.y + this->size.height >= o.y);
+    return (this->origin.x < o.x && this->origin.x + this->size.width >= o.x) && (this->origin.y < o.y && this->origin.y + this->size.height >= o.y);
 }
 
 UIKit::UIView::~UIView() {
@@ -93,7 +93,11 @@ void UIKit::UIView::removeFromSuperView() {
 void UIKit::UIView::draw(CGRect rect) {
     if (this->isHidden) return;
     ofSetColor(this->backgroundColor);
-    ofDrawRectRounded(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height, this->cornerRadius);
+    if (this->cornerRadius == 0) {
+        ofDrawRectangle(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height);
+    } else {
+        ofDrawRectRounded(this->frame.origin.x + rect.origin.x, this->frame.origin.y + rect.origin.y, this->frame.size.width, this->frame.size.height, this->cornerRadius);
+    }
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->draw(this->frame + rect.origin);
     }
@@ -123,7 +127,9 @@ bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentO
     
     bool bubble = false;
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
-        if ((*it)->hitTest(clickPosition, absoluteFrame.origin, event)) bubble = true;
+        if ((*it)->hitTest(clickPosition, absoluteFrame.origin, event)) {
+            bubble = true;
+        }
     }
     if (this->subviews.size() != 0 && !bubble) return false;
     switch (event) {
@@ -135,7 +141,7 @@ bool UIKit::UIView::hitTest(UIKit::CGPoint clickPosition, UIKit::CGPoint parentO
     }
     bubble = this->shouldBubble;
     this->shouldBubble = true;
-    return bubble;
+    return this->shouldBubble;
 }
 
 bool UIKit::UIView::isFocused() {

@@ -12,10 +12,11 @@
 
 namespace Components {
 class Sphere: public RenderableComponent {
-    ofColor color;
     float radius = 50;
 
  public:
+    ofColor color;
+    
     void render(bool useTexture) override;
     ofColor getColor();
     float getRadius();

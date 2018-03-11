@@ -12,17 +12,16 @@
 
 namespace Components {
 class Line: public RenderableComponent {
-    ofColor lineColor;
-    float lineWidth = 2;
+    float strokeWidth = 2;
     float lineLength = 100;
 
  public:
+    ofColor strokeColor;
+    
     void render(bool useTexture) override;
-    ofColor getLineColor();
-    float getLineWidth();
+    float getStrokeWidth();
     float getLineLength();
-    void setLineColor(ofColor color);
-    void setLineWidth(float width);
+    void setStrokeWidth(float width);
     void setLineLength(float length);
     
     UIKit::UIView* getUIView() override;

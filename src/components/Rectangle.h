@@ -12,21 +12,18 @@
 
 namespace Components {
 class Rectangle: public RenderableComponent {
-    ofColor fillColor;
-    ofColor drawColor;
     float borderWidth = 2;
     float width = 100;
     float height = 100;
 
  public:
+    ofColor fillColor;
+    ofColor strokeColor;
+    
     void render(bool useTexture) override;
-    ofColor getFillColor();
-    ofColor getDrawColor();
     float getBorderWidth();
     float getWidth();
     float getHeight();
-    void setFillColor(ofColor color);
-    void setDrawColor(ofColor color);
     void setBorderWidth(float width);
     void setWidth(float width);
     void setHeight(float height);

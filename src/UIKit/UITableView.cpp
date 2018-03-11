@@ -81,7 +81,7 @@ void UIKit::UITableView::reloadData() {
         ofAddListener(cell->onmousedown, this, &UIKit::UITableView::didSelectCell);
         cell->frame = UIKit::CGRect(UIKit::CGPoint(0, x),
                                     UIKit::CGSize(this->frame.size.width, this->dataSource->heightForRow(i)));
-        x += this->dataSource->heightForRow(i);
+        x += this->dataSource->heightForRow(i) + this->cellSpacing;
         this->addSubview(cell);
     }
 }
@@ -104,6 +104,6 @@ void UIKit::UITableView::draw(UIKit::CGRect rect) {
                     this->frame.size.height);
     int i = 0;
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it, ++i) {
-        (*it)->draw(this->frame + rect.origin + UIKit::CGPoint(0, i * this->cellSpacing));
+        (*it)->draw(this->frame + rect.origin);
     }
 }

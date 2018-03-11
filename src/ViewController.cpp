@@ -13,6 +13,7 @@ void ViewController::viewDidLoad() {
     this->hierarchyHeader->addSubview(this->hierarchyHeaderLabel);
     this->hierarchyHeader->addSubview(this->hierarchyHeaderButton);
     this->hierarchyHeader->backgroundColor = ofColor(220);
+    this->hierarchyHeaderLabel->padding = 10;
     
     this->hierarchyPanel->setDataSource(this);
     this->hierarchyPanel->setDelegate(this);
@@ -24,6 +25,7 @@ void ViewController::viewDidLoad() {
     this->view->addSubview(this->componentHeader);
     this->componentHeader->addSubview(this->componentHeaderLabel);
     this->componentHeader->backgroundColor = ofColor(220);
+    this->componentHeaderLabel->padding = 10;
     
     this->componentPanel->setDataSource(this->componentsDataSource);
     this->componentPanel->cellSpacing = 10;

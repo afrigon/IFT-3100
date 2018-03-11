@@ -9,7 +9,7 @@
 
 Components::Views::Sphere::Sphere(Components::Sphere* sphere): Base("Sphere"), sphere(sphere) {
     if (!sphere) return;
-    this->colorView = Components::Views::Generator::color("Color: ", this->sphere->getColor());
+    this->colorView = Components::Views::Generator::color("Color: ", &this->sphere->color);
     this->radiusView = Components::Views::Generator::numeric("Radius: ", this->sphere->getRadius());
     this->radiusView->tag = 1;
     ofAddListener(this->radiusView->valueLabel->onclick, this, &Components::Views::Sphere::click);

@@ -28,7 +28,7 @@ class UILabel: public UIView {
     std::string text = "Label";
     ofColor textColor = ofColor(0, 0, 0);
     TextAlignment textAlignment = TextAlignment::left;
-    double padding = 10;
+    double padding = 0;
 
     UILabel();
     explicit UILabel(std::string);

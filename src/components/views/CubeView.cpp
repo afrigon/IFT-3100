@@ -9,7 +9,7 @@
 
 Components::Views::Cube::Cube(Components::Cube* cube): Base("Cube"), cube(cube) {
     if (!cube) return;
-    this->colorView = Components::Views::Generator::color("Color: ", this->cube->getColor());
+    this->colorView = Components::Views::Generator::color("Color: ", &this->cube->color);
     this->sizeView = Components::Views::Generator::vector3("Size: ", this->cube->getSize());
     this->contentView->addSubview(this->colorView);
     this->contentView->addSubview(this->sizeView);

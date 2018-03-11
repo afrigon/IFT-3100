@@ -10,30 +10,22 @@
 
 void Components::Line::render(bool useTexture) {
     ofFill();
-    ofSetColor(this->lineColor);
-    ofSetLineWidth(this->lineWidth);
+    ofSetColor(this->strokeColor);
+    ofSetLineWidth(this->strokeWidth);
     float half = static_cast<float>(this->lineLength) / 2.0f;
     ofDrawLine(-half, 0, half, 0);
 }
 
-ofColor Components::Line::getLineColor() {
-    return this->lineColor;
-}
-
-float Components::Line::getLineWidth() {
-    return this->lineWidth;
+float Components::Line::getStrokeWidth() {
+    return this->strokeWidth;
 }
 
 float Components::Line::getLineLength() {
     return this->lineLength;
 }
 
-void Components::Line::setLineColor(ofColor color) {
-    this->lineColor = color;
-}
-
-void Components::Line::setLineWidth(float width) {
-    this->lineWidth = width;
+void Components::Line::setStrokeWidth(float width) {
+    this->strokeWidth = width;
 }
 
 void Components::Line::setLineLength(float length) {

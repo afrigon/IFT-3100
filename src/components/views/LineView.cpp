@@ -9,8 +9,8 @@
 
 Components::Views::Line::Line(Components::Line* line): Base("Line"), line(line) {
     if (!line) return;
-    this->colorView = Components::Views::Generator::color("Color: ", this->line->getLineColor());
-    this->widthView = Components::Views::Generator::numeric("Width: ", this->line->getLineWidth());
+    this->colorView = Components::Views::Generator::color("Color: ", &this->line->strokeColor);
+    this->widthView = Components::Views::Generator::numeric("Width: ", this->line->getStrokeWidth());
     this->lengthView = Components::Views::Generator::numeric("Length: ", this->line->getLineLength());
 
     this->colorView->colorView->tag = 0;
@@ -42,7 +42,7 @@ void Components::Views::Line::layoutSubviews() {
 void Components::Views::Line::setText(int tag) {
     switch(tag) {
         case 0: break;
-        case 1: this->widthView->setValue(this->line->getLineWidth()); break;
+        case 1: this->widthView->setValue(this->line->getStrokeWidth()); break;
         case 2: this->lengthView->setValue(this->line->getLineLength()); break;
         default: break;
     }
@@ -53,8 +53,8 @@ void Components::Views::Line::click(UIView & view) {
         case 0: break;
         case 1:
             {
-                float x = this->line->getLineWidth();
-                if(x < 9.5) { this->line->setLineWidth(x + 0.5); }
+                float x = this->line->getStrokeWidth();
+                if(x < 9.5) { this->line->setStrokeWidth(x + 0.5); }
             }
             break;
         case 2: this->line->setLineLength(this->line->getLineLength() + 5); break;
@@ -68,8 +68,8 @@ void Components::Views::Line::rightclick(UIView & view) {
         case 0: break;
         case 1:
             {
-                float x = this->line->getLineWidth();
-                if(x > 0.5) { this->line->setLineWidth(x - 0.5); }
+                float x = this->line->getStrokeWidth();
+                if(x > 0.5) { this->line->setStrokeWidth(x - 0.5); }
             }
             break;
         case 2: this->line->setLineLength(this->line->getLineLength() - 5); break;

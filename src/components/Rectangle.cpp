@@ -9,7 +9,6 @@
 #include "views/RectangleView.h"
 
 void Components::Rectangle::render(bool useTexture) {
-
     ofFill();
     ofSetColor(this->fillColor);
     if(useTexture) {
@@ -32,18 +31,10 @@ void Components::Rectangle::render(bool useTexture) {
     }
 
     ofNoFill();
-    ofSetColor(this->drawColor);
+    ofSetColor(this->strokeColor);
     ofSetLineWidth(this->borderWidth);
     //ofDrawRectRounded(-width / 2, -height / 2, 0, this->width, this->height, 1);
     ofDrawRectangle(-width / 2, -height / 2, 0, width, height);
-}
-
-ofColor Components::Rectangle::getFillColor() {
-    return this->fillColor;
-}
-
-ofColor Components::Rectangle::getDrawColor() {
-    return this->drawColor;
 }
 
 float Components::Rectangle::getBorderWidth() {
@@ -56,14 +47,6 @@ float Components::Rectangle::getWidth() {
 
 float Components::Rectangle::getHeight() {
     return this->height;
-}
-
-void Components::Rectangle::setFillColor(ofColor color) {
-    this->fillColor = color;
-}
-
-void Components::Rectangle::setDrawColor(ofColor color) {
-    this->drawColor = color;
 }
 
 void Components::Rectangle::setBorderWidth(float width) {

@@ -54,5 +54,5 @@ void UIKit::UILabel::draw(UIKit::CGRect rect) {
 }
 
 double UIKit::UILabel::widthFor(string text) {
-    return this->font.stringWidth(text);
+    return this->font.stringWidth(text) + (this->textAlignment == TextAlignment::center ? 0 : this->padding * 2);
 }

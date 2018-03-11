@@ -9,8 +9,8 @@
 
 Components::Views::Rectangle::Rectangle(Components::Rectangle* rectangle): Base("Rectangle"), rectangle(rectangle) {
     if (!rectangle) return;
-    this->fillColorView = Components::Views::Generator::color("Fill: ", this->rectangle->getFillColor());
-    this->strokeColorView = Components::Views::Generator::color("Stroke: ", this->rectangle->getDrawColor());
+    this->fillColorView = Components::Views::Generator::color("Fill: ", &this->rectangle->fillColor);
+    this->strokeColorView = Components::Views::Generator::color("Stroke: ", &this->rectangle->strokeColor);
     this->borderWidthView = Components::Views::Generator::numeric("Border: ", this->rectangle->getBorderWidth());
     this->widthView = Components::Views::Generator::numeric("Width: ", this->rectangle->getWidth());
     this->heightView = Components::Views::Generator::numeric("Height: ", this->rectangle->getHeight());

@@ -9,7 +9,7 @@
 
 Components::Views::Ellipse::Ellipse(Components::Ellipse* ellipse): Base("Ellipse"), ellipse(ellipse) {
     if (!ellipse) return;
-    this->fillColorView = Components::Views::Generator::color("Fill: ", this->ellipse->getFillColor());
+    this->fillColorView = Components::Views::Generator::color("Fill: ", &this->ellipse->fillColor);
     this->widthView = Components::Views::Generator::numeric("Width: ", this->ellipse->getWidth());
     this->heightView = Components::Views::Generator::numeric("Height: ", this->ellipse->getHeight());
 

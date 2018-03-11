@@ -33,12 +33,17 @@ struct Vector3View: public LabeledView {
     void setValue(Vector3);
 };
 
-enum class ColorMode { RGB, HSL };
+enum class ColorMode { RGB, HSB };
 
 class ColorView: public LabeledView {
     bool showAlpha = true;
-    ofColor color = ofColor(255);
+    ofColor* color;
     ColorMode mode = ColorMode::RGB;
+    
+    void editColor(int, int);
+    void switchMode(UIView&);
+    void click(UIView&);
+    void rightclick(UIView&);
     
  public:
     const double spacing = 40;
@@ -47,10 +52,9 @@ class ColorView: public LabeledView {
     UIKit::UILabel* modeLabel = new UIKit::UILabel("RGB");
     UIKit::UIView* colorView = new UIKit::UIView();
     
-    ColorView();
+    ColorView(ofColor*);
     ~ColorView();
-    void setValue(ofColor);
-    void switchMode(UIView&);
+    void setValue();
     void setShowAlpha(bool);
 };
 
@@ -63,7 +67,7 @@ struct NumericView: public LabeledView {
 
 struct Generator {
     static Vector3View* vector3(string, Vector3);
-    static ColorView* color(string, ofColor);
+    static ColorView* color(string, ofColor*);
     static NumericView* numeric(string, double);
     static string numericToString(double);
     static string numericToIntString(double);

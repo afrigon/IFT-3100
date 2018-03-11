@@ -14,16 +14,8 @@ void Components::Sphere::render(bool useTexture) {
     ofDrawSphere(this->radius);
 }
 
-ofColor Components::Sphere::getColor() {
-    return this->color;
-}
-
 float Components::Sphere::getRadius() {
     return this->radius;
-}
-
-void Components::Sphere::setColor(ofColor color) {
-    this->color = color;
 }
 
 void Components::Sphere::setRadius(float radius) {

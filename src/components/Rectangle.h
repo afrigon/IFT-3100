@@ -20,6 +20,8 @@ class Rectangle: public RenderableComponent {
     ofColor fillColor;
     ofColor strokeColor;
     
+    Rectangle();
+    Rectangle* createInstance() override { return new Rectangle(); }
     void render(bool useTexture) override;
     float getBorderWidth();
     float getWidth();

@@ -18,6 +18,8 @@ class Line: public RenderableComponent {
  public:
     ofColor strokeColor;
     
+    Line();
+    Line* createInstance() override { return new Line(); }
     void render(bool useTexture) override;
     float getStrokeWidth();
     float getLineLength();

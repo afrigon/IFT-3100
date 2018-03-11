@@ -21,7 +21,7 @@ void Components::Views::LabeledView::setName(string name) {
 
 Components::Views::Vector3View::Vector3View() {
     for (int i = 0; i < 3; ++i) {
-        this->valueLabels[i] = new UIKit::UILabel("0");
+        this->valueLabels[i] = new UIKit::UIButton("0");
         this->valueLabels[i]->textColor = ofColor(20);
         this->valueLabels[i]->setFontSize(8);
         this->valueLabels[i]->textAlignment = UIKit::TextAlignment::center;
@@ -40,7 +40,7 @@ void Components::Views::Vector3View::setValue(Vector3 v) {
 
 Components::Views::ColorView::ColorView(ofColor* color): color(color) {
     for (int i = 0; i < 4; ++i) {
-        this->valueLabels[i] = new UIKit::UILabel("255");
+        this->valueLabels[i] = new UIKit::UIButton("255");
         this->valueLabels[i]->textColor = ofColor(20);
         this->valueLabels[i]->setFontSize(8);
         this->valueLabels[i]->textAlignment = UIKit::TextAlignment::center;
@@ -160,6 +160,39 @@ void Components::Views::NumericView::setValue(double value) {
     this->valueLabel->text = Components::Views::Generator::numericToString(value);
 }
 
+Components::Views::FilePickerView::FilePickerView() {
+    this->pathLabel->textColor = ofColor(20);
+    this->pathLabel->setFontSize(6);
+    this->addSubview(this->pathLabel);
+    
+    this->button->textColor = ofColor(255);
+    this->button->backgroundColor = ofColor(100);
+    this->button->cornerRadius = 5;
+    this->button->setFontSize(8);
+    this->button->textAlignment = UIKit::TextAlignment::center;
+    this->addSubview(this->button);
+    ofAddListener(this->button->onclick, this, &Components::Views::FilePickerView::buttonclick);
+}
+
+Components::Views::FilePickerView::~FilePickerView() {
+    ofRemoveListener(this->button->onclick, this, &Components::Views::FilePickerView::buttonclick);
+}
+
+void Components::Views::FilePickerView::setValue(string path) {
+    this->button->frame = UIKit::CGRect(50, 5, 50, this->height - 10);
+    this->pathLabel->frame = UIKit::CGRect(60 + 50, 0, 300-60-50, this->height);
+    this->pathLabel->text = path;
+}
+
+void Components::Views::FilePickerView::buttonclick(UIView & view) {
+    if (!this->delegate) return;
+    ofFileDialogResult result = ofSystemLoadDialog();
+    if (result.bSuccess) {
+        this->setValue(result.filePath);
+        this->delegate->didPickFile(result.filePath);
+    }
+}
+
 Components::Views::Vector3View* Components::Views::Generator::vector3(string name, Vector3 value) {
     Components::Views::Vector3View* view = new Components::Views::Vector3View();
     view->setName(name);
@@ -175,6 +208,13 @@ Components::Views::ColorView* Components::Views::Generator::color(string name, o
 
 Components::Views::NumericView* Components::Views::Generator::numeric(string name, double value) {
     Components::Views::NumericView* view = new Components::Views::NumericView();
+    view->setName(name);
+    view->setValue(value);
+    return view;
+}
+
+Components::Views::FilePickerView* Components::Views::Generator::file(string name, string value) {
+    Components::Views::FilePickerView* view = new Components::Views::FilePickerView();
     view->setName(name);
     view->setValue(value);
     return view;

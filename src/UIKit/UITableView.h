@@ -52,13 +52,13 @@ class UITableView: public UIView {
 
     void didSelectCell(UIView &);
     void onBlur(UIView &);
-    void unselectAll();
 
  public:
     double cellSpacing = 0;
     
     UITableView();
     ~UITableView();
+    void unselectAll();
     virtual void reloadData();
     void setDataSource(UITableViewDataSource*);
     void setDelegate(UITableViewDelegate*);

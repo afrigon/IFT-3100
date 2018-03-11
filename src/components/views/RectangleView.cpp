@@ -7,7 +7,7 @@
 
 #include "RectangleView.h"
 
-Components::Views::Rectangle::Rectangle(Components::Rectangle* rectangle): Base("Rectangle"), rectangle(rectangle) {
+Components::Views::Rectangle::Rectangle(Components::Rectangle* rectangle): Base(rectangle->name), rectangle(rectangle) {
     if (!rectangle) return;
     this->fillColorView = Components::Views::Generator::color("Fill: ", &this->rectangle->fillColor);
     this->strokeColorView = Components::Views::Generator::color("Stroke: ", &this->rectangle->strokeColor);
@@ -15,15 +15,13 @@ Components::Views::Rectangle::Rectangle(Components::Rectangle* rectangle): Base(
     this->widthView = Components::Views::Generator::numeric("Width: ", this->rectangle->getWidth());
     this->heightView = Components::Views::Generator::numeric("Height: ", this->rectangle->getHeight());
 
-    this->fillColorView->colorView->tag = 0;
-    this->strokeColorView->colorView->tag = 1;
-    this->borderWidthView->valueLabel->tag = 2;
+    this->borderWidthView->valueLabel->tag = 0;
     ofAddListener(this->borderWidthView->valueLabel->onclick, this, &Components::Views::Rectangle::click);
     ofAddListener(this->borderWidthView->valueLabel->onrightclick, this, &Components::Views::Rectangle::rightclick);
-    this->widthView->valueLabel->tag = 3;
+    this->widthView->valueLabel->tag = 1;
     ofAddListener(this->widthView->valueLabel->onclick, this, &Components::Views::Rectangle::click);
     ofAddListener(this->widthView->valueLabel->onrightclick, this, &Components::Views::Rectangle::rightclick);
-    this->heightView->valueLabel->tag = 4;
+    this->heightView->valueLabel->tag = 2;
     ofAddListener(this->heightView->valueLabel->onclick, this, &Components::Views::Rectangle::click);
     ofAddListener(this->heightView->valueLabel->onrightclick, this, &Components::Views::Rectangle::rightclick);
 
@@ -34,6 +32,14 @@ Components::Views::Rectangle::Rectangle(Components::Rectangle* rectangle): Base(
     this->contentView->addSubview(this->heightView);
 }
 
+Components::Views::Rectangle::~Rectangle() {
+    ofRemoveListener(this->borderWidthView->valueLabel->onclick, this, &Components::Views::Rectangle::click);
+    ofRemoveListener(this->borderWidthView->valueLabel->onrightclick, this, &Components::Views::Rectangle::rightclick);
+    ofRemoveListener(this->widthView->valueLabel->onclick, this, &Components::Views::Rectangle::click);
+    ofRemoveListener(this->widthView->valueLabel->onrightclick, this, &Components::Views::Rectangle::rightclick);
+    ofRemoveListener(this->heightView->valueLabel->onclick, this, &Components::Views::Rectangle::click);
+    ofRemoveListener(this->heightView->valueLabel->onrightclick, this, &Components::Views::Rectangle::rightclick);
+}
 
 void Components::Views::Rectangle::layoutSubviews() {
     int x = 0;
@@ -54,44 +60,26 @@ void Components::Views::Rectangle::layoutSubviews() {
 
 void Components::Views::Rectangle::setText(int tag) {
     switch(tag) {
-        case 0: break;
-        case 1: break;
-        case 2: this->borderWidthView->setValue(this->rectangle->getBorderWidth()); break;
-        case 3: this->widthView->setValue(this->rectangle->getWidth()); break;
-        case 4: this->heightView->setValue(this->rectangle->getHeight()); break;
-        default: break;
+        case 0: this->borderWidthView->setValue(this->rectangle->getBorderWidth()); break;
+        case 1: this->widthView->setValue(this->rectangle->getWidth()); break;
+        case 2: this->heightView->setValue(this->rectangle->getHeight()); break;
     }
 }
 
 void Components::Views::Rectangle::click(UIView & view) {
     switch(view.tag) {
-        case 0: break;
-        case 1: break;
-        case 2:
-            {
-                float x = this->rectangle->getBorderWidth();
-                if(x < 9.5) { this->rectangle->setBorderWidth(x + 0.5); }
-            }
-            break;
-        case 3: this->rectangle->setWidth(this->rectangle->getWidth() + 5); break;
-        case 4: this->rectangle->setHeight(this->rectangle->getHeight() + 5); break;
-        default: break;
+        case 0: this->rectangle->setBorderWidth(min((this->rectangle->getBorderWidth() + 0.5), 9.5)); break;
+        case 1: this->rectangle->setWidth(this->rectangle->getWidth() + 5); break;
+        case 2: this->rectangle->setHeight(this->rectangle->getHeight() + 5); break;
     }
     setText(view.tag);
 }
 
 void Components::Views::Rectangle::rightclick(UIView & view) {
     switch(view.tag) {
-        case 0: break;
-        case 1: break;
-        case 2:
-            {
-                float x = this->rectangle->getBorderWidth();
-                if(x < 9.5) { this->rectangle->setBorderWidth(x - 0.5); }
-            }
-            break;
-        case 3: this->rectangle->setWidth(this->rectangle->getWidth() - 5); break;
-        case 4: this->rectangle->setHeight(this->rectangle->getHeight() - 5); break;
+        case 0: this->rectangle->setBorderWidth(max((this->rectangle->getBorderWidth() - 0.5), 0.5)); break;
+        case 1: this->rectangle->setWidth(this->rectangle->getWidth() - 5); break;
+        case 2: this->rectangle->setHeight(this->rectangle->getHeight() - 5); break;
         default: break;
     }
     setText(view.tag);

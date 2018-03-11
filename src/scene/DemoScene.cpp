@@ -164,7 +164,7 @@ Scene DemoScene::generate5() {
     Cube* c2 = o2->addComponent<Cube>(new Cube());
 
     Cube* c3 = o3->addComponent<Cube>(new Cube());
-    c3->setSize(Vector3(200, 300, 100));
+    c3->size = Vector3(200, 300, 100);
 
     o1->addChild(o2);
 
@@ -303,8 +303,8 @@ Scene DemoScene::generate9() {
 
     Components::Cubemap* c01 = o01->addComponent<Components::Cubemap>(new Components::Cubemap());
     o01->name = "Skybox";
-    c01->loadMap("cm1.png");
-    c01->setDistance(2000);
+    c01->loadMap("cm.png");
+    c01->distance = 2000;
 
     Components::Rectangle* c1 = o1->addComponent<Components::Rectangle>(new Components::Rectangle());
     o1->name = "Rectangle";

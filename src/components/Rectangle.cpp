@@ -8,6 +8,10 @@
 #include "components/Rectangle.h"
 #include "views/RectangleView.h"
 
+Components::Rectangle::Rectangle() {
+    this->name = "Square / Rectangle";
+}
+
 void Components::Rectangle::render(bool useTexture) {
     ofFill();
     ofSetColor(this->fillColor);

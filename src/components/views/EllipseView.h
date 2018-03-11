@@ -22,6 +22,7 @@ namespace Components {
             
         public:
             Ellipse(Components::Ellipse*);
+            ~Ellipse();
             void layoutSubviews() override;
             void setText(int tag);
 

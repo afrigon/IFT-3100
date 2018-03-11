@@ -14,14 +14,14 @@
 
 namespace Components {
     namespace Views {
-        class Model: public Components::Views::Base {
+        class Model: public Components::Views::Base, public Components::Views::FilePickerDelegate {
             Components::Model* model = nullptr;
-    
+            Components::Views::FilePickerView* filePicker;
+            
         public:
             Model(Components::Model*);
             void layoutSubviews() override;
-
-            void click(UIView & view);
+            void didPickFile(string) override;
         };
     }  // namespace Views
 }  // namespace Components

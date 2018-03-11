@@ -8,6 +8,10 @@
 #include "components/Sphere.h"
 #include "views/SphereView.h"
 
+Components::Sphere::Sphere() {
+    this->name = "Ball";
+}
+
 void Components::Sphere::render(bool useTexture) {
     ofFill();
     ofSetColor(this->color);

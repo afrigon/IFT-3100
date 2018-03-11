@@ -19,7 +19,7 @@ namespace Components {
 namespace Views {
 struct LabeledView: public UIKit::UIView {
     const double height = 30;
-    UIKit::UILabel* label = new UIKit::UILabel();
+    UIKit::UIButton* label = new UIKit::UIButton();
     
     LabeledView();
     void setName(string name);
@@ -27,7 +27,7 @@ struct LabeledView: public UIKit::UIView {
 
 struct Vector3View: public LabeledView {
     const double spacing = 50;
-    UIKit::UILabel* valueLabels [3];
+    UIKit::UIButton* valueLabels [3];
     
     Vector3View();
     void setValue(Vector3);
@@ -48,8 +48,8 @@ class ColorView: public LabeledView {
  public:
     const double spacing = 40;
     
-    UIKit::UILabel* valueLabels [4];
-    UIKit::UILabel* modeLabel = new UIKit::UILabel("RGB");
+    UIKit::UIButton* valueLabels [4];
+    UIKit::UIButton* modeLabel = new UIKit::UIButton("RGB");
     UIKit::UIView* colorView = new UIKit::UIView();
     
     ColorView(ofColor*);
@@ -65,10 +65,26 @@ struct NumericView: public LabeledView {
     void setValue(double);
 };
 
+struct FilePickerDelegate {
+    virtual void didPickFile(string path) {}
+};
+
+struct FilePickerView: public LabeledView {
+    FilePickerDelegate* delegate = nullptr;
+    UIKit::UILabel* pathLabel = new UIKit::UILabel("");
+    UIKit::UIButton* button = new UIKit::UIButton("open");
+    
+    FilePickerView();
+    ~FilePickerView();
+    void setValue(string);
+    void buttonclick(UIView &);
+};
+
 struct Generator {
     static Vector3View* vector3(string, Vector3);
     static ColorView* color(string, ofColor*);
     static NumericView* numeric(string, double);
+    static FilePickerView* file(string, string);
     static string numericToString(double);
     static string numericToIntString(double);
 };

@@ -98,11 +98,7 @@ void UIKit::UITableView::setDelegate(UITableViewDelegate* delegate) {
 
 void UIKit::UITableView::draw(UIKit::CGRect rect) {
     if (this->isHidden) return;
-    ofSetColor(this->backgroundColor);
-    ofDrawRectangle(this->frame.origin.x + rect.origin.x,
-                    this->frame.origin.y + rect.origin.y,
-                    this->frame.size.width,
-                    this->frame.size.height);
+    UIKit::UIView::draw(rect);
     int i = 0;
     for (list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it, ++i) {
         (*it)->draw(this->frame + rect.origin);

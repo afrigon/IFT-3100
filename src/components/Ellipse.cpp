@@ -8,6 +8,10 @@
 #include "components/Ellipse.h"
 #include "views/EllipseView.h"
 
+Components::Ellipse::Ellipse() {
+    this->name = "Circle / Ellipse";
+}
+
 void Components::Ellipse::render(bool useTexture) {
     ofFill();
     ofSetColor(fillColor);

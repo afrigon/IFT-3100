@@ -7,18 +7,24 @@
 
 #include "ModelView.h"
 
-Components::Views::Model::Model(Components::Model* Model): Base("Model"), model(model) {
+Components::Views::Model::Model(Components::Model* model): Base(model->name), model(model) {
     if (!model) return;
+    this->filePicker = Components::Views::Generator::file("File: ", this->model->getPath());
+    this->filePicker->delegate = this;
+    this->contentView->addSubview(this->filePicker);
 }
-
 
 void Components::Views::Model::layoutSubviews() {
     int x = 0;
+    this->filePicker->frame = UIKit::CGRect(0, x, this->frame.size.width, this->filePicker->height);
+    x += this->filePicker->height;
+    
     this->contentView->frame = UIKit::CGRect(0, 0, this->frame.size.width, x);
     Components::Views::Base::layoutSubviews();
 }
 
-void Components::Views::Model::click(UIView & view) {
-    //Should_have_an_event_more_like_fileSelected();
+void Components::Views::Model::didPickFile(string path) {
+    if (!this->model->loadModel(path)) {
+        //show error
+    }
 }
-

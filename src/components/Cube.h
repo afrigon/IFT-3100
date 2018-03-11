@@ -13,14 +13,13 @@
 
 namespace Components {
 class Cube: public RenderableComponent {
-    Vector3 size = Vector3(100, 100, 100);
-
  public:
     ofColor color = ofColor(255);
+    Vector3 size = Vector3(100, 100, 100);
     
+    Cube();
+    Cube* createInstance() override { return new Cube(); }
     void render(bool useTexture) override;
-    Vector3 getSize();
-    void setSize(Vector3 size);
     
     UIKit::UIView* getUIView() override;
     int getUIViewHeight() override;

@@ -8,18 +8,14 @@
 #include "components/Cube.h"
 #include "views/CubeView.h"
 
+Components::Cube::Cube() {
+    this->name = "Box";
+}
+
 void Components::Cube::render(bool useTexture) {
     ofFill();
     ofSetColor(this->color);
     ofDrawBox(this->size.getX(), this->size.getY(), this->size.getZ());
-}
-
-Vector3 Components::Cube::getSize() {
-    return this->size;
-}
-
-void Components::Cube::setSize(Vector3 size) {
-    this->size = size;
 }
 
 UIKit::UIView* Components::Cube::getUIView() {

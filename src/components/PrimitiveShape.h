@@ -26,6 +26,7 @@ class PrimitiveShape: public RenderableComponent {
 
  public:
     PrimitiveShape();
+    PrimitiveShape* createInstance() override { return new PrimitiveShape(); }
     void render(bool useTexture) override;
     unsigned int getPointCount();
     void setPointSize(unsigned int newSize);

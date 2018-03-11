@@ -18,6 +18,8 @@ class Ellipse: public RenderableComponent {
  public:
     ofColor fillColor;
     
+    Ellipse();
+    Ellipse* createInstance() override { return new Ellipse(); }
     void render(bool useTexture) override;
     unsigned int getWidth();
     unsigned int getHeight();

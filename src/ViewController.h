@@ -14,6 +14,7 @@
 #include "scene/Scene.h"
 #include "GameObject.h"
 #include "ComponentsDataSource.h"
+#include "ComponentList.h"
 
 class ViewController: public UIKit::UIViewController, public UIKit::UITableViewDataSource, public UIKit::UITableViewDelegate {
     Scene* scene;
@@ -23,12 +24,15 @@ class ViewController: public UIKit::UIViewController, public UIKit::UITableViewD
     // UI
     UIKit::UIView* hierarchyHeader = new UIKit::UIView();
     UIKit::UILabel* hierarchyHeaderLabel = new UIKit::UILabel("Hierarchy");
-    UIKit::UILabel* hierarchyHeaderButton = new UIKit::UILabel("+");
+    UIKit::UIButton* hierarchyHeaderButton = new UIKit::UIButton("+");
     UIKit::UITableView* hierarchyPanel = new UIKit::UITableView();
     
     UIKit::UIView* componentHeader = new UIKit::UIView();
     UIKit::UILabel* componentHeaderLabel = new UIKit::UILabel("Components");
+    UIKit::UIButton* componentHeaderButton = new UIKit::UIButton("+");
     UIKit::UITableView* componentPanel = new UIKit::UITableView();
+    
+    Components::Views::ComponentList* componentList = new Components::Views::ComponentList();
 
     // viewcontroller events
     void viewDidLoad() override;
@@ -36,17 +40,19 @@ class ViewController: public UIKit::UIViewController, public UIKit::UITableViewD
 
     // hierarchy data source
     int numberOfRows() override;
-    UIKit::UITableViewCell* cellForRow(int index) override;
-    int heightForRow(int index) override;
+    UIKit::UITableViewCell* cellForRow(int) override;
+    int heightForRow(int) override;
     
     // hierarchy delegate
-    void didSelectRow(int index) override;
+    void didSelectRow(int) override;
     void didLoseFocus() override;
     
     void selectGameObject(GameObject* go);
+    void didAddComponent(GameObject &);
  public:
     ViewController(Scene* scene): scene(scene) {}
-    void addGameObject(UIKit::UIView & test);
+    void addGameObject(UIKit::UIView &);
+    void addComponent(UIKit::UIView &);
 };
 
 #endif  // VIEWCONTROLLER_H_

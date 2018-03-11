@@ -14,6 +14,7 @@
 
 namespace UIKit {
 class UIWindow {
+    static UIWindow* instance;
     CGSize size = UIKit::CGSize(ofGetWidth(), ofGetHeight());
     UIViewController* rootViewController;
     UIKit::CGPoint clickStartPosition;
@@ -24,8 +25,11 @@ class UIWindow {
     void mouseup(ofMouseEventArgs &);
 
  public:
+    ofEasyCam* mainCamera;
+    
     UIWindow();
     ~UIWindow();
+    static UIWindow* shared();
     void draw();
     void setRootViewController(UIViewController*);
     void layoutSubviews();

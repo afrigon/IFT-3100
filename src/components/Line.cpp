@@ -8,6 +8,10 @@
 #include "components/Line.h"
 #include "views/LineView.h"
 
+Components::Line::Line() {
+    this->name = "Line";
+}
+
 void Components::Line::render(bool useTexture) {
     ofFill();
     ofSetColor(this->strokeColor);

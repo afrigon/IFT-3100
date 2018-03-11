@@ -13,24 +13,25 @@
 #include "Rectangle.h"
 
 namespace Components {
-    namespace Views {
-        class Rectangle: public Components::Views::Base {
-            Components::Rectangle* rectangle = nullptr;
-            Components::Views::ColorView* fillColorView;
-            Components::Views::ColorView* strokeColorView;
-            Components::Views::NumericView* borderWidthView;
-            Components::Views::NumericView* widthView;
-            Components::Views::NumericView* heightView;
-    
-        public:
-            Rectangle(Components::Rectangle*);
-            void layoutSubviews() override;
-            void setText(int tag);
+namespace Views {
+class Rectangle: public Components::Views::Base {
+    Components::Rectangle* rectangle = nullptr;
+    Components::Views::ColorView* fillColorView;
+    Components::Views::ColorView* strokeColorView;
+    Components::Views::NumericView* borderWidthView;
+    Components::Views::NumericView* widthView;
+    Components::Views::NumericView* heightView;
 
-            void click(UIView & view);
-            void rightclick(UIView & view);
-        };
-    }  // namespace Views
+public:
+    Rectangle(Components::Rectangle*);
+    ~Rectangle();
+    void layoutSubviews() override;
+    void setText(int tag);
+
+    void click(UIView & view);
+    void rightclick(UIView & view);
+};
+}  // namespace Views
 }  // namespace Components
 
 #endif  // COMPONENTS_VIEWS_RECTANGLEVIEW_H_

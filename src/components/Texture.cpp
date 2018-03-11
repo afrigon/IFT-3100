@@ -7,13 +7,18 @@
 
 #include "Texture.h"
 
-ofTexture& Components::Texture::getTexture() {
-    return tex;
+Components::Texture::Texture() {
+    this->name = "Material";
 }
 
-bool Components::Texture::loadTexture(std::string path) {
-    if(isLoaded = ofLoadImage(tex, path)) {
-        this->setWrappingMode(GL_REPEAT);
+//ofTexture& Components::Texture::getTexture() {
+//    return tex;
+//}
+
+bool Components::Texture::loadTexture(string path) {
+    this->path = path;
+    if((isLoaded = ofLoadImage(tex, path))) {
+        this->setWrappingMode(GL_REPEAT, GL_REPEAT);
         try {
             //GenerateMipmap fails if the image in invalid (such as non-power of 2)
             tex.generateMipmap();
@@ -23,16 +28,16 @@ bool Components::Texture::loadTexture(std::string path) {
     return isLoaded;
 }
 
+string Components::Texture::getPath() {
+    return this->path;
+}
+
 void Components::Texture::bindTexture(int location) {
     if(isLoaded) tex.bind(location);
 }
 
 void Components::Texture::unbindTexture(int location) {
     if(isLoaded) tex.unbind(location);
-}
-
-void Components::Texture::setWrappingMode(GLint wrapMode) {
-    tex.setTextureWrap(wrapMode, wrapMode);
 }
 
 void Components::Texture::setWrappingMode(GLint wrapModeHorizontal, GLint wrapModeVertical) {

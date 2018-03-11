@@ -27,11 +27,12 @@ void ofApp::setup() {
     this->scene = DemoScene::generate9();
     this->scene.print();
     
-    this->window.setRootViewController(new ViewController(&scene));
+    UIKit::UIWindow::shared()->setRootViewController(new ViewController(&scene));
+    UIKit::UIWindow::shared()->mainCamera = &cam;
 }
 
 void ofApp::update() {
-    this->window.layoutSubviews();
+    UIKit::UIWindow::shared()->layoutSubviews();
 }
 
 void ofApp::draw() {
@@ -56,7 +57,7 @@ void ofApp::draw() {
         lastElapsed = ofGetElapsedTimeMicros();
     }
 
-    if (!takeScreenshotOnNext) this->window.draw();
+    if (!takeScreenshotOnNext) UIKit::UIWindow::shared()->draw();
     else takeScreenshot();
 }
 
@@ -65,7 +66,6 @@ void ofApp::keyPressed(int key) {
         // ctrl + s || print screen
         case 19:
         case 63248: takeScreenshotOnNext = true; break;
-        case 'c': cam.enableMouseInput(); break;
     }
 }
 

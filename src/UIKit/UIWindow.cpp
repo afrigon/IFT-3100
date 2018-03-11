@@ -18,6 +18,15 @@ UIKit::UIWindow::~UIWindow() {
     ofRemoveListener(ofEvents().mousePressed, this, &UIWindow::mousedown);
     ofRemoveListener(ofEvents().mouseReleased, this, &UIWindow::mouseup);
     delete this->rootViewController;
+    delete UIWindow::instance;
+}
+
+UIKit::UIWindow* UIKit::UIWindow::instance = nullptr;
+UIKit::UIWindow* UIKit::UIWindow::shared() {
+    if (!UIWindow::instance) {
+        UIWindow::instance = new UIKit::UIWindow();
+    }
+    return UIWindow::instance;
 }
 
 void UIKit::UIWindow::resize(ofResizeEventArgs & e) {

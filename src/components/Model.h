@@ -9,6 +9,7 @@
 #define COMPONENTS_MODEL_H_
 
 #include <string>
+using std::string;
 
 #include "components/RenderableComponent.h"
 #include "ofxAssimpModelLoader.h"
@@ -16,15 +17,16 @@
 namespace Components {
 class Model: public RenderableComponent {
     ofxAssimpModelLoader model;
-    std::string path;
+    string path;
     size_t verticesCount;
 
  public:
+    Model();
+    Model* createInstance() override { return new Model(); }
     void render(bool useTexture) override;
-    void loadModel(std::string path);
-    std::string getPath();
-    size_t getVertexCount();
-    unsigned int getAnimationCount();
+    bool loadModel(string path);
+    string getPath();
+    int getVertexCount();
     
     UIKit::UIView* getUIView() override;
     int getUIViewHeight() override;

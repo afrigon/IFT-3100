@@ -9,9 +9,11 @@
 #define UIKIT_UIKIT_H_
 
 #include "UIView.h"
+#include "UIEvent.h"
 #include "UIViewController.h"
 #include "UIWindow.h"
 #include "UITableView.h"
 #include "UILabel.h"
+#include "UIButton.h"
 
 #endif  // UIKIT_UIKIT_H_

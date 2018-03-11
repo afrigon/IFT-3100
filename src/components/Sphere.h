@@ -17,6 +17,8 @@ class Sphere: public RenderableComponent {
  public:
     ofColor color;
     
+    Sphere();
+    Sphere* createInstance() override { return new Sphere(); }
     void render(bool useTexture) override;
     ofColor getColor();
     float getRadius();

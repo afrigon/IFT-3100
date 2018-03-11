@@ -48,7 +48,6 @@ struct CGRect {
 
 class UIView {
     bool focus = false;
-    bool isUserInteractionEnabled = false;
     
  protected:
     UIView* superview;
@@ -62,6 +61,7 @@ class UIView {
     ofColor tintColor;
     int cornerRadius = 0;
     bool shouldBubble = true;
+    bool isUserInteractionEnabled = false;
     ofEvent<UIView> onclick;
     ofEvent<UIView> onmousedown;
     ofEvent<UIView> onmouseup;

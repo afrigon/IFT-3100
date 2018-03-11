@@ -18,14 +18,6 @@ void Components::Sphere::render(bool useTexture) {
     ofDrawSphere(this->radius);
 }
 
-float Components::Sphere::getRadius() {
-    return this->radius;
-}
-
-void Components::Sphere::setRadius(float radius) {
-    this->radius = radius;
-}
-
 UIKit::UIView* Components::Sphere::getUIView() {
     return new Components::Views::Sphere(this);
 }

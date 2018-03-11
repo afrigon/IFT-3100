@@ -12,18 +12,13 @@
 
 namespace Components {
 class Sphere: public RenderableComponent {
-    float radius = 50;
-
  public:
+    float radius = 50;
     ofColor color;
     
     Sphere();
     Sphere* createInstance() override { return new Sphere(); }
     void render(bool useTexture) override;
-    ofColor getColor();
-    float getRadius();
-    void setColor(ofColor color);
-    void setRadius(float radius);
     
     UIKit::UIView* getUIView() override;
     int getUIViewHeight() override;

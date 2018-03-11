@@ -5,7 +5,8 @@
 //  found in the LICENSE file.
 //
 
-#include "Texture.h"
+#include "components/Texture.h"
+#include "views/TextureView.h"
 
 Components::Texture::Texture() {
     this->name = "Material";
@@ -42,4 +43,12 @@ void Components::Texture::unbindTexture(int location) {
 
 void Components::Texture::setWrappingMode(GLint wrapModeHorizontal, GLint wrapModeVertical) {
     tex.setTextureWrap(wrapModeHorizontal, wrapModeVertical);
+}
+
+UIKit::UIView* Components::Texture::getUIView() {
+    return new Components::Views::Texture(this);
+}
+
+int Components::Texture::getUIViewHeight() {
+    return 20 + 30;
 }

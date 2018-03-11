@@ -76,6 +76,7 @@ void UIKit::UIView::addSubview(UIView* view) {
     view->superview = this;
     this->subviews.push_back(view);
     this->didAddSubview(view);
+    UIKit::UIWindow::shared()->setNeedsLayout();
 }
 
 void UIKit::UIView::removeFromSuperView() {

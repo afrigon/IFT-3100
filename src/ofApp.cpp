@@ -25,14 +25,13 @@ void ofApp::setup() {
     light.setPosition(0, 0, 500);
 
     this->scene = DemoScene::generate9();
-    this->scene.print();
     
     UIKit::UIWindow::shared()->setRootViewController(new ViewController(&scene));
     UIKit::UIWindow::shared()->mainCamera = &cam;
 }
 
 void ofApp::update() {
-    UIKit::UIWindow::shared()->layoutSubviews();
+    UIKit::UIWindow::shared()->layoutIfNeeded();
 }
 
 void ofApp::draw() {

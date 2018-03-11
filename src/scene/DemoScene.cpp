@@ -188,12 +188,12 @@ Scene DemoScene::generate6() {
     t3->rotation = Vector3(60, 60, 45);
 
     Sphere* s1 = o1->addComponent<Sphere>(new Sphere());
-    s1->setColor(ofColor(200, 0, 0));
+    s1->color = ofColor(200, 0, 0);
 
     Sphere* s2 = o2->addComponent<Sphere>(new Sphere());
 
     Sphere* s3 = o3->addComponent<Sphere>(new Sphere());
-    s3->setRadius(150);
+    s3->radius = 150;
 
     o1->addChild(o2);
 
@@ -319,7 +319,7 @@ Scene DemoScene::generate9() {
     c2->setPoint(3, Vector3(-25, 25, 0));
 
     Line* c3 = o3->addComponent<Line>(new Line());
-    o3->name = "Ligne";
+    o3->name = "Line";
 
     Components::Ellipse* c4 = o4->addComponent<Components::Ellipse>(new Components::Ellipse());
     o4->name = "Ellipse";

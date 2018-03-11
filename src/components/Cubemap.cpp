@@ -5,7 +5,8 @@
 //  found in the LICENSE file.
 //
 
-#include "Cubemap.h"
+#include "components/Cubemap.h"
+#include "views/CubemapView.h"
 
 Components::Cubemap::Cubemap() {
     this->name = "Cubemap";
@@ -49,7 +50,9 @@ void Components::Cubemap::render(bool useTexture) {
 //    if (!ofLoadImage(textures[5], image6)) ofLogError("LoadCubemap", "Image failed to load : 6");
 //}
 
-void Components::Cubemap::loadMap(string path) {
+bool Components::Cubemap::loadMap(string path) {
+    ofImage image = ofImage(path);
+    if (image.getImageType() == ofImageType::OF_IMAGE_UNDEFINED) return false;
     this->path = path;
     
     for (int i = 0; i < 6; ++i) {
@@ -58,8 +61,7 @@ void Components::Cubemap::loadMap(string path) {
         this->textures[i].setTextureMinMagFilter(GL_LINEAR, GL_LINEAR);
     }
     this->generateMeshes();
-    
-    ofImage image = ofImage(path);
+
     ofImage tmp = ofImage();
     float width = image.getWidth();
     float height = image.getHeight();
@@ -94,6 +96,8 @@ void Components::Cubemap::loadMap(string path) {
     tmp.cropFrom(image, width * 3 / 4, height / 3, w, h);
     textures[5] = tmp.getTexture();
     tmp.clear();
+    
+    return true;
 }
 
 //void Components::Cubemap::loadMap(ofImage images[6]) {
@@ -218,4 +222,12 @@ void Components::Cubemap::generateMeshes() {
 
     meshes[5] = m;
     m.clear();
+}
+
+UIKit::UIView* Components::Cubemap::getUIView() {
+    return new Components::Views::Cubemap(this);
+}
+
+int Components::Cubemap::getUIViewHeight() {
+    return 20 + 30 + 30;
 }

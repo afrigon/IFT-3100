@@ -16,25 +16,28 @@ using std::string;
 #include "ofMain.h"
 
 namespace Components {
-    class Texture : public AbstractComponent {
-        string path = "";
-        ofTexture tex;
-        bool isLoaded = false;
+class Texture : public AbstractComponent {
+    string path = "";
+    ofTexture tex;
+    bool isLoaded = false;
 
-     public:
-        Texture();
-        Texture* createInstance() override { return new Texture(); }
-        //ofTexture& getTexture();
-        bool loadTexture(string path);
-        string getPath();
-        
-        // GameObject functions
-        void bindTexture(int location);
-        void unbindTexture(int location);
-        
-        // GL_CLAMP_TO_EDGE | GL_MIRRORED_REPEAT | GL_REPEAT
-        void setWrappingMode(GLint wrapModeHorizontal, GLint wrapModeVertical);
-    };
+ public:
+    Texture();
+    Texture* createInstance() override { return new Texture(); }
+    //ofTexture& getTexture();
+    bool loadTexture(string path);
+    string getPath();
+    
+    // GameObject functions
+    void bindTexture(int location);
+    void unbindTexture(int location);
+    
+    // GL_CLAMP_TO_EDGE | GL_MIRRORED_REPEAT | GL_REPEAT
+    void setWrappingMode(GLint wrapModeHorizontal, GLint wrapModeVertical);
+    
+    UIKit::UIView* getUIView() override;
+    int getUIViewHeight() override;
+};
 }  // namespace Components
 
 #endif  // COMPONENTS_TEXTURE_H_

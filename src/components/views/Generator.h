@@ -19,7 +19,7 @@ namespace Components {
 namespace Views {
 struct LabeledView: public UIKit::UIView {
     const double height = 30;
-    UIKit::UIButton* label = new UIKit::UIButton();
+    UIKit::UILabel* label = new UIKit::UILabel();
     
     LabeledView();
     void setName(string name);
@@ -59,7 +59,8 @@ class ColorView: public LabeledView {
 };
 
 struct NumericView: public LabeledView {
-    UIKit::UILabel* valueLabel = new UIKit::UILabel("0");
+    int decimalCount = 2;
+    UIKit::UIButton* valueLabel = new UIKit::UIButton("0");
     
     NumericView();
     void setValue(double);
@@ -85,7 +86,7 @@ struct Generator {
     static ColorView* color(string, ofColor*);
     static NumericView* numeric(string, double);
     static FilePickerView* file(string, string);
-    static string numericToString(double);
+    static string numericToString(double, int = 2);
     static string numericToIntString(double);
 };
 }  // namespace Views

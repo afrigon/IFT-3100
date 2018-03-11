@@ -19,6 +19,7 @@ class UIWindow {
     UIViewController* rootViewController;
     UIKit::CGPoint clickStartPosition;
     int clickThreshold = 3;
+    bool needLayout = true;
     
     void resize(ofResizeEventArgs &);
     void mousedown(ofMouseEventArgs &);
@@ -32,6 +33,8 @@ class UIWindow {
     static UIWindow* shared();
     void draw();
     void setRootViewController(UIViewController*);
+    void layoutIfNeeded();
+    void setNeedsLayout();
     void layoutSubviews();
 };
 }  // namespace UIKit

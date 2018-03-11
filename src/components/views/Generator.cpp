@@ -157,12 +157,12 @@ Components::Views::NumericView::NumericView() {
 
 void Components::Views::NumericView::setValue(double value) {
     this->valueLabel->frame = UIKit::CGRect(130, 0, 50, this->height);
-    this->valueLabel->text = Components::Views::Generator::numericToString(value);
+    this->valueLabel->text = Components::Views::Generator::numericToString(value, this->decimalCount);
 }
 
 Components::Views::FilePickerView::FilePickerView() {
     this->pathLabel->textColor = ofColor(20);
-    this->pathLabel->setFontSize(6);
+    this->pathLabel->setFontSize(7);
     this->addSubview(this->pathLabel);
     
     this->button->textColor = ofColor(255);
@@ -220,9 +220,9 @@ Components::Views::FilePickerView* Components::Views::Generator::file(string nam
     return view;
 }
 
-string Components::Views::Generator::numericToString(double value) {
+string Components::Views::Generator::numericToString(double value, int decimalCount) {
     std::ostringstream ss;
-    ss << std::fixed << std::setprecision(2) << value;
+    ss << std::fixed << std::setprecision(decimalCount) << value;
     return ss.str();
 }
 

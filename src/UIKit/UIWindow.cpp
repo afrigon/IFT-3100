@@ -67,6 +67,17 @@ void UIKit::UIWindow::setRootViewController(UIViewController* vc) {
     this->rootViewController->viewDidLoad();
 }
 
+void UIKit::UIWindow::layoutIfNeeded() {
+    if (this->needLayout) {
+        this->layoutSubviews();
+        this->needLayout = false;
+    }
+}
+
+void UIKit::UIWindow::setNeedsLayout() {
+    this->needLayout = true;
+}
+
 void UIKit::UIWindow::layoutSubviews() {
     this->rootViewController->layoutSubviews();
 }

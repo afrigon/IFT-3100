@@ -24,10 +24,6 @@ class Scene {
     Scene& render();
     unsigned int getGameObjectCount();
     GameObject* getGameObjectAt(unsigned int index);
-
-    void print() {
-        std::cout << "Total : " << getGameObjectCount() << std::endl;
-    }
 };
 
 #endif  // SCENE_SCENE_H_

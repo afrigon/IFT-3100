@@ -48,6 +48,7 @@ string Components::Model::getPath() {
 }
 
 int Components::Model::getVertexCount() {
+    if (this->path == "") return 0;
     return static_cast<int>(verticesCount);
 }
 
@@ -56,5 +57,5 @@ UIKit::UIView* Components::Model::getUIView() {
 }
 
 int Components::Model::getUIViewHeight() {
-    return 20 + 30;
+    return 20 + 30 + 30;
 }

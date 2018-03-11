@@ -43,7 +43,7 @@ void GameObject::draw() {
     ofPushMatrix();  // Push the matrix and remove after the childs
 
     // Move the matrix using the transform
-    ofTranslate(transform->position.getX(), transform->position.getY(), transform->position.getZ());
+    ofTranslate(transform->position.getX(), -transform->position.getY(), -transform->position.getZ());
     ofRotateX(transform->rotation.getX());
     ofRotateY(transform->rotation.getY());
     ofRotateZ(transform->rotation.getZ());

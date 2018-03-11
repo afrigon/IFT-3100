@@ -12,24 +12,23 @@ ofTexture& Components::Texture::getTexture() {
 }
 
 bool Components::Texture::loadTexture(std::string path) {
-    if (ofLoadImage(tex, path)) {
+    if(isLoaded = ofLoadImage(tex, path)) {
         this->setWrappingMode(GL_REPEAT);
         try {
             //GenerateMipmap fails if the image in invalid (such as non-power of 2)
             tex.generateMipmap();
         } catch (const std::exception&) {}
         tex.setTextureMinMagFilter(GL_LINEAR, GL_LINEAR);
-        return true;
     }
-    return false;
+    return isLoaded;
 }
 
 void Components::Texture::bindTexture(int location) {
-    tex.bind(location);
+    if(isLoaded) tex.bind(location);
 }
 
 void Components::Texture::unbindTexture(int location) {
-    tex.unbind(location);
+    if(isLoaded) tex.unbind(location);
 }
 
 void Components::Texture::setWrappingMode(GLint wrapMode) {

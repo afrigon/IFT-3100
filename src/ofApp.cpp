@@ -15,12 +15,14 @@ void ofApp::setup() {
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Game Engine");
 
+    cam.setVFlip(true);
+
     outputTime = false;
     takeScreenshotOnNext = false;
     if (outputTime) lastElapsed = ofGetElapsedTimeMicros();
 
     light = ofLight();
-    light.setPosition(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 100);
+    light.setPosition(0, 0, 500);
 
     this->scene = DemoScene::generate9();
     this->scene.print();
@@ -33,6 +35,8 @@ void ofApp::update() {
 }
 
 void ofApp::draw() {
+    cam.begin();
+
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofEnableDepthTest();
     light.enable();
@@ -45,6 +49,8 @@ void ofApp::draw() {
     ofDisableLighting();
     ofDisableSeparateSpecularLight();
 
+    cam.end();
+
     if (outputTime) {
         std::cout << "Elapsed Micros : " << ofGetElapsedTimeMicros() - lastElapsed << std::endl;
         lastElapsed = ofGetElapsedTimeMicros();
@@ -55,8 +61,12 @@ void ofApp::draw() {
 }
 
 void ofApp::keyPressed(int key) {
-    // ctrl + s || print screen
-    if (key == 19 || key == 63248) takeScreenshotOnNext = true;
+    switch (key) {
+        // ctrl + s || print screen
+        case 19:
+        case 63248: takeScreenshotOnNext = true; break;
+        case 'c': cam.enableMouseInput(); break;
+    }
 }
 
 void ofApp::keyReleased(int key) {

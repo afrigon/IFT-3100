@@ -19,7 +19,6 @@ Scene& Scene::remove(GameObject* o) {
 
 Scene& Scene::render() {
     ofPushMatrix();
-    ofTranslate(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
     ofTranslate(-75, 100);
     ofRotateX(-25);
     ofRotateY(-30);

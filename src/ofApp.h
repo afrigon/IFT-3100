@@ -21,6 +21,8 @@ class ofApp: public ofBaseApp {
     uint64_t lastElapsed;
     UIKit::UIWindow window;
 
+    ofEasyCam cam;
+
  public:
     ofLight	light;
 

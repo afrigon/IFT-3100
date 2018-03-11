@@ -24,13 +24,31 @@ void Components::Model::render(bool useTexture) {
 void Components::Model::loadModel(std::string path) {
     if(model.loadModel(path)) {
         this->path = path;
-        model.playAllAnimations();
-        model.setLoopStateForAllAnimations(ofLoopType::OF_LOOP_NORMAL);
+
+        if(model.hasAnimations()) {
+            model.playAllAnimations();
+            model.setLoopStateForAllAnimations(ofLoopType::OF_LOOP_NORMAL);
+        }
+        
+        verticesCount = 0;
+        unsigned int modelMeshCount = model.getMeshCount();
+        for(unsigned int i = 0; i < modelMeshCount; ++i) {
+            ofMesh m = model.getMesh(i);
+            verticesCount += m.getNumVertices();
+        }
     }
 }
 
 std::string Components::Model::getPath() {
     return path;
+}
+
+size_t Components::Model::getVertexCount() {
+    return verticesCount;
+}
+
+unsigned int Components::Model::getAnimationCount() {
+    return model.getAnimationCount();
 }
 
 UIKit::UIView* Components::Model::getUIView() {

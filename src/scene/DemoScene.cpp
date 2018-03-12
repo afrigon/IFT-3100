@@ -333,10 +333,10 @@ Scene DemoScene::generate9() {
 
     Model* c7 = o7->addComponent<Model>(new Model());
     o7->name = "Charlie";
-    c7->loadModel("charlie.obj");
+    c7->loadModel("charlie.dae");
 
-    //Components::Texture* t06 = o6->addComponent<Components::Texture>(new Components::Texture());
-    //t06->loadTexture("card.jpg");
+    Components::Texture* t06 = o6->addComponent<Components::Texture>(new Components::Texture());
+    t06->loadTexture("card.jpg");
 
     temp.addObject(o01);
     temp.addObject(o1);

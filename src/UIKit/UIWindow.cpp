@@ -32,6 +32,7 @@ UIKit::UIWindow* UIKit::UIWindow::shared() {
 void UIKit::UIWindow::resize(ofResizeEventArgs & e) {
     this->size = UIKit::CGSize(e.width, e.height);
     this->rootViewController->view->frame = UIKit::CGRect(UIKit::CGPoint(), this->size);
+    this->setNeedsLayout();
 }
 
 void UIKit::UIWindow:: mousedown(ofMouseEventArgs & e) {

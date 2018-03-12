@@ -9,6 +9,7 @@
 
 void ofApp::setup() {
     ofDisableArbTex();
+    ofSetEscapeQuitsApp(false);
     ofSetBackgroundAuto(true);
     ofSetBackgroundColor(75);
     ofSetFrameRate(60);

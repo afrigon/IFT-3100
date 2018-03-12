@@ -9,7 +9,6 @@
 #define MATH_VECTOR3_H_
 
 #include <cmath>
-#include <string>
 
 class Vector3 {
     float x;

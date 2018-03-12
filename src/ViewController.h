@@ -53,6 +53,8 @@ class ViewController: public UIKit::UIViewController, public UIKit::UITableViewD
     ViewController(Scene* scene): scene(scene) {}
     void addGameObject(UIKit::UIView &);
     void addComponent(UIKit::UIView &);
+
+    void onKeyPressed(ofKeyEventArgs& e);
 };
 
 #endif  // VIEWCONTROLLER_H_

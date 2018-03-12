@@ -81,7 +81,7 @@ list<GameObject*>& GameObject::getChildren() {
     return children;
 }
 
-GameObject * GameObject::getParent() {
+GameObject *& GameObject::getParent() {
     return parent;
 }
 
@@ -99,7 +99,7 @@ list<GameObject*>::iterator GameObject::addChild(GameObject* gameObject, list<Ga
     return children.insert(itPosition, gameObject);
 }
 
-list<GameObject*>::iterator GameObject::removeChild(list<GameObject*>::const_iterator itPosition) {
+list<GameObject*>::iterator GameObject::removeChild(list<GameObject*>::const_iterator& itPosition) {
     delete *itPosition;
     return children.erase(itPosition);;
 }
@@ -107,14 +107,13 @@ list<GameObject*>::iterator GameObject::removeChild(list<GameObject*>::const_ite
 list<GameObject*>::iterator GameObject::removeChild(GameObject* objectToRemove) {
     for (auto it = children.cbegin(); it != children.cend(); ++it) {
         if (*it == objectToRemove) {
-            (*it)->setParent(nullptr);
             return children.erase(it);
         }
     }
     return children.end();
 }
 
-list<GameObject*>::iterator GameObject::moveChild(list<GameObject*>::const_iterator itChild, list<GameObject*>::const_iterator itPosition) {
+list<GameObject*>::iterator GameObject::moveChild(list<GameObject*>::const_iterator& itChild, list<GameObject*>::const_iterator& itPosition) {
     GameObject* movingObject = *itChild;
     children.erase(itChild);
     return children.insert(itPosition, movingObject);

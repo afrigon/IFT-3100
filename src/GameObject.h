@@ -45,7 +45,7 @@ class GameObject {
     // Returns a reference on the list
     list<GameObject*>& getChildren();
     // Return the parent of this instance. Nullptr if no parents
-    GameObject* getParent();
+    GameObject*& getParent();
     // Set the parent
     void setParent(GameObject* parent);
     // Add a child to the end of the list
@@ -56,13 +56,13 @@ class GameObject {
     list<GameObject*>::iterator addChild(GameObject* gameObject, list<GameObject*>::const_iterator itPosition);
     // Remove the child at the specified position
     // Returns an iterator on the next child
-    list<GameObject*>::iterator removeChild(list<GameObject*>::const_iterator itPosition);
+    list<GameObject*>::iterator removeChild(list<GameObject*>::const_iterator& itPosition);
     // Remove the child using the gameobject directly
     // Returns an iterator on the next child or end() if not found
     list<GameObject*>::iterator removeChild(GameObject* objectToRemove);
     // Move itChild to itPosition in the list
     // Returns the new positon of the child
-    list<GameObject*>::iterator moveChild(list<GameObject*>::const_iterator itChild, list<GameObject*>::const_iterator itPosition);
+    list<GameObject*>::iterator moveChild(list<GameObject*>::const_iterator& itChild, list<GameObject*>::const_iterator& itPosition);
     // Returns the number of object below him and include himself
     unsigned int getGameObjectCount();
     // Returns the gameobject the index value

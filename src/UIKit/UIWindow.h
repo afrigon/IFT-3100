@@ -24,6 +24,7 @@ class UIWindow {
     void resize(ofResizeEventArgs &);
     void mousedown(ofMouseEventArgs &);
     void mouseup(ofMouseEventArgs &);
+    void keyPressed(ofKeyEventArgs&);
 
  public:
     ofEasyCam* mainCamera;

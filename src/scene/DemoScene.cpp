@@ -38,15 +38,20 @@ Scene DemoScene::generate1() {
     p2->setFillColor(ofColor(60, 120, 0));
 
     PrimitiveShape* p3 = o3->addComponent<PrimitiveShape>(new PrimitiveShape());
-    p3->setPointSize(4);
+    p3->setPointSize(9);
     p3->setPoint(0, Vector3(100, 100, 0));
     p3->setPoint(1, Vector3(0, 100, 0));
     p3->setPoint(2, Vector3(0, 0, 0));
     p3->setPoint(3, Vector3(100, 0, 0));
+    p3->setPoint(4, Vector3(120, 100, 0));
+    p3->setPoint(5, Vector3(130, -25, 0));
+    p3->setPoint(6, Vector3(-50, 30, 0));
+    p3->setPoint(7, Vector3(0, 0, 0));
+    p3->setPoint(8, Vector3(100, 100, 0));
     p3->setDrawColor(ofColor(120, 0, 60));
 
-    o1->addChild(o2);
-    temp.addObject(o1);
+    //o1->addChild(o2);
+    //temp.addObject(o1);
 
     return temp.addObject(o3);
 }
@@ -262,7 +267,10 @@ Scene DemoScene::generate8() {
     Cube* c6 = o6->addComponent<Cube>(new Cube());
 
     Model* c7 = o7->addComponent<Model>(new Model());
-    c7->loadModel("/Users/frigon/Documents/University/IFT-3100/labo/labo/labo5/bin/data/charlie.obj");
+    c7->loadModel("charlie.dae");
+
+    Components::Texture* t06 = o6->addComponent<Components::Texture>(new Components::Texture());
+    t06->loadTexture("card.jpg");
 
     temp.addObject(o1);
     temp.addObject(o2);
@@ -270,7 +278,8 @@ Scene DemoScene::generate8() {
     temp.addObject(o4);
     temp.addObject(o5);
     temp.addObject(o6);
-    return temp.addObject(o7);
+    temp.addObject(o7);
+    return temp;
 }
 
 Scene DemoScene::generate9() {

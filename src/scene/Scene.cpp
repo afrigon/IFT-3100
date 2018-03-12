@@ -9,6 +9,7 @@
 
 Scene& Scene::addObject(GameObject* o) {
     this->gameObjects.push_back(o);
+    o->setParent(nullptr);
     return *this;
 }
 

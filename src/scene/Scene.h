@@ -22,6 +22,7 @@ class Scene {
     Scene& addObject(GameObject* o);
     Scene& remove(GameObject* o);
     Scene& render();
+    list<GameObject*>& getGameObjects() { return gameObjects; }
     unsigned int getGameObjectCount();
     GameObject* getGameObjectAt(unsigned int index);
 };

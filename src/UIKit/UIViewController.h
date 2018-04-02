@@ -23,6 +23,7 @@ class UIViewController {
     virtual void viewDidLoad() {}
     virtual void willLayoutSubviews() {}
     virtual void didLayoutSubviews() {}
+    virtual void onKeyPressed(ofKeyEventArgs& e) {}
 };
 }  // namespace UIKit
 

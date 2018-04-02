@@ -16,7 +16,7 @@ namespace UIKit {
 class UIWindow {
     static UIWindow* instance;
     CGSize size = UIKit::CGSize(ofGetWidth(), ofGetHeight());
-    UIViewController* rootViewController;
+    UIViewController* rootViewController = nullptr;
     UIKit::CGPoint clickStartPosition;
     int clickThreshold = 3;
     bool needLayout = true;
@@ -24,6 +24,7 @@ class UIWindow {
     void resize(ofResizeEventArgs &);
     void mousedown(ofMouseEventArgs &);
     void mouseup(ofMouseEventArgs &);
+    void keyPressed(ofKeyEventArgs&);
 
  public:
     ofEasyCam* mainCamera;

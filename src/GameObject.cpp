@@ -49,6 +49,13 @@ void GameObject::draw() {
     ofRotateZ(transform->rotation.getZ());
     ofScale(transform->scale.getX(), transform->scale.getY(), transform->scale.getZ());
 
+    //Find and enable the lights
+    std::vector<LightSourceComponent*> lights = getComponents<LightSourceComponent>();
+    for(auto it = lights.begin(); it != lights.end(); ++it) {
+        (*it)->setPosition(transform->position);
+        (*it)->enable();
+    }
+
     //Apply the textures
     std::vector<Components::Texture*> textures = getComponents<Components::Texture>();
     bool useTexture = !textures.empty();
@@ -72,6 +79,11 @@ void GameObject::draw() {
         (*it)->draw();
     }
 
+    //Disable the lights
+    for(auto it = lights.begin(); it != lights.end(); ++it) {
+        (*it)->disable();
+    }
+
     ofPopMatrix();  // Remove matrix before leaving to next object
 }
 
@@ -81,7 +93,7 @@ list<GameObject*>& GameObject::getChildren() {
     return children;
 }
 
-GameObject * GameObject::getParent() {
+GameObject *& GameObject::getParent() {
     return parent;
 }
 
@@ -99,7 +111,7 @@ list<GameObject*>::iterator GameObject::addChild(GameObject* gameObject, list<Ga
     return children.insert(itPosition, gameObject);
 }
 
-list<GameObject*>::iterator GameObject::removeChild(list<GameObject*>::const_iterator itPosition) {
+list<GameObject*>::iterator GameObject::removeChild(list<GameObject*>::const_iterator& itPosition) {
     delete *itPosition;
     return children.erase(itPosition);;
 }
@@ -107,14 +119,13 @@ list<GameObject*>::iterator GameObject::removeChild(list<GameObject*>::const_ite
 list<GameObject*>::iterator GameObject::removeChild(GameObject* objectToRemove) {
     for (auto it = children.cbegin(); it != children.cend(); ++it) {
         if (*it == objectToRemove) {
-            (*it)->setParent(nullptr);
             return children.erase(it);
         }
     }
     return children.end();
 }
 
-list<GameObject*>::iterator GameObject::moveChild(list<GameObject*>::const_iterator itChild, list<GameObject*>::const_iterator itPosition) {
+list<GameObject*>::iterator GameObject::moveChild(list<GameObject*>::const_iterator& itChild, list<GameObject*>::const_iterator& itPosition) {
     GameObject* movingObject = *itChild;
     children.erase(itChild);
     return children.insert(itPosition, movingObject);
@@ -128,20 +139,11 @@ unsigned int GameObject::getGameObjectCount() {
     return compteur + 1;
 }
 
-GameObject * GameObject::getGameObjectAt(unsigned int index) {
-    if(!children.empty()) {
-        int i = 0;
-        for(auto it = children.cbegin(); it != children.cend(); ++it) {
-            if(i == index) {
-                return *it;
-            } else {
-                unsigned int count = (*it)->getGameObjectCount();
-                i += count;
-                if(i > index) {
-                    return (*it)->getGameObjectAt(index + count - i - 1);
-                }
-            }
-        }
+GameObject * GameObject::getGameObjectAt(unsigned int& index) {
+    for(auto it = children.cbegin(); it != children.cend(); ++it) {
+        if(index == 0) return *it;
+        GameObject* g = (*it)->getGameObjectAt(--index);
+        if(g) return g;
     }
     return nullptr;
 }

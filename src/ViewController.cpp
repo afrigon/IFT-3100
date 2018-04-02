@@ -111,6 +111,118 @@ void ViewController::addComponent(UIKit::UIView & view) {
     this->componentList->show(this->selectedGameObject);
 }
 
+void ViewController::onKeyPressed(ofKeyEventArgs & e) {
+    switch(e.key) {
+        case 356: //LEFT
+            if(selectedGameObject)
+                if(selectedGameObject->getParent()) {
+                    selectedGameObject->getParent()->removeChild(selectedGameObject);
+                    if(selectedGameObject->getParent()->getParent()) {
+                        selectedGameObject->getParent()->getParent()->addChild(selectedGameObject);
+                    } else {
+                        scene->addObject(selectedGameObject);
+                    }
+                    this->hierarchyPanel->reloadData();
+                }
+            break;
+        case 357: //UP
+            //Terrorist style because no more time
+            if(selectedGameObject) {
+                if(selectedGameObject->getParent()) {
+                    list<GameObject*>::const_iterator hisIt = selectedGameObject->getParent()->getChildren().cend();
+                    for(auto it = selectedGameObject->getParent()->getChildren().cbegin(); it != selectedGameObject->getParent()->getChildren().cend(); ++it) {
+                        if((*it)->getID() == selectedGameObject->getID()) {
+                            if(hisIt != selectedGameObject->getParent()->getChildren().cend()) {
+                                list<GameObject*>::const_iterator myIt = hisIt; ++myIt;
+                                selectedGameObject->getParent()->moveChild(myIt, hisIt);
+                            }
+                            this->hierarchyPanel->reloadData();
+                            break;
+                        }
+                        hisIt = it;
+                    }
+                } else {
+                    list<GameObject*>::const_iterator hisIt = scene->getGameObjects().cend();
+                    for(auto it = scene->getGameObjects().cbegin(); it != scene->getGameObjects().cend(); ++it) {
+                        if((*it)->getID() == selectedGameObject->getID()) {
+                            if(hisIt != scene->getGameObjects().cend()) {
+                                list<GameObject*>::const_iterator myIt = hisIt; ++myIt;
+                                scene->getGameObjects().erase(myIt);
+                                scene->getGameObjects().insert(hisIt, selectedGameObject);
+                            }
+                            this->hierarchyPanel->reloadData();
+                            break;
+                        }
+                        hisIt = it;
+                    }
+                }
+            }
+            break;
+        case 358: //RIGHT
+            if(selectedGameObject) {
+                GameObject* newParent = nullptr;
+                if(selectedGameObject->getParent()) {
+                    for(auto it = selectedGameObject->getParent()->getChildren().begin(); it != selectedGameObject->getParent()->getChildren().end(); ++it) {
+                        if((*it)->getID() == selectedGameObject->getID()) break;
+                        newParent = (*it);
+                    }
+                } else {
+                    list<GameObject*> tmp = scene->getGameObjects();
+                    for(list<GameObject*>::iterator it = tmp.begin(); it != tmp.end(); ++it) {
+                        if((*it)->getID() == selectedGameObject->getID()) break;
+                        newParent = (*it);
+                    }
+                }
+                if(newParent) {
+                    if(selectedGameObject->getParent()) {
+                        selectedGameObject->getParent()->removeChild(selectedGameObject);
+                    } else {
+                        scene->remove(selectedGameObject);
+                    }
+                    newParent->addChild(selectedGameObject, newParent->getChildren().cbegin());
+                    this->hierarchyPanel->reloadData();
+                }
+            }
+            break;
+        case 359: //DOWN
+            //Terrorist style because no more time
+            if(selectedGameObject) {
+                if(selectedGameObject->getParent()) {
+                    list<GameObject*>::const_iterator hisIt = selectedGameObject->getParent()->getChildren().cend();
+                    for(auto it = selectedGameObject->getParent()->getChildren().cend(); it != selectedGameObject->getParent()->getChildren().cbegin();) {
+                        --it;
+                        if((*it)->getID() == selectedGameObject->getID()) {
+                            if(hisIt != selectedGameObject->getParent()->getChildren().cend()) {
+                                list<GameObject*>::const_iterator myIt = hisIt++; --myIt;
+                                selectedGameObject->getParent()->moveChild(myIt, hisIt);
+                            }
+                            this->hierarchyPanel->reloadData();
+                            break;
+                        }
+                        hisIt = it;
+                    }
+                } else {
+                    list<GameObject*>::const_iterator hisIt = scene->getGameObjects().cend();
+                    for(auto it = scene->getGameObjects().cend(); it != scene->getGameObjects().cbegin();) {
+                        --it;
+                        if((*it)->getID() == selectedGameObject->getID()) {
+                            if(hisIt != scene->getGameObjects().cend()) {
+                                list<GameObject*>::const_iterator myIt = hisIt++; --myIt;
+                                scene->getGameObjects().erase(myIt);
+                                scene->getGameObjects().insert(hisIt, selectedGameObject);
+                            }
+                            this->hierarchyPanel->reloadData();
+                            break;
+                        }
+                        hisIt = it;
+                    }
+                }
+            }
+            break;
+        default: break;
+    }
+}
+
 int ViewController::heightForRow(int index) {
     return 20;
 }

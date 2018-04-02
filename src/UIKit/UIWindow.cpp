@@ -11,12 +11,14 @@ UIKit::UIWindow::UIWindow() {
     ofAddListener(ofEvents().windowResized, this, &UIWindow::resize);
     ofAddListener(ofEvents().mousePressed, this, &UIWindow::mousedown);
     ofAddListener(ofEvents().mouseReleased, this, &UIWindow::mouseup);
+    ofAddListener(ofEvents().keyPressed, this, &UIWindow::keyPressed);
 }
 
 UIKit::UIWindow::~UIWindow() {
     ofRemoveListener(ofEvents().windowResized, this, &UIWindow::resize);
     ofRemoveListener(ofEvents().mousePressed, this, &UIWindow::mousedown);
     ofRemoveListener(ofEvents().mouseReleased, this, &UIWindow::mouseup);
+    ofRemoveListener(ofEvents().keyPressed, this, &UIWindow::keyPressed);
     delete this->rootViewController;
     delete UIWindow::instance;
 }
@@ -32,6 +34,7 @@ UIKit::UIWindow* UIKit::UIWindow::shared() {
 void UIKit::UIWindow::resize(ofResizeEventArgs & e) {
     this->size = UIKit::CGSize(e.width, e.height);
     this->rootViewController->view->frame = UIKit::CGRect(UIKit::CGPoint(), this->size);
+    this->setNeedsLayout();
 }
 
 void UIKit::UIWindow:: mousedown(ofMouseEventArgs & e) {
@@ -55,6 +58,10 @@ void UIKit::UIWindow:: mouseup(ofMouseEventArgs & e) {
     this->clickStartPosition = CGPoint(-100, -100);
 }
 
+void UIKit::UIWindow::keyPressed(ofKeyEventArgs &e) {
+    this->rootViewController->onKeyPressed(e);
+}
+
 void UIKit::UIWindow::draw() {
     ofSetDepthTest(false);
     this->rootViewController->view->draw(UIKit::CGRect(UIKit::CGPoint(), this->size));
@@ -62,6 +69,7 @@ void UIKit::UIWindow::draw() {
 }
 
 void UIKit::UIWindow::setRootViewController(UIViewController* vc) {
+    if(rootViewController) delete rootViewController;
     this->rootViewController = vc;
     vc->view->frame = UIKit::CGRect(UIKit::CGPoint(), this->size);
     this->rootViewController->viewDidLoad();

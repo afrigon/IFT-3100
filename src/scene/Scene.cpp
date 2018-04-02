@@ -9,6 +9,7 @@
 
 Scene& Scene::addObject(GameObject* o) {
     this->gameObjects.push_back(o);
+    o->setParent(nullptr);
     return *this;
 }
 
@@ -39,21 +40,16 @@ unsigned int Scene::getGameObjectCount() {
     return compteur;
 }
 
-GameObject* Scene::getGameObjectAt(unsigned int index) {
-    if (!gameObjects.empty()) {
-        int i = 0;
-        for (auto it = gameObjects.cbegin(); it != gameObjects.cend(); ++it) {
-            if (i == index) {
-                return *it;
-            } else {
-                unsigned int count = (*it)->getGameObjectCount();
-                i += count;
-                if (i > index) {
-                    return (*it)->getGameObjectAt(index + count - i - 1);
-                }
-            }
-        }
+GameObject* Scene::getGameObject(unsigned int& index) {
+    for(auto it = gameObjects.cbegin(); it != gameObjects.cend(); ++it) {
+        if(index == 0) return *it;
+        GameObject* g = (*it)->getGameObjectAt(--index);
+        if(g) return g;
     }
     return nullptr;
+}
+
+GameObject* Scene::getGameObjectAt(unsigned int index) {
+    return getGameObject(index);
 }
 

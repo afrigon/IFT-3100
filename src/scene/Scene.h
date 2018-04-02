@@ -17,11 +17,13 @@ using std::list;
 
 class Scene {
     list<GameObject*> gameObjects;
+    GameObject* getGameObject(unsigned int& index);
 
  public:
     Scene& addObject(GameObject* o);
     Scene& remove(GameObject* o);
     Scene& render();
+    list<GameObject*>& getGameObjects() { return gameObjects; }
     unsigned int getGameObjectCount();
     GameObject* getGameObjectAt(unsigned int index);
 };

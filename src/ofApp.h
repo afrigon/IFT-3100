@@ -15,8 +15,10 @@
 #include "ViewController.h"
 
 class ofApp: public ofBaseApp {
-    Scene scene;
+    vector<Scene> scenes;
+    int currentScene = 0;
     bool outputTime;
+    bool outputKey;
     bool takeScreenshotOnNext;
     uint64_t lastElapsed;
 

@@ -3,6 +3,7 @@
 Components::Views::AmbientLight::AmbientLight(Components::AmbientLight * ambientLight) : Base(ambientLight->name), ambientLight(ambientLight) {
     if(!ambientLight) return;
     this->colorView = Components::Views::Generator::color("Color: ", &this->ambientLight->color);
+
     this->contentView->addSubview(this->colorView);
 }
 

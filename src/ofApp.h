@@ -16,7 +16,7 @@
 
 class ofApp: public ofBaseApp {
     vector<Scene> scenes;
-    unsigned int currentScene = 0;
+    int currentScene = 0;
     bool outputTime;
     bool outputKey;
     bool takeScreenshotOnNext;

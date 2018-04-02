@@ -7,6 +7,7 @@
 class LightSourceComponent : public AbstractComponent {
     protected:
     ofLight light;
+    Vector3 attenuation;
     virtual void setupColor() {
         light.setDiffuseColor(color);
     }
@@ -22,6 +23,33 @@ class LightSourceComponent : public AbstractComponent {
     }
     void disable() {
         light.disable();
+    }
+
+    float getAttenuationConstant() {
+        return attenuation.getX();
+    }
+
+    float getAttenuationLinear() {
+        return attenuation.getY();
+    }
+
+    float getAttenuationQuadratic() {
+        return attenuation.getZ();
+    }
+
+    void setAttenuationConstant(float value) {
+        attenuation = Vector3(value, 0, 0);
+        light.setAttenuation(attenuation.getX(), attenuation.getY(), attenuation.getZ());
+    }
+
+    void setAttenuationLinear(float value) {
+        attenuation = Vector3(0, value, 0);
+        light.setAttenuation(attenuation.getX(), attenuation.getY(), attenuation.getZ());
+    }
+
+    void setAttenuationQuadratic(float value) {
+        attenuation = Vector3(0, 0, value);
+        light.setAttenuation(attenuation.getX(), attenuation.getY(), attenuation.getZ());
     }
 };
 

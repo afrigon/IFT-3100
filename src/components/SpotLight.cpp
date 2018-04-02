@@ -44,5 +44,5 @@ UIKit::UIView * Components::SpotLight::getUIView() {
 }
 
 int Components::SpotLight::getUIViewHeight() {
-    return 20 + 30 + 30 + 30 + 30;
+    return 20 + 30 + 30 + 30 + 30 + 30 + 30 + 30;
 }

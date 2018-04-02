@@ -13,6 +13,9 @@ namespace Components
             Components::Views::Vector3View* orientationView;
             Components::Views::NumericView* cutoffView;
             Components::Views::NumericView* concentrationView;
+            Components::Views::NumericView* constantView;
+            Components::Views::NumericView* linearView;
+            Components::Views::NumericView* quadraticView;
 
             public:
             SpotLight(Components::SpotLight*);

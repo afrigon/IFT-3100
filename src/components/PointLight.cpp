@@ -19,5 +19,5 @@ UIKit::UIView * Components::PointLight::getUIView() {
 }
 
 int Components::PointLight::getUIViewHeight() {
-    return 20 + 30;
+    return 20 + 30 + 30 + 30 + 30;
 }

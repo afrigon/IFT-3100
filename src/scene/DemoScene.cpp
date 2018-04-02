@@ -8,6 +8,10 @@
 #include "scene/DemoScene.h"
 using namespace Components;
 
+Scene DemoScene::generateEmpty() {
+    return Scene();
+}
+
 Scene DemoScene::generate1() {
     Scene temp = Scene();
 

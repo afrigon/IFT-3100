@@ -24,6 +24,7 @@
 
 class DemoScene {
  public:
+     static Scene generateEmpty();  // EmptyScene
      static Scene generate1();  // PrimitiveShape
      static Scene generate2();  // Line
      static Scene generate3();  // Rectangle

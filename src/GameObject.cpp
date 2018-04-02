@@ -49,6 +49,13 @@ void GameObject::draw() {
     ofRotateZ(transform->rotation.getZ());
     ofScale(transform->scale.getX(), transform->scale.getY(), transform->scale.getZ());
 
+    //Find and enable the lights
+    std::vector<LightSourceComponent*> lights = getComponents<LightSourceComponent>();
+    for(auto it = lights.begin(); it != lights.end(); ++it) {
+        (*it)->setPosition(transform->position);
+        (*it)->enable();
+    }
+
     //Apply the textures
     std::vector<Components::Texture*> textures = getComponents<Components::Texture>();
     bool useTexture = !textures.empty();
@@ -70,6 +77,11 @@ void GameObject::draw() {
     // Draw all the childs
     for (auto it = children.begin(); it != children.end(); ++it) {
         (*it)->draw();
+    }
+
+    //Disable the lights
+    for(auto it = lights.begin(); it != lights.end(); ++it) {
+        (*it)->disable();
     }
 
     ofPopMatrix();  // Remove matrix before leaving to next object
@@ -127,20 +139,11 @@ unsigned int GameObject::getGameObjectCount() {
     return compteur + 1;
 }
 
-GameObject * GameObject::getGameObjectAt(unsigned int index) {
-    if(!children.empty()) {
-        int i = 0;
-        for(auto it = children.cbegin(); it != children.cend(); ++it) {
-            if(i == index) {
-                return *it;
-            } else {
-                unsigned int count = (*it)->getGameObjectCount();
-                i += count;
-                if(i > index) {
-                    return (*it)->getGameObjectAt(index + count - i - 1);
-                }
-            }
-        }
+GameObject * GameObject::getGameObjectAt(unsigned int& index) {
+    for(auto it = children.cbegin(); it != children.cend(); ++it) {
+        if(index == 0) return *it;
+        GameObject* g = (*it)->getGameObjectAt(--index);
+        if(g) return g;
     }
     return nullptr;
 }

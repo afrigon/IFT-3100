@@ -69,6 +69,7 @@ void UIKit::UIWindow::draw() {
 }
 
 void UIKit::UIWindow::setRootViewController(UIViewController* vc) {
+    if(rootViewController) delete rootViewController;
     this->rootViewController = vc;
     vc->view->frame = UIKit::CGRect(UIKit::CGPoint(), this->size);
     this->rootViewController->viewDidLoad();

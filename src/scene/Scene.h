@@ -17,6 +17,7 @@ using std::list;
 
 class Scene {
     list<GameObject*> gameObjects;
+    GameObject* getGameObject(unsigned int& index);
 
  public:
     Scene& addObject(GameObject* o);

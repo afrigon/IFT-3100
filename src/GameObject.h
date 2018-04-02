@@ -16,8 +16,9 @@ using std::list;
 using std::string;
 
 #include "components/AbstractComponent.h"
-#include "components/Transform.h"
 #include "components/RenderableComponent.h"
+#include "components/LightSourceComponent.h"
+#include "components/Transform.h"
 #include "components/Texture.h"
 
 class GameObject {
@@ -66,7 +67,7 @@ class GameObject {
     // Returns the number of object below him and include himself
     unsigned int getGameObjectCount();
     // Returns the gameobject the index value
-    GameObject* getGameObjectAt(unsigned int index);
+    GameObject* getGameObjectAt(unsigned int& index);
     // Returns the depth of the current GameObject
     unsigned int getDepth();
     int getComponentsCount();

@@ -16,7 +16,7 @@ namespace UIKit {
 class UIWindow {
     static UIWindow* instance;
     CGSize size = UIKit::CGSize(ofGetWidth(), ofGetHeight());
-    UIViewController* rootViewController;
+    UIViewController* rootViewController = nullptr;
     UIKit::CGPoint clickStartPosition;
     int clickThreshold = 3;
     bool needLayout = true;

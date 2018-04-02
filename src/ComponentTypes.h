@@ -22,6 +22,10 @@ enum class ComponentTypes {
     Cube,
     Sphere,
     Model,
+    AmbientLight,
+    DirectionalLight,
+    PointLight,
+    SpotLight,
     Texture,
     Cubemap,
     LAST
@@ -38,6 +42,10 @@ class ComponentStore {
             case ComponentTypes::Cube: return new Cube();
             case ComponentTypes::Sphere: return new Sphere();
             case ComponentTypes::Model: return new Model();
+            case ComponentTypes::AmbientLight: return new AmbientLight();
+            case ComponentTypes::DirectionalLight: return new DirectionalLight();
+            case ComponentTypes::PointLight: return new PointLight();
+            case ComponentTypes::SpotLight: return new SpotLight();
             case ComponentTypes::Texture: return new Texture();
             case ComponentTypes::Cubemap: return new Cubemap();
             default: return nullptr;

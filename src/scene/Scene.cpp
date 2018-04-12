@@ -26,7 +26,7 @@ Scene& Scene::render() {
 
     ofDrawGrid(100, 100, false, false, true, false);
     for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
-        (*it)->draw();
+        (*it)->draw(Vector3(0, 0, 0));
     }
     ofPopMatrix();
     return *this;

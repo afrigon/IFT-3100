@@ -39,7 +39,9 @@ uint64_t GameObject::getID() const {
 
 void GameObject::update() {}
 
-void GameObject::draw() {
+void GameObject::draw(Vector3 globalPosition) {
+    globalPosition += transform->position;
+
     ofPushMatrix();  // Push the matrix and remove after the childs
 
     // Move the matrix using the transform
@@ -52,7 +54,7 @@ void GameObject::draw() {
     //Find and enable the lights
     std::vector<LightSourceComponent*> lights = getComponents<LightSourceComponent>();
     for(auto it = lights.begin(); it != lights.end(); ++it) {
-        (*it)->setPosition(transform->position);
+        (*it)->setPosition(globalPosition);
         (*it)->enable();
     }
 
@@ -76,7 +78,7 @@ void GameObject::draw() {
 
     // Draw all the childs
     for (auto it = children.begin(); it != children.end(); ++it) {
-        (*it)->draw();
+        (*it)->draw(globalPosition);
     }
 
     //Disable the lights

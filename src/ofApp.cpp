@@ -16,20 +16,15 @@ void ofApp::setup() {
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Game Engine");
 
-    cam.setVFlip(true);
-
     outputTime = false;
     outputKey = true;      //MUST BE FALSE ON FINAL BUILD : SOME KEYS ARE CRASHING THE PRINT
     takeScreenshotOnNext = false;
     if (outputTime) lastElapsed = ofGetElapsedTimeMicros();
 
-    light = ofLight();
-    light.setPosition(0, 0, 500);
-
     this->scenes.push_back(DemoScene::generateEmpty());
     
     UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[0])));
-    UIKit::UIWindow::shared()->mainCamera = &cam;
+    UIKit::UIWindow::shared()->mainCamera = &(scenes[0].getCamera());
 }
 
 void ofApp::update() {
@@ -37,21 +32,15 @@ void ofApp::update() {
 }
 
 void ofApp::draw() {
-    cam.begin();
-
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofEnableDepthTest();
-    //light.enable();
     ofEnableSeparateSpecularLight();
 
     scenes[currentScene].render();
 
     ofDisableDepthTest();
-    light.disable();
     ofDisableLighting();
     ofDisableSeparateSpecularLight();
-
-    cam.end();
 
     if (outputTime) {
         std::cout << "Elapsed Micros : " << ofGetElapsedTimeMicros() - lastElapsed << std::endl;
@@ -66,35 +55,67 @@ void ofApp::keyPressed(int key) {
     if(outputKey) {
         std::cout << "Key pressed" << key << std::endl;
     }
-    switch (key) {
-        // ctrl + s || print screen (doesn't work on windows)
-        case 19:
+    //Checking the ctrl key because ctrl + key sends a int ranging from 8-ish to 30-ish
+    // (include the tab (9) and the backspace(8))
+    switch(key) {
+            //ctrl + s || print screen (doesn't work on windows)
+        case 19: if(!ofGetKeyPressed(OF_KEY_CONTROL)) { return; }
         case 63248: takeScreenshotOnNext = true; break;
-        //Control + n
-        case 14:
-            scenes.push_back(Scene());
-            currentScene = scenes.size() - 1;
-            UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[currentScene])));
+
+            //Control + e
+        case 5:
+            if(ofGetKeyPressed(OF_KEY_CONTROL)) {
+                ofEasyCam* cam = &(scenes[currentScene].getCamera());
+                if(cam->getOrtho()) { cam->disableOrtho(); } else { cam->enableOrtho(); }
+            }
             break;
-        //Control + w
+
+            //Control + g
+        case 7:
+            if(ofGetKeyPressed(OF_KEY_CONTROL)) {
+                scenes[currentScene].setGridEnabled(!scenes[currentScene].getGridEnabled());
+            }
+            break;
+
+            //Control + n
+        case 14:
+            if(ofGetKeyPressed(OF_KEY_CONTROL)) {
+                scenes[currentScene].disableCam();
+                scenes.push_back(Scene());
+                currentScene = scenes.size() - 1;
+                UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[currentScene])));
+                scenes[currentScene].enableCam();
+                UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
+            }
+            break;
+
+            //Control + w
         case 23:
-            {
+            if(ofGetKeyPressed(OF_KEY_CONTROL)) {
                 vector<Scene>::const_iterator it = scenes.cbegin();
                 it += currentScene;
+                scenes[currentScene].disableCam();
                 scenes.erase(it);
                 if(scenes.empty()) { scenes.push_back(Scene()); }
                 if(--currentScene < 0) { currentScene = 0; }
                 UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[currentScene])));
-                break;
+                scenes[currentScene].enableCam();
+                UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
             }
-        //Tab (and then look for control
+            break;
+
+            //Tab
         case 9:
+            //ctrl + tab
             if(ofGetKeyPressed(OF_KEY_CONTROL)) {
+                scenes[currentScene].disableCam();
                 if(ofGetKeyPressed(OF_KEY_LEFT_SHIFT) || ofGetKeyPressed(OF_KEY_RIGHT_SHIFT)) {
                     if(--currentScene < 0) currentScene = scenes.size() - 1;
                 } else
                     if(++currentScene == scenes.size()) { currentScene = 0; }
                 UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[currentScene])));
+                scenes[currentScene].enableCam();
+                UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
             }
     }
 }

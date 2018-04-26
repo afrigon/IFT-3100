@@ -50,11 +50,11 @@ class ViewController: public UIKit::UIViewController, public UIKit::UITableViewD
     void selectGameObject(GameObject* go);
     void didAddComponent(GameObject &);
  public:
-    ViewController(Scene* scene): scene(scene) {}
+    ViewController(Scene* scene) : scene(scene) {}
     void addGameObject(UIKit::UIView &);
     void addComponent(UIKit::UIView &);
 
-    void onKeyPressed(ofKeyEventArgs& e);
+    void onKeyPressed(ofKeyEventArgs& e) override;
 };
 
 #endif  // VIEWCONTROLLER_H_

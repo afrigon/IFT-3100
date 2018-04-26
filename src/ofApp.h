@@ -22,10 +22,7 @@ class ofApp: public ofBaseApp {
     bool takeScreenshotOnNext;
     uint64_t lastElapsed;
 
-    ofEasyCam cam;
-
  public:
-    ofLight	light;
 
     void setup();
     void update();

@@ -15,5 +15,7 @@
 #include "UITableView.h"
 #include "UILabel.h"
 #include "UIButton.h"
+#include "UITextfield.h"
+#include "UINumericField.h"
 
 #endif  // UIKIT_UIKIT_H_

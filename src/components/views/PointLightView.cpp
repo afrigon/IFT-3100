@@ -1,4 +1,4 @@
-#include "src\components\views\PointLightView.h"
+#include "PointLightView.h"
 
 Components::Views::PointLight::PointLight(Components::PointLight * pointLight) : Base(pointLight->name), pointLight(pointLight) {
     if(!pointLight) return;

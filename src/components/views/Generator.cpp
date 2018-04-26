@@ -19,6 +19,17 @@ void Components::Views::LabeledView::setName(string name) {
     this->label->frame = UIKit::CGRect(10, 0, this->label->widthFor(name), this->height);
 }
 
+Components::Views::TextView::TextView(string text) {
+    this->value = new UIKit::UITextfield(text);
+    this->value->value.setFontSize(8);
+    this->value->value.textAlignment = UIKit::TextAlignment::left;
+    this->addSubview(this->value);
+}
+
+void Components::Views::TextView::setValue(string value) {
+    this->value->value.text = value;
+}
+
 Components::Views::Vector3View::Vector3View() {
     for (int i = 0; i < 3; ++i) {
         this->valueLabels[i] = new UIKit::UIButton("0");
@@ -210,6 +221,13 @@ Components::Views::NumericView* Components::Views::Generator::numeric(string nam
     Components::Views::NumericView* view = new Components::Views::NumericView();
     view->setName(name);
     view->setValue(value);
+    return view;
+}
+
+Components::Views::TextView * Components::Views::Generator::text(string name, string value) {
+    Components::Views::TextView* view = new Components::Views::TextView();
+    view->setName(name);
+    view->value->value.text = value;
     return view;
 }
 

@@ -7,6 +7,8 @@
 
 #include "UIKit/UILabel.h"
 
+unordered_map<int, ofTrueTypeFont>* UIKit::UILabel::fonts = new unordered_map<int, ofTrueTypeFont>();
+
 UIKit::UILabel::UILabel(string text): text(text) {
     this->loadFont();
     this->backgroundColor = ofColor(0, 0);
@@ -18,7 +20,14 @@ void UIKit::UILabel::setFontSize(int fontSize) {
 }
 
 void UIKit::UILabel::loadFont() {
-    this->font.load("nunito.ttf", this->fontSize);
+    unordered_map<int, ofTrueTypeFont>::iterator it = UIKit::UILabel::fonts->find(this->fontSize);
+    if(it == UIKit::UILabel::fonts->end()) {
+        this->font = new ofTrueTypeFont();
+        this->font->load("nunito.ttf", this->fontSize);
+        UIKit::UILabel::fonts->insert(pair<int, ofTrueTypeFont>(this->fontSize, *(this->font)));
+    } else {
+        this->font = &(it->second);
+    }
 }
 
 void UIKit::UILabel::draw(UIKit::CGRect rect) {
@@ -29,14 +38,14 @@ void UIKit::UILabel::draw(UIKit::CGRect rect) {
     switch (this->textAlignment) {
         case TextAlignment::left: (x = rect.origin.x + this->frame.origin.x + this->padding); break;
         case TextAlignment::right:
-            x = rect.origin.x + this->frame.origin.x + this->frame.size.width + this->font.stringWidth(this->text) - this->padding;
+            x = rect.origin.x + this->frame.origin.x + this->frame.size.width + this->font->stringWidth(this->text) - this->padding;
             break;
         case TextAlignment::center:
-            x = rect.origin.x + this->frame.origin.x + this->frame.size.width / 2 - this->font.stringWidth(this->text) / 2;
+            x = rect.origin.x + this->frame.origin.x + this->frame.size.width / 2 - this->font->stringWidth(this->text) / 2;
             break;
     }
-    float stringHeight = this->font.stringHeight(this->text);
-    this->font.drawString(this->text, x, rect.origin.y + this->frame.origin.y + (this->frame.size.height - stringHeight) / 2 + stringHeight);
+    float stringHeight = this->font->stringHeight(this->text);
+    this->font->drawString(this->text, x, rect.origin.y + this->frame.origin.y + (this->frame.size.height - stringHeight) / 2 + stringHeight);
 
     for (std::list<UIView*>::iterator it = this->subviews.begin(); it != this->subviews.end(); ++it) {
         (*it)->draw(rect + this->frame);
@@ -44,5 +53,5 @@ void UIKit::UILabel::draw(UIKit::CGRect rect) {
 }
 
 double UIKit::UILabel::widthFor(string text) {
-    return this->font.stringWidth(text) + (this->textAlignment == TextAlignment::center ? 0 : this->padding * 2);
+    return this->font->stringWidth(text) + (this->textAlignment == TextAlignment::center ? 0 : this->padding * 2);
 }

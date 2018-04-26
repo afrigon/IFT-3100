@@ -25,6 +25,13 @@ struct LabeledView: public UIKit::UIView {
     void setName(string name);
 };
 
+struct TextView : public LabeledView {
+    UIKit::UITextfield* value;
+
+    TextView(std::string text = "");
+    void setValue(std::string);
+};
+
 struct Vector3View: public LabeledView {
     const double spacing = 50;
     UIKit::UIButton* valueLabels [3];
@@ -85,6 +92,7 @@ struct Generator {
     static Vector3View* vector3(string, Vector3);
     static ColorView* color(string, ofColor*);
     static NumericView* numeric(string, double);
+    static TextView* text(string, string);
     static FilePickerView* file(string, string);
     static string numericToString(double, int = 2);
     static string numericToIntString(double);

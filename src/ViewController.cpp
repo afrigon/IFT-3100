@@ -113,7 +113,7 @@ void ViewController::addComponent(UIKit::UIView & view) {
 
 void ViewController::onKeyPressed(ofKeyEventArgs & e) {
     switch(e.key) {
-        case 356: //LEFT
+        case 356: //LEFT 
             if(selectedGameObject)
                 if(selectedGameObject->getParent()) {
                     selectedGameObject->getParent()->removeChild(selectedGameObject);
@@ -125,8 +125,8 @@ void ViewController::onKeyPressed(ofKeyEventArgs & e) {
                     this->hierarchyPanel->reloadData();
                 }
             break;
-        case 357: //UP
-            //Terrorist style because no more time
+        case 357: //UP 
+                  //Terrorist style because no more time 
             if(selectedGameObject) {
                 if(selectedGameObject->getParent()) {
                     list<GameObject*>::const_iterator hisIt = selectedGameObject->getParent()->getChildren().cend();
@@ -158,7 +158,7 @@ void ViewController::onKeyPressed(ofKeyEventArgs & e) {
                 }
             }
             break;
-        case 358: //RIGHT
+        case 358: //RIGHT 
             if(selectedGameObject) {
                 GameObject* newParent = nullptr;
                 if(selectedGameObject->getParent()) {
@@ -184,8 +184,8 @@ void ViewController::onKeyPressed(ofKeyEventArgs & e) {
                 }
             }
             break;
-        case 359: //DOWN
-            //Terrorist style because no more time
+        case 359: //DOWN 
+                  //Terrorist style because no more time 
             if(selectedGameObject) {
                 if(selectedGameObject->getParent()) {
                     list<GameObject*>::const_iterator hisIt = selectedGameObject->getParent()->getChildren().cend();

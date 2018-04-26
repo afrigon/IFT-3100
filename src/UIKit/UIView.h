@@ -47,9 +47,9 @@ struct CGRect {
 };
 
 class UIView {
-    bool focus = false;
-    
  protected:
+    bool focus = false;
+
     UIView* superview;
     std::list<UIView*> subviews;
 
@@ -68,6 +68,8 @@ class UIView {
     ofEvent<UIView> onrightclick;
     ofEvent<UIView> onfocus;
     ofEvent<UIView> onblur;
+    ofEvent<pair<UIView, int>> onkeypressed;
+    ofEvent<pair<UIView, int>> onkeyreleased;
 
     UIView() {}
     ~UIView();

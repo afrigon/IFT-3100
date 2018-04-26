@@ -13,7 +13,9 @@ enum class UIEvent {
     click,
     mousedown,
     mouseup,
-    rightclick
+    rightclick,
+    keypressed,
+    keyreleased
 };
 }  // namespace UIKit
 

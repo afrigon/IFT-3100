@@ -39,7 +39,7 @@ class GameObject {
     uint64_t getID() const;
     
     void update();
-    void draw();
+    void draw(Vector3 globalPosition);
 
     // Returns a reference on the transform pointer
     Components::Transform*& getTransform() { return transform; }

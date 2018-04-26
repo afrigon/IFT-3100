@@ -10,6 +10,7 @@
 
 #include <list>
 #include <string>
+#include <map>
 using std::string;
 
 #include "UIView.h"
@@ -22,7 +23,8 @@ enum class TextAlignment {
 };
     
 class UILabel: public UIView {
-    ofTrueTypeFont font;
+    static unordered_map<int, ofTrueTypeFont>* fonts;
+    ofTrueTypeFont* font;
     int fontSize = 12;
 
  public:

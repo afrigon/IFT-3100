@@ -180,7 +180,7 @@ Components::Views::SwitchView::SwitchView() {
 
 void Components::Views::SwitchView::setValue(int value) {
     this->selectedIndex = value;
-    if (value < 0 && value >= this->choices.size()) return;
+    if (value < 0 || value >= this->choices.size()) return;
     this->valueLabel->text = this->choices[value];
     this->valueLabel->frame = UIKit::CGRect(130, 0, 300-130, this->height);
 }

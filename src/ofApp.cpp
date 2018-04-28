@@ -14,7 +14,7 @@ void ofApp::setup() {
     ofSetBackgroundColor(75);
     ofSetFrameRate(60);
     ofSetDepthTest(true);
-    ofSetWindowTitle("Super Epic Game Engine");
+    ofSetWindowTitle("Super Epic Not Game Engine");
 
     outputTime = false;
     outputKey = true;      //MUST BE FALSE ON FINAL BUILD : SOME KEYS ARE CRASHING THE PRINT
@@ -25,6 +25,8 @@ void ofApp::setup() {
     
     UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[0])));
     UIKit::UIWindow::shared()->mainCamera = &(scenes[0].getCamera());
+    
+    this->shader.load("shader");
 }
 
 void ofApp::update() {
@@ -36,7 +38,7 @@ void ofApp::draw() {
     ofEnableDepthTest();
     ofEnableSeparateSpecularLight();
 
-    scenes[currentScene].render();
+    scenes[currentScene].render(this->shader);
 
     ofDisableDepthTest();
     ofDisableLighting();
@@ -103,20 +105,21 @@ void ofApp::keyPressed(int key) {
                 UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
             }
             break;
-
-            //Tab
-        case 9:
-            //ctrl + tab
-            if(ofGetKeyPressed(OF_KEY_CONTROL)) {
-                scenes[currentScene].disableCam();
-                if(ofGetKeyPressed(OF_KEY_LEFT_SHIFT) || ofGetKeyPressed(OF_KEY_RIGHT_SHIFT)) {
-                    if(--currentScene < 0) currentScene = scenes.size() - 1;
-                } else
-                    if(++currentScene == scenes.size()) { currentScene = 0; }
-                UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[currentScene])));
-                scenes[currentScene].enableCam();
-                UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
-            }
+            //[]
+        case 91:
+            scenes[currentScene].disableCam();
+            if(--currentScene < 0) currentScene = scenes.size() - 1;
+            UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[currentScene])));
+            scenes[currentScene].enableCam();
+            UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
+            break;
+        case 93:
+            scenes[currentScene].disableCam();
+            if(++currentScene == scenes.size()) { currentScene = 0; }
+            UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[currentScene])));
+            scenes[currentScene].enableCam();
+            UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
+            break;
     }
 }
 

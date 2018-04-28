@@ -13,7 +13,7 @@ Components::Views::Model::Model(Components::Model* model): Base(model->name), mo
     this->filePicker->delegate = this;
     this->contentView->addSubview(this->filePicker);
     
-    this->vertexView = Components::Views::Generator::numeric("Vertices:", this->model->getVertexCount());
+    this->vertexView = Components::Views::Generator::numeric("Vertices: ", this->model->getVertexCount());
     this->vertexView->decimalCount = 0;
     this->vertexView->setValue(this->model->getVertexCount());
     this->vertexView->valueLabel->isUserInteractionEnabled = false;

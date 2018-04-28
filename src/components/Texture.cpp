@@ -9,16 +9,12 @@
 #include "views/TextureView.h"
 
 Components::Texture::Texture() {
-    this->name = "Material";
+    this->name = "Texture";
 }
-
-//ofTexture& Components::Texture::getTexture() {
-//    return tex;
-//}
 
 bool Components::Texture::loadTexture(string path) {
     this->path = path;
-    if((isLoaded = ofLoadImage(tex, path))) {
+    if ((isLoaded = ofLoadImage(tex, path))) {
         this->setWrappingMode(GL_REPEAT, GL_REPEAT);
         try {
             //GenerateMipmap fails if the image in invalid (such as non-power of 2)
@@ -34,11 +30,11 @@ string Components::Texture::getPath() {
 }
 
 void Components::Texture::bindTexture(int location) {
-    if(isLoaded) tex.bind(location);
+    if (isLoaded) tex.bind(location);
 }
 
 void Components::Texture::unbindTexture(int location) {
-    if(isLoaded) tex.unbind(location);
+    if (isLoaded) tex.unbind(location);
 }
 
 void Components::Texture::setWrappingMode(GLint wrapModeHorizontal, GLint wrapModeVertical) {

@@ -10,6 +10,7 @@
 
 #include <cmath>
 #include <string>
+#include <vector>
 using std::string;
 
 #include "UIKit.h"
@@ -53,7 +54,7 @@ class ColorView: public LabeledView {
     void rightclick(UIView&);
     
  public:
-    const double spacing = 40;
+    const double spacing = 35;
     
     UIKit::UIButton* valueLabels [4];
     UIKit::UIButton* modeLabel = new UIKit::UIButton("RGB");
@@ -71,6 +72,15 @@ struct NumericView: public LabeledView {
     
     NumericView();
     void setValue(double);
+};
+    
+struct SwitchView: public LabeledView {
+    UIKit::UIButton* valueLabel = new UIKit::UIButton("");
+    vector<string> choices;
+    int selectedIndex = -1;
+    
+    SwitchView();
+    void setValue(int);
 };
 
 struct FilePickerDelegate {
@@ -92,6 +102,7 @@ struct Generator {
     static Vector3View* vector3(string, Vector3);
     static ColorView* color(string, ofColor*);
     static NumericView* numeric(string, double);
+    static SwitchView* switchView(string, vector<string>, int);
     static TextView* text(string, string);
     static FilePickerView* file(string, string);
     static string numericToString(double, int = 2);

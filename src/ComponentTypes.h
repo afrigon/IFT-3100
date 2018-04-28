@@ -28,6 +28,7 @@ enum class ComponentTypes {
     SpotLight,
     Texture,
     Cubemap,
+    ParametricCurve,
     Material,
     LAST
 };
@@ -49,6 +50,7 @@ class ComponentStore {
             case ComponentTypes::SpotLight: return new SpotLight();
             case ComponentTypes::Texture: return new Texture();
             case ComponentTypes::Cubemap: return new Cubemap();
+            case ComponentTypes::ParametricCurve: return new ParametricCurves();
             case ComponentTypes::Material: return new Material();
             default: return nullptr;
         }

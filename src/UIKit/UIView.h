@@ -78,9 +78,11 @@ class UIView {
     uint64_t getID() const;
     
     virtual void didAddSubview(UIView*) {}
+    virtual void didRemoveSubview(UIView*) {}
     virtual void willRemoveSubview(UIView*) {}
     
     void addSubview(UIView*);
+    void removeSubview(UIView*);
     void removeFromSuperView();
     virtual void layoutSubviews();
     virtual void draw(CGRect);

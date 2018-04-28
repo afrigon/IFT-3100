@@ -39,6 +39,9 @@ class ofApp: public ofBaseApp {
     void dragEvent(ofDragInfo dragInfo);
 
     void takeScreenshot();
+    const vector<Scene> getScenes() { return this->scenes; }
+    int getScenesCount() { return this->scenes.size(); }
+    int getCurrentSceneIndex() { return this->currentScene; }
 };
 
 #endif  // OFAPP_H_

@@ -22,7 +22,7 @@ Scene& Scene::remove(GameObject* o) {
     return *this;
 }
 
-Scene& Scene::render() {
+Scene& Scene::render(ofShader shader) {
     cam.begin();
 
     ofPushMatrix();
@@ -35,7 +35,7 @@ Scene& Scene::render() {
     }
 
     for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
-        (*it)->draw(Vector3(0, 0, 0));
+        (*it)->draw(Vector3(0, 0, 0), shader);
     }
     ofPopMatrix();
 

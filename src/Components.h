@@ -26,6 +26,7 @@
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "SpotLight.h"
+#include "Material.h"
 
 #endif  // COMPONENTS_COMPONENTS_H_
 

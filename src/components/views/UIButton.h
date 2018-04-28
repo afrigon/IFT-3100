@@ -18,7 +18,7 @@ class UIButton: public UIKit::UILabel {
     
  public:
     UIButton(string text = "Button");
-    ~UIButton();
+    
     void mousedown(UIView&);
     void mouseup(UIView&);
 };

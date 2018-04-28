@@ -13,16 +13,12 @@ Components::Model::Model() {
 }
 
 void Components::Model::render(bool useTexture) {
+    if(!model.hasMeshes()) return;
     if (model.hasAnimations()) model.update();
-    if(model.hasMeshes()) {
-        if(useTexture) {
-            model.disableTextures();
-            model.drawFaces();
-            model.enableTextures();
-        } else {
-            model.drawFaces();
-        }
-    }
+    useTexture
+    ? model.disableMaterials()
+    : model.enableMaterials();
+    model.drawFaces();
 }
 
 bool Components::Model::loadModel(std::string path) {

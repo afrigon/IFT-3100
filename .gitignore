@@ -5,7 +5,8 @@
 Makefile
 *.make
 *.xcodeproj
-bin
+*.app
+*.exe
 build
 obj
 .vs

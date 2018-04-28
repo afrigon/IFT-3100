@@ -23,7 +23,7 @@ void UIKit::UILabel::loadFont() {
     unordered_map<int, ofTrueTypeFont>::iterator it = UIKit::UILabel::fonts->find(this->fontSize);
     if(it == UIKit::UILabel::fonts->end()) {
         this->font = new ofTrueTypeFont();
-        this->font->load("nunito.ttf", this->fontSize);
+        this->font->load("Roboto-Regular.ttf", this->fontSize);
         UIKit::UILabel::fonts->insert(pair<int, ofTrueTypeFont>(this->fontSize, *(this->font)));
     } else {
         this->font = &(it->second);

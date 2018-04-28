@@ -82,7 +82,7 @@ Components::Views::ColorView::~ColorView() {
 
 void Components::Views::ColorView::setValue() {
     for (int i = 0; i < 4; ++i) {
-        this->valueLabels[i]->frame = UIKit::CGRect(i * (this->spacing + (this->showAlpha ? 0 : 10)) + 125, 0, this->spacing + (this->showAlpha ? 0 : 10), this->height);
+        this->valueLabels[i]->frame = UIKit::CGRect(i * (this->spacing + (this->showAlpha ? 0 : 10)) + 150, 0, this->spacing + (this->showAlpha ? 0 : 10), this->height);
     }
     
     if (!this->showAlpha) {
@@ -92,8 +92,8 @@ void Components::Views::ColorView::setValue() {
     }
     
     this->colorView->backgroundColor = *this->color;
-    this->colorView->frame = UIKit::CGRect(60, 3, this->height - 6, this->height - 6);
-    this->modeLabel->frame = UIKit::CGRect(100, 0, this->height, this->height);
+    this->colorView->frame = UIKit::CGRect(80, 3, this->height - 6, this->height - 6);
+    this->modeLabel->frame = UIKit::CGRect(120, 0, this->height, this->height);
     
     switch (this->mode) {
         case ColorMode::RGB:
@@ -171,6 +171,20 @@ void Components::Views::NumericView::setValue(double value) {
     this->valueLabel->text = Components::Views::Generator::numericToString(value, this->decimalCount);
 }
 
+Components::Views::SwitchView::SwitchView() {
+    this->valueLabel->textColor = ofColor(20);
+    this->valueLabel->setFontSize(8);
+    this->valueLabel->textAlignment = UIKit::TextAlignment::center;
+    this->addSubview(this->valueLabel);
+}
+
+void Components::Views::SwitchView::setValue(int value) {
+    this->selectedIndex = value;
+    if (value < 0 && value >= this->choices.size()) return;
+    this->valueLabel->text = this->choices[value];
+    this->valueLabel->frame = UIKit::CGRect(130, 0, 300-130, this->height);
+}
+
 Components::Views::FilePickerView::FilePickerView() {
     this->pathLabel->textColor = ofColor(20);
     this->pathLabel->setFontSize(7);
@@ -190,8 +204,8 @@ Components::Views::FilePickerView::~FilePickerView() {
 }
 
 void Components::Views::FilePickerView::setValue(string path) {
-    this->button->frame = UIKit::CGRect(50, 5, 50, this->height - 10);
-    this->pathLabel->frame = UIKit::CGRect(60 + 50, 0, 300-60-50, this->height);
+    this->button->frame = UIKit::CGRect(120, 5, 50, this->height - 10);
+    this->pathLabel->frame = UIKit::CGRect(60 + 120, 0, 300-60-120-10, this->height);
     this->pathLabel->text = path;
 }
 
@@ -220,6 +234,14 @@ Components::Views::ColorView* Components::Views::Generator::color(string name, o
 Components::Views::NumericView* Components::Views::Generator::numeric(string name, double value) {
     Components::Views::NumericView* view = new Components::Views::NumericView();
     view->setName(name);
+    view->setValue(value);
+    return view;
+}
+
+Components::Views::SwitchView* Components::Views::Generator::switchView(string name, vector<string> choices, int value) {
+    Components::Views::SwitchView* view = new Components::Views::SwitchView();
+    view->setName(name);
+    view->choices = choices;
     view->setValue(value);
     return view;
 }

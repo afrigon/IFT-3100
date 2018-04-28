@@ -14,6 +14,7 @@ using std::list;
 
 #include "GameObject.h"
 #include "components/RenderableComponent.h"
+#include "ofShader.h"
 
 class Scene {
     ofEasyCam cam;
@@ -25,7 +26,7 @@ class Scene {
     Scene();
     Scene& addObject(GameObject* o);
     Scene& remove(GameObject* o);
-    Scene& render();
+    Scene& render(ofShader shader);
     list<GameObject*>& getGameObjects() { return gameObjects; }
     unsigned int getGameObjectCount();
     GameObject* getGameObjectAt(unsigned int index);

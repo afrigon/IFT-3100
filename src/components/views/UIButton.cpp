@@ -14,10 +14,6 @@ UIKit::UIButton::UIButton(string text): UIKit::UILabel(text) {
     ofAddListener(this->onmouseup, this, &UIKit::UIButton::mouseup);
 }
 
-UIKit::UIButton::~UIButton() {
-    
-}
-
 void UIKit::UIButton::mousedown(UIKit::UIView & view) {
     this->storedTextColor = this->textColor;
     this->textColor.setBrightness(min((this->textColor.getBrightness() + 60.0), 255.0));

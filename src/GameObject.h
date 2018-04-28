@@ -20,6 +20,8 @@ using std::string;
 #include "components/LightSourceComponent.h"
 #include "components/Transform.h"
 #include "components/Texture.h"
+#include "components/Material.h"
+#include "ofShader.h"
 
 class GameObject {
     Components::Transform* transform;
@@ -39,7 +41,7 @@ class GameObject {
     uint64_t getID() const;
     
     void update();
-    void draw(Vector3 globalPosition);
+    void draw(Vector3 globalPosition, ofShader shader);
 
     // Returns a reference on the transform pointer
     Components::Transform*& getTransform() { return transform; }

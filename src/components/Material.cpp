@@ -56,6 +56,7 @@ void Components::Material::setupShader(ofShader shader) {
     if (this->diffuse.isLoaded) shader.setUniformTexture("diffuseMap", this->diffuse.getMap(), 2);
     if (this->specular.isLoaded) shader.setUniformTexture("specularMap", this->specular.getMap(), 3);
     if (this->normal.isLoaded) shader.setUniformTexture("normalMap", this->normal.getMap(), 4);
+    if (this->reflection.isLoaded) shader.setUniformTexture("reflectionMap", this->reflection.getMap(), 5);
     
     int color = this->ambientColor.getHex();
     shader.setUniform3f("colorAmbient",  ((color >> 16) & 0xFF) / 255.0, ((color >> 8) & 0xFF) / 255.0, (color & 0xFF) / 255.0);

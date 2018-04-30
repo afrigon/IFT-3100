@@ -9,6 +9,7 @@
 #define OFAPP_H_
 
 #include "ofMain.h"
+#include "post/PostProcessing.h"
 #include "scene/Scene.h"
 #include "scene/DemoScene.h"
 #include "UIKit/UIKit.h"
@@ -21,6 +22,7 @@ class ofApp: public ofBaseApp {
     bool outputKey;
     bool takeScreenshotOnNext;
     uint64_t lastElapsed;
+    PostProcessing post;
 
  public:
     ofShader shader = ofShader();

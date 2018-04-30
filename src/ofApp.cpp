@@ -15,7 +15,9 @@ void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Not Game Engine");
-
+    
+    post.createPass<BloomPass>();
+    
     outputTime = false;
     outputKey = true;      //MUST BE FALSE ON FINAL BUILD : SOME KEYS ARE CRASHING THE PRINT
     takeScreenshotOnNext = false;
@@ -38,7 +40,9 @@ void ofApp::draw() {
     ofEnableDepthTest();
     ofEnableSeparateSpecularLight();
 
+    post.begin();
     scenes[currentScene].render(this->shader);
+    post.end();
 
     ofDisableDepthTest();
     ofDisableLighting();

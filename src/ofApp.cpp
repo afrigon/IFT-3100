@@ -16,9 +16,9 @@ void ofApp::setup() {
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Not Game Engine");
     
-//    post.createPass<StaticWavePass>();
+    post.createPass<StaticWavePass>();
 //    post.createPass<InversionPass>();
-    post.createPass<BloomPass>();
+//    post.createPass<BloomPass>();
     
     outputTime = false;
     outputKey = true;      //MUST BE FALSE ON FINAL BUILD : SOME KEYS ARE CRASHING THE PRINT

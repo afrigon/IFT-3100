@@ -48,7 +48,7 @@ void StaticWavePass::render(ofFbo& readFbo, ofFbo& writeFbo) {
     
     this->shader.begin();
     this->shader.setUniformTexture("readTex", readFbo, 1);
-    this->shader.setUniform1f("offset", this->offset);
+    this->shader.setUniform1f("offset", ofGetElapsedTimef() * 2*3.14159 * 0.75);
     this->texturedQuad(writeFbo.getWidth(), writeFbo.getHeight());
     this->shader.end();
     

@@ -15,7 +15,6 @@ class StaticWavePass: public RenderPass {
     
 public:
     typedef shared_ptr<StaticWavePass> Ptr;
-    float offset = 0;
     
     StaticWavePass();
     void render(ofFbo& readFbo, ofFbo& writeFbo);

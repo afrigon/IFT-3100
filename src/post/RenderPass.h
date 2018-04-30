@@ -8,9 +8,11 @@
 #ifndef POST_RENDERPASS_H_
 #define POST_RENDERPASS_H_
 
-#include "ofMain.h"
 #include <string>
 using std::string;
+
+#include "ofMain.h"
+#include "UIWindow.h"
 
 #define STRINGIFY(A) #A
 

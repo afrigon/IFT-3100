@@ -23,6 +23,7 @@ class ofApp: public ofBaseApp {
     bool takeScreenshotOnNext;
     uint64_t lastElapsed;
     PostProcessing post;
+    bool enablePost = true;
 
  public:
     ofShader shader = ofShader();

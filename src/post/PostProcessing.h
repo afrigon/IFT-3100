@@ -8,9 +8,14 @@
 #ifndef POST_POSTPROCESSING_H_
 #define POST_POSTPROCESSING_H_
 
+#include <vector>
+
 #include "RenderPass.h"
 #include "BloomPass.h"
-#include <vector>
+#include "BrightPass.h"
+#include "GaussianBlurPass.h"
+#include "InversionPass.h"
+#include "StaticWavePass.h"
 
 class PostProcessing {
     ofFbo raw;
@@ -22,7 +27,8 @@ class PostProcessing {
     
  public:
     PostProcessing();
-    void resize();
+    ~PostProcessing();
+    void resize(ofResizeEventArgs&);
     void begin();
     void end();
     

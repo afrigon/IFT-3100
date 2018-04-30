@@ -16,6 +16,8 @@ void ofApp::setup() {
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Not Game Engine");
     
+//    post.createPass<StaticWavePass>();
+//    post.createPass<InversionPass>();
     post.createPass<BloomPass>();
     
     outputTime = false;
@@ -40,13 +42,14 @@ void ofApp::draw() {
     ofEnableDepthTest();
     ofEnableSeparateSpecularLight();
 
-    post.begin();
+    if (this->enablePost) post.begin();
     scenes[currentScene].render(this->shader);
-    post.end();
-
+    
     ofDisableDepthTest();
     ofDisableLighting();
     ofDisableSeparateSpecularLight();
+    
+    if (this->enablePost) post.end();
 
     if (outputTime) {
         std::cout << "Elapsed Micros : " << ofGetElapsedTimeMicros() - lastElapsed << std::endl;
@@ -123,6 +126,10 @@ void ofApp::keyPressed(int key) {
             UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[currentScene])));
             scenes[currentScene].enableCam();
             UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
+            break;
+        //Control + p
+        case 16:
+            this->enablePost = !this->enablePost;
             break;
     }
 }

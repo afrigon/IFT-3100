@@ -5,9 +5,9 @@
 //  found in the LICENSE file.
 //
 
-#include "BloomPass.h"
+#include "BrightPass.h"
 
-BloomPass::BloomPass() {
+BrightPass::BrightPass() {
     ostringstream oss;
     string vertexShader = STRINGIFY(
         in vec4 position;
@@ -27,11 +27,14 @@ BloomPass::BloomPass() {
         out vec4 fragmentColor;
 
         uniform sampler2D readTex;
-        uniform sampler2D bloomedTex;
+        uniform float threshold;
 
         void main() {
-            fragmentColor = texture(readTex, varyingTexcoord) +
-                            texture(bloomedTex, varyingTexcoord);
+            fragmentColor = texture(readTex, varyingTexcoord);
+            float brightness = fragmentColor.r * 0.2125 + fragmentColor.g * 0.7154 + fragmentColor.b * 0.0721;
+            if (brightness <= threshold) {
+                fragmentColor = vec4(0.0);
+            }
         }
     );
     oss.str("");
@@ -41,29 +44,13 @@ BloomPass::BloomPass() {
     this->shader.linkProgram();
 }
 
-void BloomPass::render(ofFbo& readFbo, ofFbo& writeFbo) {
+void BrightPass::render(ofFbo& readFbo, ofFbo& writeFbo) {
     writeFbo.begin();
     ofClear(0, 0, 0, 255);
     
-    ofFbo pingPong[2];
-    ofFbo::Settings s;
-    
-    s.width = writeFbo.getWidth();
-    s.height = writeFbo.getHeight();
-    s.textureTarget = GL_TEXTURE_2D;
-    
-    pingPong[0].allocate(s);
-    pingPong[1].allocate(s);
-    
-    brightPass.render(readFbo, pingPong[0]);
-    gaussianBlurPass.direction = ofVec2f(1, 0);
-    gaussianBlurPass.render(pingPong[0], pingPong[1]);
-    gaussianBlurPass.direction = ofVec2f(0, 1);
-    gaussianBlurPass.render(pingPong[1], pingPong[0]);
-    
     this->shader.begin();
     this->shader.setUniformTexture("readTex", readFbo, 1);
-    this->shader.setUniformTexture("bloomedTex", pingPong[0], 2);
+    this->shader.setUniform1f("threshold", this->threshold);
     this->texturedQuad(writeFbo.getWidth(), writeFbo.getHeight());
     this->shader.end();
     

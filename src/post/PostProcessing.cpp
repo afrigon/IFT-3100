@@ -8,10 +8,15 @@
 #include "PostProcessing.h"
 
 PostProcessing::PostProcessing() {
+    ofAddListener(ofEvents().windowResized, this, &PostProcessing::resize);
     this->setup();
 }
 
-void PostProcessing::resize() {
+PostProcessing::~PostProcessing() {
+    ofRemoveListener(ofEvents().windowResized, this, &PostProcessing::resize);
+}
+
+void PostProcessing::resize(ofResizeEventArgs& args) {
     this->setup();
 }
 
@@ -20,8 +25,7 @@ void PostProcessing::setup() {
     
     s.width = ofNextPow2(ofGetWidth());
     s.height = ofNextPow2(ofGetHeight());
-    s.textureTarget = GL_TEXTURE_2D;
-    
+    s.textureTarget = GL_TEXTURE_2D;    
     this->pingPong[0].allocate(s);
     this->pingPong[1].allocate(s);
     
@@ -72,10 +76,11 @@ void PostProcessing::end() {
 }
 
 void PostProcessing::process() {
-    if (this->passes.size() <= 1) this->passes[0]->render(this->raw, this->pingPong[0]);
-    for (int i = 1; i < this->passes.size(); ++i) {
-        cout << "pass" << endl;
-        this->passes[i]->render(this->pingPong[i % 2 == 0 ? 1 : 0], this->pingPong[i % 2 != 0 ? 1 : 0]);
+    int currentReadFbo = 0;
+    for (int i = 0; i < passes.size(); ++i) {
+        if (i == 0) passes[i]->render(raw, pingPong[1 - currentReadFbo]);
+        else passes[i]->render(pingPong[currentReadFbo], pingPong[1 - currentReadFbo]);
+        currentReadFbo = 1 - currentReadFbo;
     }
 
     //fliped for ofEasyCam
@@ -84,9 +89,9 @@ void PostProcessing::process() {
     int h = ofGetHeight();
     glTranslatef(0, h, 0);
     glScalef(1, -1, 1);
-
-    if (this->passes.size() < 1) this->raw.draw(0, 0, w, h);
-    else this->pingPong[this->passes.size() % 2 == 0 ? 1 : 0].draw(0, 0, w, h);
+    
+    if (passes.size() == 0) raw.draw(0, 0, w, h);
+    else pingPong[currentReadFbo].draw(0, 0, w, h);
     
     glPopMatrix();
 }

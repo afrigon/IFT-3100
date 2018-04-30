@@ -9,8 +9,12 @@
 #define POST_BLOOMPASS_H_
 
 #include "RenderPass.h"
+#include "BrightPass.h"
+#include "GaussianBlurPass.h"
 
 class BloomPass: public RenderPass {
+    BrightPass brightPass;
+    GaussianBlurPass gaussianBlurPass;
     ofShader shader;
     
  public:

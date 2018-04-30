@@ -15,3 +15,8 @@ obj
 *.vcxproj.filters
 *.vcxproj.user
 icon.rc
+*.dll
+*.exp
+*.ilk
+*.lib
+*.pdb

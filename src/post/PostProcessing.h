@@ -26,6 +26,8 @@ class PostProcessing {
     void process();
     
  public:
+    int activeEffect = 0;
+    
     PostProcessing();
     ~PostProcessing();
     void resize(ofResizeEventArgs&);

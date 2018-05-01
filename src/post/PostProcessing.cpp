@@ -76,11 +76,15 @@ void PostProcessing::end() {
 }
 
 void PostProcessing::process() {
+    int processedCount = 0;
     int currentReadFbo = 0;
     for (int i = 0; i < passes.size(); ++i) {
-        if (i == 0) passes[i]->render(raw, pingPong[1 - currentReadFbo]);
-        else passes[i]->render(pingPong[currentReadFbo], pingPong[1 - currentReadFbo]);
-        currentReadFbo = 1 - currentReadFbo;
+        if ((this->activeEffect & static_cast<int>(pow(2, i))) != 0) {
+            if (i == 0) passes[i]->render(raw, pingPong[1 - currentReadFbo]);
+            else passes[i]->render(pingPong[currentReadFbo], pingPong[1 - currentReadFbo]);
+            currentReadFbo = 1 - currentReadFbo;
+            processedCount++;
+        }
     }
 
     //fliped for ofEasyCam
@@ -90,7 +94,7 @@ void PostProcessing::process() {
     glTranslatef(0, h, 0);
     glScalef(1, -1, 1);
     
-    if (passes.size() == 0) raw.draw(0, 0, w, h);
+    if (processedCount == 0) raw.draw(0, 0, w, h);
     else pingPong[currentReadFbo].draw(0, 0, w, h);
     
     glPopMatrix();

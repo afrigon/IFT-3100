@@ -16,9 +16,10 @@ void ofApp::setup() {
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Not Game Engine");
     
+    post.createPass<BloomPass>();
+    post.createPass<BrightPass>();
+    post.createPass<InversionPass>();
     post.createPass<StaticWavePass>();
-//    post.createPass<InversionPass>();
-//    post.createPass<BloomPass>();
     
     outputTime = false;
     outputKey = true;      //MUST BE FALSE ON FINAL BUILD : SOME KEYS ARE CRASHING THE PRINT
@@ -131,6 +132,14 @@ void ofApp::keyPressed(int key) {
         case 16:
             this->enablePost = !this->enablePost;
             break;
+        case 49:
+            this->post.activeEffect ^= 1; break;
+        case 50:
+            this->post.activeEffect ^= 2; break;
+        case 51:
+            this->post.activeEffect ^= 4; break;
+        case 52:
+            this->post.activeEffect ^= 8; break;
     }
 }
 

@@ -80,7 +80,7 @@ void PostProcessing::process() {
     int currentReadFbo = 0;
     for (int i = 0; i < passes.size(); ++i) {
         if ((this->activeEffect & static_cast<int>(pow(2, i))) != 0) {
-            if (i == 0) passes[i]->render(raw, pingPong[1 - currentReadFbo]);
+            if (processedCount == 0) passes[i]->render(raw, pingPong[1 - currentReadFbo]);
             else passes[i]->render(pingPong[currentReadFbo], pingPong[1 - currentReadFbo]);
             currentReadFbo = 1 - currentReadFbo;
             processedCount++;

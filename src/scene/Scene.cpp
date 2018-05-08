@@ -30,9 +30,7 @@ Scene& Scene::render(ofShader shader) {
     ofRotateX(-25);
     ofRotateY(-30);
 
-    if(gridEnabled) {
-        ofDrawGrid(100, 100, false, false, true, false);
-    }
+    if(gridEnabled) ofDrawGrid(100, 100, false, false, true, false);
 
     for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
         (*it)->draw(Vector3(0, 0, 0), shader);

@@ -15,7 +15,12 @@ void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetDepthTest(true);
     ofSetWindowTitle("Super Epic Not Game Engine");
-
+    
+    post.createPass<BloomPass>();
+    post.createPass<BrightPass>();
+    post.createPass<InversionPass>();
+    post.createPass<StaticWavePass>();
+    
     outputTime = false;
     outputKey = true;      //MUST BE FALSE ON FINAL BUILD : SOME KEYS ARE CRASHING THE PRINT
     takeScreenshotOnNext = false;
@@ -38,11 +43,14 @@ void ofApp::draw() {
     ofEnableDepthTest();
     ofEnableSeparateSpecularLight();
 
+    if (this->enablePost) post.begin();
     scenes[currentScene].render(this->shader);
-
+    
     ofDisableDepthTest();
     ofDisableLighting();
     ofDisableSeparateSpecularLight();
+    
+    if (this->enablePost) post.end();
 
     if (outputTime) {
         std::cout << "Elapsed Micros : " << ofGetElapsedTimeMicros() - lastElapsed << std::endl;
@@ -120,6 +128,18 @@ void ofApp::keyPressed(int key) {
             scenes[currentScene].enableCam();
             UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
             break;
+        //Control + p
+        case 16:
+            this->enablePost = !this->enablePost;
+            break;
+        case 49:
+            this->post.activeEffect ^= 1; break;
+        case 50:
+            this->post.activeEffect ^= 2; break;
+        case 51:
+            this->post.activeEffect ^= 4; break;
+        case 52:
+            this->post.activeEffect ^= 8; break;
     }
 }
 

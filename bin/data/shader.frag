@@ -3,6 +3,7 @@
 in vec3 viewSpacePosition;
 in vec3 viewSpaceNormal;
 in vec2 varyingTexcoord;
+in vec3 varyingReflectionDirection;
 
 out vec4 fragmentColor;
 
@@ -12,6 +13,7 @@ uniform sampler2D ambientMap;
 uniform sampler2D diffuseMap;
 uniform sampler2D specularMap;
 uniform sampler2D normalMap;
+uniform sampler2D reflectionMap;
 
 uniform vec3 colorAmbient;
 uniform vec3 colorDiffuse;

@@ -6,6 +6,8 @@ namespace Components
 {
     class SpotLight : public LightSourceComponent {
         Vector3 orientation = Vector3();
+        float cutOff = 45;
+        float concentration = 1;
 
         public:
         SpotLight();

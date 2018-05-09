@@ -15,10 +15,55 @@ Components::Model::Model() {
 void Components::Model::render(bool useTexture) {
     if(!model.hasMeshes()) return;
     if (model.hasAnimations()) model.update();
-    useTexture
-    ? model.disableMaterials()
-    : model.enableMaterials();
-    model.drawFaces();
+    
+    //Litteraly reusing the draw function of ofxassimp to adapt it using the shader
+    ofPushStyle();
+
+    ofPushMatrix();
+    ofMultMatrix(model.getModelMatrix());
+
+#ifndef TARGET_OPENGLES
+    glPolygonMode(GL_FRONT_AND_BACK, ofGetGLPolyMode(OF_MESH_FILL));
+#endif
+
+    for(unsigned int i = 0; i < model.getMeshCount(); i++) {
+        ofxAssimpMeshHelper & mesh = model.getMeshHelper(i);
+
+        ofPushMatrix();
+        ofScale(-1, 1, 1);
+        ofMultMatrix(mesh.matrix);
+
+        //Would need to set the flags
+        if(mesh.hasTexture()) {
+            mesh.getTextureRef().bind(1);
+            mesh.getTextureRef().bind(2);
+        }
+
+        //Would set the shininess here
+        /*if(bUsingMaterials) {
+            mesh.material.begin();
+        }*/
+
+        if(mesh.twoSided) {
+            glEnable(GL_CULL_FACE);
+        } else {
+            glDisable(GL_CULL_FACE);
+        }
+
+        ofEnableBlendMode(mesh.blendMode);
+
+        mesh.vbo.drawElements(GL_TRIANGLES, mesh.indices.size());
+
+        if(mesh.hasTexture()) {
+            mesh.getTextureRef().unbind(1);
+            mesh.getTextureRef().unbind(2);
+        }
+
+        ofPopMatrix();
+    }
+
+    ofPopMatrix();
+    ofPopStyle();
 }
 
 bool Components::Model::loadModel(std::string path) {

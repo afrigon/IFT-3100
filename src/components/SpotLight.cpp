@@ -3,7 +3,6 @@
 
 Components::SpotLight::SpotLight() {
     this->name = "SpotLight";
-    light.setSpotlight();
 }
 
 ofColor Components::SpotLight::getColor() {
@@ -15,11 +14,11 @@ Vector3 Components::SpotLight::getOrientation() {
 }
 
 float Components::SpotLight::getCutOff() {
-    return light.getSpotlightCutOff();
+    return cutOff;
 }
 
 float Components::SpotLight::getConcentration() {
-    return light.getSpotConcentration();
+    return concentration;
 }
 
 void Components::SpotLight::setColor(ofColor color) {
@@ -28,15 +27,14 @@ void Components::SpotLight::setColor(ofColor color) {
 
 void Components::SpotLight::setOrientation(Vector3 orientation) {
     this->orientation = orientation;
-    light.setOrientation(ofVec3f(orientation.getX(), orientation.getY(), orientation.getZ()));
 }
 
 void Components::SpotLight::setCutOff(float value) {
-    light.setSpotlightCutOff(value);
+    cutOff = value;
 }
 
 void Components::SpotLight::setConcentration(float value) {
-    light.setSpotConcentration(value);
+    concentration = value;
 }
 
 UIKit::UIView * Components::SpotLight::getUIView() {

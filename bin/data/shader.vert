@@ -13,7 +13,7 @@ uniform mat4x4 projectionMatrix;
 
 void main() {
     mat4x4 normalMatrix = transpose(inverse(modelViewMatrix));
-    viewSpaceNormal = vec3(normalMatrix * normal);
+    viewSpaceNormal = vec3(normal);
     viewSpacePosition = vec3(modelViewMatrix * position);
     gl_Position = projectionMatrix * modelViewMatrix * position;
     varyingTexcoord = texcoord;

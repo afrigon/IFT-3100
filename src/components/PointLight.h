@@ -8,6 +8,8 @@ namespace Components
         public:
         PointLight();
         PointLight* createInstance() override { return new PointLight(); }
+        void enable(ofShader shader) override;
+        void disable(ofShader shader) override;
         ofColor getColor();
         void setColor(ofColor color);
 

@@ -25,8 +25,8 @@ enum class ComponentTypes {
     AmbientLight,
     DirectionalLight,
     PointLight,
-    SpotLight,
-    Texture,
+    //SpotLight,    //Removed for new shader and I don't know how to compute it
+    //Texture,      //Changed for Material since 28/4/2018
     Cubemap,
     ParametricCurve,
     Material,
@@ -47,8 +47,8 @@ class ComponentStore {
             case ComponentTypes::AmbientLight: return new AmbientLight();
             case ComponentTypes::DirectionalLight: return new DirectionalLight();
             case ComponentTypes::PointLight: return new PointLight();
-            case ComponentTypes::SpotLight: return new SpotLight();
-            case ComponentTypes::Texture: return new Texture();
+            //case ComponentTypes::SpotLight: return new SpotLight();
+            //case ComponentTypes::Texture: return new Texture();
             case ComponentTypes::Cubemap: return new Cubemap();
             case ComponentTypes::ParametricCurve: return new ParametricCurves();
             case ComponentTypes::Material: return new Material();

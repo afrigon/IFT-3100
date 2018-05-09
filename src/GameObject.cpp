@@ -41,6 +41,8 @@ void GameObject::update() {}
 
 void GameObject::draw(Vector3 globalPosition, ofShader shader) {
     globalPosition += transform->position;
+    bool useShader = true;
+    shader.begin();
 
     ofPushMatrix();  // Push the matrix and remove after the childs
 
@@ -55,20 +57,11 @@ void GameObject::draw(Vector3 globalPosition, ofShader shader) {
     std::vector<LightSourceComponent*> lights = getComponents<LightSourceComponent>();
     for(auto it = lights.begin(); it != lights.end(); ++it) {
         (*it)->setPosition(globalPosition);
-        (*it)->enable();
+        (*it)->enable(shader);
     }
 
-    //Apply the textures
-//    std::vector<Components::Texture*> textures = getComponents<Components::Texture>();
-//    bool useTexture = !textures.empty();
-//    for(int i = 0; i < textures.size(); ++i) {
-//        textures[i]->bindTexture(i);
-//    }
-    bool useShader = false;
     std::vector<Components::Material*> material = this->getComponents<Components::Material>();
     if (material.size() > 0) {
-        useShader = true;
-        shader.begin();
         material[0]->setupShader(shader);
     }
     
@@ -78,12 +71,7 @@ void GameObject::draw(Vector3 globalPosition, ofShader shader) {
         (*it)->render(useShader);
     }
     
-    if (material.size() > 0) shader.end();
-
-    //Remove the textures
-//    for(int i = 0; i < textures.size(); ++i) {
-//        textures[i]->unbindTexture(i);
-//    }
+    shader.end();
 
     // Draw all the childs
     for (auto it = children.begin(); it != children.end(); ++it) {
@@ -92,7 +80,7 @@ void GameObject::draw(Vector3 globalPosition, ofShader shader) {
 
     //Disable the lights
     for(auto it = lights.begin(); it != lights.end(); ++it) {
-        (*it)->disable();
+        (*it)->disable(shader);
     }
 
     ofPopMatrix();  // Remove matrix before leaving to next object

@@ -25,9 +25,9 @@ enum class ComponentTypes {
     AmbientLight,
     DirectionalLight,
     PointLight,
-    SpotLight,
-    Texture,
-    Cubemap,
+    //SpotLight,    //Can't make it work in the shader properly :tears:
+    //Texture,      //Changed for Material since 28/4/2018
+    //Cubemap,      //As severly broken due to shader (textures aren't set properly in the shader)
     ParametricCurve,
     Material,
     LAST
@@ -47,9 +47,9 @@ class ComponentStore {
             case ComponentTypes::AmbientLight: return new AmbientLight();
             case ComponentTypes::DirectionalLight: return new DirectionalLight();
             case ComponentTypes::PointLight: return new PointLight();
-            case ComponentTypes::SpotLight: return new SpotLight();
-            case ComponentTypes::Texture: return new Texture();
-            case ComponentTypes::Cubemap: return new Cubemap();
+            //case ComponentTypes::SpotLight: return new SpotLight();
+            //case ComponentTypes::Texture: return new Texture();
+            //case ComponentTypes::Cubemap: return new Cubemap();
             case ComponentTypes::ParametricCurve: return new ParametricCurves();
             case ComponentTypes::Material: return new Material();
             default: return nullptr;

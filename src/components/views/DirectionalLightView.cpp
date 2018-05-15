@@ -41,18 +41,18 @@ void Components::Views::DirectionalLight::layoutSubviews() {
 
 void Components::Views::DirectionalLight::click(UIView & view) {
     switch(view.tag) {
-        case 0: this->directionalLight->setDirection(this->directionalLight->getDirection() + Vector3(10, 0, 0)); break;
-        case 1: this->directionalLight->setDirection(this->directionalLight->getDirection() + Vector3(0, 10, 0)); break;
-        case 2: this->directionalLight->setDirection(this->directionalLight->getDirection() + Vector3(0, 0, 10)); break;
+        case 0: this->directionalLight->setDirection(this->directionalLight->getDirection() + Vector3(1, 0, 0)); break;
+        case 1: this->directionalLight->setDirection(this->directionalLight->getDirection() + Vector3(0, 1, 0)); break;
+        case 2: this->directionalLight->setDirection(this->directionalLight->getDirection() + Vector3(0, 0, 1)); break;
     }
     this->directionView->setValue(this->directionalLight->getDirection());
 }
 
 void Components::Views::DirectionalLight::rightclick(UIView & view) {
     switch(view.tag) {
-        case 0: this->directionalLight->setDirection(this->directionalLight->getDirection() - Vector3(10, 0, 0)); break;
-        case 1: this->directionalLight->setDirection(this->directionalLight->getDirection() - Vector3(0, 10, 0)); break;
-        case 2: this->directionalLight->setDirection(this->directionalLight->getDirection() - Vector3(0, 0, 10)); break;
+        case 0: this->directionalLight->setDirection(this->directionalLight->getDirection() - Vector3(1, 0, 0)); break;
+        case 1: this->directionalLight->setDirection(this->directionalLight->getDirection() - Vector3(0, 1, 0)); break;
+        case 2: this->directionalLight->setDirection(this->directionalLight->getDirection() - Vector3(0, 0, 1)); break;
     }
     this->directionView->setValue(this->directionalLight->getDirection());
 }

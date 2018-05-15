@@ -41,9 +41,9 @@ namespace Components {
             reflection  (128)
          */
     public:
-        ofColor ambientColor = ofColor(40);
-        ofColor diffuseColor = ofColor(150);
-        ofColor specularColor = ofColor(75);
+        ofColor ambientColor = ofColor();
+        ofColor diffuseColor = ofColor();
+        ofColor specularColor = ofColor();
         
         Map ambient;
         Map diffuse;

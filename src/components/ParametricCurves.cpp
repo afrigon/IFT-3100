@@ -161,6 +161,10 @@ Components::curveTypes Components::ParametricCurves::getCurveType() {
 
 void Components::ParametricCurves::setCurveType(Components::curveTypes value) {
     this->curveStyle = value;
+    line.clear();
+    for(unsigned int i = 0; i <= this->precisionCount; ++i) {
+        line.addVertex(ofVec3f());
+    }
     this->updateLine();
 }
 

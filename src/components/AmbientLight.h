@@ -5,10 +5,13 @@
 namespace Components
 {
     class AmbientLight : public LightSourceComponent {
+        static char count;
+
         public:
         AmbientLight();
         AmbientLight* createInstance() override { return new AmbientLight(); }
-        void setupColor() override;
+        void enable(ofShader shader) override;
+        void disable(ofShader shader) override;
         ofColor getColor();
         void setColor(ofColor color);
 

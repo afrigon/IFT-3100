@@ -10,6 +10,8 @@ namespace Components
         public:
         DirectionalLight();
         DirectionalLight* createInstance() override { return new DirectionalLight(); }
+        void enable(ofShader shader) override;
+        void disable(ofShader shader) override;
         ofColor getColor();
         Vector3 getDirection();
         void setColor(ofColor color);

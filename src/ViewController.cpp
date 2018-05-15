@@ -113,6 +113,15 @@ void ViewController::addComponent(UIKit::UIView & view) {
 
 void ViewController::onKeyPressed(ofKeyEventArgs & e) {
     switch(e.key) {
+        case 127: //DELETE (to delete selected go)
+            if(selectedGameObject && scene) {
+                scene->remove(selectedGameObject);
+                delete selectedGameObject;
+                this->hierarchyPanel->reloadData();
+                this->selectedGameObject = 0;
+                this->selectGameObject(0);
+                //this->componentPanel->reloadData(); //Executed in selecGameObject(0);
+            }
         case 356: //LEFT 
             if(selectedGameObject)
                 if(selectedGameObject->getParent()) {

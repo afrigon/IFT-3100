@@ -10,7 +10,8 @@ void Components::DirectionalLight::enable(ofShader shader) {
         int color = this->color.getHex();
         std::string s = std::to_string(LightSourceComponent::count);
         shader.setUniform1i("lightCount", ++LightSourceComponent::count);
-        shader.setUniform4f("lights[" + s + "].position", direction.getX(), direction.getY(), direction.getZ(), 1.0);
+        shader.setUniform4f("lights[" + s + "].position", 0.0f, 0.0f, 0.0f, 1.0f);
+        shader.setUniform3f("lights[" + s + "].direction", this->direction.getX(), this->direction.getY(), this->direction.getZ());
         shader.setUniform4f("lights[" + s + "].color", ofVec4f(((color >> 16) & 0xFF) / 255.0, ((color >> 8) & 0xFF) / 255.0, (color & 0xFF) / 255.0, 1.0));
     }
 }

@@ -86,7 +86,10 @@ void ofApp::keyPressed(int key) {
                 scenes[currentScene].setGridEnabled(!scenes[currentScene].getGridEnabled());
             }
             break;
-
+            /* I fucked up the scenes system somehow, and since it doesn't have a use yet, it's not being fixed.
+                The flags? and the light count is shared through all scenes, which fucks up the shader
+                Fix: move the light count into scene instead of lightsourcecomponent or
+                     use a map in lightsourcecomponent to map the scene index with lights (cancer when adding/removing scenes)
             //Control + n
         case 14:
             if(ofGetKeyPressed(OF_KEY_CONTROL)) {
@@ -127,11 +130,12 @@ void ofApp::keyPressed(int key) {
             UIKit::UIWindow::shared()->setRootViewController(new ViewController(&(scenes[currentScene])));
             scenes[currentScene].enableCam();
             UIKit::UIWindow::shared()->mainCamera = &(scenes[currentScene].getCamera());
-            break;
+            break;*/
         //Control + p
         case 16:
             this->enablePost = !this->enablePost;
             break;
+        //1 - 4
         case 49:
             this->post.activeEffect ^= 1; break;
         case 50:

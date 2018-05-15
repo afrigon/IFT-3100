@@ -1,8 +1,10 @@
 #version 330
 
+in vec3 vPos;
+in vec3 vNorm;
 in vec3 viewSpacePosition;
 in vec3 viewSpaceNormal;
-in vec2 varyingTexcoord;
+in vec2 vTex;
 
 out vec4 fragmentColor;
 
@@ -14,9 +16,16 @@ uniform sampler2D specularMap;
 uniform sampler2D normalMap;
 uniform sampler2D reflectionMap;
 
+uniform mat4x4 modelViewMatrix;
+uniform mat4x4 projectionMatrix;
+
 struct PerLight {
     vec4 position;
+    vec3 direction;
     vec4 color;
+    
+    float cutOff;
+    float outerCutOff;
 	
     float constant;
     float linear;
@@ -59,33 +68,34 @@ vec3 calcLight(PerLight light, float attenuation, vec3 diff,
 
 
 void main() {
-    if(lightCount == 0) {
-        fragmentColor = vec4(colorAmbient, 1.0);
-        return;
-    }
-    vec3 N = normalize(viewSpaceNormal);
-    vec3 Nm = N;
-    vec3 V = normalize(-viewSpacePosition);
-    fragmentColor = vec4(0.0);
     
     // ambient
     vec4 ambientColor = vec4(colorAmbient, 1.0);
     if((flags & 8) != 0)
-        ambientColor = texture(ambientMap, varyingTexcoord) * vec4(colorAmbient, 1.0);
+        ambientColor = texture(ambientMap, vTex) * vec4(colorAmbient, 1.0);
     if(ambCount == 0) {
         fragmentColor += ambientColor;
     }
+    if(lightCount == 0) {
+        fragmentColor = ambientColor;
+        return;
+    }
+    
+    vec3 N = normalize(vNorm);
+    vec3 Nm = N;
+    if ((flags & 64) != 0) Nm = normalize(texture(normalMap, vTex).rgb * 2.0 - 1.0);
+    vec3 V = normalize(-viewSpacePosition);
+    fragmentColor = vec4(0.0);
     
     // diffuse
     vec4 diffuseColor = ((flags & 16) != 0)
-    ? texture(diffuseMap, varyingTexcoord)
+    ? texture(diffuseMap, vTex)
     : vec4(colorDiffuse, 1.0);
     
     // specular
     vec4 specularColor = vec4(colorSpecular, 1.0);
     if ((flags & 6) != 0) {
-        if ((flags & 64) != 0) Nm = normalize(texture(normalMap, varyingTexcoord).rgb * 2.0 - 1.0);
-        if ((flags & 32) != 0) specularColor *= texture(specularMap, varyingTexcoord).x;
+        if ((flags & 32) != 0) specularColor *= texture(specularMap, vTex).x;
     }
     
     for(int i = 0; i < lightCount && i < MAX_LIGHT; i++) {
@@ -96,7 +106,7 @@ void main() {
         //Directional Lights
         else if(lights[i].position.w == 1)
             fragmentColor += vec4(calcLight(lights[i], 1.0, diffuseColor.xyz, specularColor.xyz,
-                            Nm, V, normalize(lights[i].position.xyz)), lights[i].color.w);
+                            Nm, V, normalize(lights[i].direction)), lights[i].color.w);
         
         //Point Lights
         else if(lights[i].position.w == 2) {
@@ -108,6 +118,25 @@ void main() {
             
             fragmentColor += vec4(calcLight(lights[i], attenuation, diffuseColor.xyz,
                                 specularColor.xyz, Nm, V, L), lights[i].color.w);
+        }
+        
+        //SpotLights
+        else if(lights[i].position.w == 3) {
+            vec3 L = normalize(lights[i].position.xyz - viewSpacePosition);
+            if(dot(L, normalize(-lights[i].direction)) > lights[i].cutOff) {
+                
+                float distance = length(lights[i].position.xyz - viewSpacePosition);
+                float attenuation = 1.0 / (lights[i].constant + lights[i].linear *
+                            distance + lights[i].quadratic * (distance * distance));
+                
+                fragmentColor += vec4(calcLight(lights[i], 1.0, diffuseColor.xyz,
+                                    specularColor.xyz, Nm, V, L), lights[i].color.w);
+                
+                // spotlight intensity
+                //float theta = dot(L, normalize(-lights[i].direction)); 
+                //float epsilon = lights[i].cutOff - lights[i].outerCutOff;
+                //fragmentColor += scolor * clamp((theta - lights[i].outerCutOff) / epsilon, 0.0, 1.0) * attenuation;
+            }
         }
     }
 }

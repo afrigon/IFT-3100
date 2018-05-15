@@ -12,7 +12,7 @@ namespace Components
             Components::Views::ColorView* colorView;
             Components::Views::Vector3View* orientationView;
             Components::Views::NumericView* cutoffView;
-            Components::Views::NumericView* concentrationView;
+            Components::Views::NumericView* outerCutOff;
             Components::Views::NumericView* constantView;
             Components::Views::NumericView* linearView;
             Components::Views::NumericView* quadraticView;

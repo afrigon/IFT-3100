@@ -6,6 +6,7 @@
 //
 
 #include "GameObject.h"
+#include "components/Material.h"
 
 GameObject::GameObject() {
     transform = new Components::Transform();
@@ -14,15 +15,15 @@ GameObject::GameObject() {
 
 GameObject::~GameObject() {
     delete transform;
-    for (auto it = children.begin(); it != children.end(); ++it) {
+    for (auto it = children.begin(); it != children.end(); it = children.begin()) {
         (*it)->~GameObject();
-        delete *it;
     }
 
     for (auto it = components.begin(); it != components.end(); ++it) {
         delete *it;
     }
-    parent->removeChild(this);
+    if(parent)
+        parent->removeChild(this);
 }
 
 bool GameObject::operator==(const GameObject &o) const {
@@ -43,6 +44,7 @@ void GameObject::draw(Vector3 globalPosition, ofShader shader) {
     globalPosition += transform->position;
     bool useShader = true;
     shader.begin();
+    shader.setUniform1i("flags", 5);
 
     ofPushMatrix();  // Push the matrix and remove after the childs
 
@@ -63,6 +65,8 @@ void GameObject::draw(Vector3 globalPosition, ofShader shader) {
     std::vector<Components::Material*> material = this->getComponents<Components::Material>();
     if (material.size() > 0) {
         material[0]->setupShader(shader);
+    } else {
+        Components::Material().setupShader(shader);
     }
     
     // Get all the renderable objects and render them
